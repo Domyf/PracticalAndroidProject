@@ -1,4 +1,4 @@
-# COMP 41690 Practical Android Programming 2019/20
+# COMP41690 Practical Android Programming 2019/20
 
 ### Introduction
 
