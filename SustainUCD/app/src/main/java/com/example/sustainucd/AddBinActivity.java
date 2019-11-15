@@ -16,6 +16,7 @@ public class AddBinActivity extends AppCompatActivity {
 
     private ImageView binImageView;
     private TextView locationTextView;
+    private int binCounter = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
