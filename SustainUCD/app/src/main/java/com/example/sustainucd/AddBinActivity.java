@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Debug;
@@ -19,6 +20,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,39 +39,42 @@ public class AddBinActivity extends AppCompatActivity {
     private TextView locationTextView;
     private int binCounter = 1;
     private String currentPhotoPath;
+    private FusedLocationProviderClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_bin);
+        //setContentView(R.layout.activity_add_bin);
+        //UI Initialization
         binImageView = findViewById(R.id.binImageView);
         locationTextView = findViewById(R.id.locationTextView);
+        //Location initialization
+        client = LocationServices.getFusedLocationProviderClient(this);
     }
 
     public void TakePhoto(View view)
     {
-        if (!HasExternalStoragePermission())
-            AskExternalStoragePermission();
+        //Ask for external storage permission
+        Permissions.AskExternalStoragePermission(this, PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+        //Ask for access fine location permission
+        Permissions.AskAccessFineLocationPermission(this, 1);
 
+        //Intent for camera app
         Intent takePhotoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (HasExternalStoragePermission() &&
+
+        //Check again if the permission has been granted
+        //and if the intent will resolve to an activity
+        if (Permissions.HasExternalStoragePermission(this) &&
                 takePhotoIntent.resolveActivity(getPackageManager()) != null) {
             File imageFile = null;
             try {
                 imageFile = createImageFile();
             } catch (IOException ex) {
-                Log.e("ADD_BIN_ACTIVITY" , "Error occurred while creating the File");
                 ex.printStackTrace();
             }
 
             if (imageFile != null) {
-                Log.e("ADD_BIN_ACTIVITY", "imageFile != null");
-                Uri imageURI = null;
-                try {
-                    imageURI = FileProvider.getUriForFile(this, "com.example.sustainucd.fileprovider", imageFile);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
+                Uri imageURI = FileProvider.getUriForFile(this, "com.example.sustainucd.fileprovider", imageFile);
 
                 takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageURI);
                 startActivityForResult(takePhotoIntent, REQUEST_IMAGE_CAPTURE);
@@ -74,24 +82,19 @@ public class AddBinActivity extends AppCompatActivity {
         }
     }
 
-    private void AskExternalStoragePermission()
+    private void GetAndSetLocation()
     {
-        // No explanation needed; Request the permission
-        ActivityCompat.requestPermissions(this,
-                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
-    }
+        client.getLastLocation().addOnSuccessListener(AddBinActivity.this, new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                if (location != null) {
+                    double latitude = location.getLatitude();
+                    double longitude = location.getLongitude();
+                    locationTextView.setText(latitude+","+longitude);
+                }
+            }
 
-    //Returns true if the app has the permission to write on external storage
-    private boolean HasExternalStoragePermission()
-    {
-        return ContextCompat.checkSelfPermission(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
-    }
-
-    private String GetLocation()
-    {
-        return "";
+        });
     }
 
     private File createImageFile() throws IOException {
@@ -133,6 +136,7 @@ public class AddBinActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            GetAndSetLocation();
             setImageView();
         }
     }
