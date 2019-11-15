@@ -1,3 +1,4 @@
+package com.group18.sustainucd.Database;
 /*
     This class represents the table 'bin' inside the database.
     A bin is represented by an id, a picture file name and a description.

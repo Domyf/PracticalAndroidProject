@@ -1,3 +1,4 @@
+package com.group18.sustainucd.Database;
 /*
     This class contains the methods used for accessing the database.
     This is the Data Access Object (DAO) associated with the bin database.

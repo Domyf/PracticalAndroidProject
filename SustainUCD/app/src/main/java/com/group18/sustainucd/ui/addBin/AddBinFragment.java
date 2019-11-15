@@ -78,9 +78,11 @@ public class AddBinFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //Ask for external storage permission
-                Permissions.AskExternalStoragePermission(getActivity(), PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+                if (!Permissions.HasExternalStoragePermission(getActivity()))
+                    Permissions.AskExternalStoragePermission(getActivity(), PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
                 //Ask for access fine location permission
-                Permissions.AskAccessFineLocationPermission(getActivity(), 1);
+                if (!Permissions.HasAccessFineLocationPermission(getActivity()))
+                    Permissions.AskAccessFineLocationPermission(getActivity(), 1);
                 //Take the photo with the phone camera app
                 TakePhoto();
             }

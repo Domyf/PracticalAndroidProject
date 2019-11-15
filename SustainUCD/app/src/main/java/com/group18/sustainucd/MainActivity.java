@@ -3,6 +3,8 @@ package com.group18.sustainucd;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.group18.sustainucd.Database.BinDao;
+import com.group18.sustainucd.Database.BinsDatabase;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -11,6 +13,9 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity {
+
+    private BinsDatabase database;
+    private BinDao binDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +31,10 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
         //Ask for access fine location permission
-        Permissions.AskAccessFineLocationPermission(this, 1);
+        if (!Permissions.HasAccessFineLocationPermission(this))
+            Permissions.AskAccessFineLocationPermission(this, 1);
+        //Get instance of the bins database
+        database = BinsDatabase.getInstance(this);
+
     }
 }
