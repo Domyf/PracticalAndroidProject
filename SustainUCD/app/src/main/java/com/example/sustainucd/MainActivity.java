@@ -14,8 +14,6 @@ import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity {
 
-    private FusedLocationProviderClient client;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,37 +27,6 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
-
-        //if (!Permissions.HasAccessFineLocationPermission(MainActivity.this))
-        /*Permissions.AskAccessFineLocationPermission(this, 1);
-
-        client = LocationServices.getFusedLocationProviderClient(this);
-
-        Button button = findViewById(R.id.getLocation);
-        button.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-
-
-                client.getLastLocation().addOnSuccessListener(MainActivity.this, new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-                        if (location != null) {
-                            TextView textView = findViewById(R.id.location);
-                            double latitude = location.getLatitude();
-                            double longitude = location.getLongitude();
-                            textView.setText(latitude+","+longitude);
-                        }
-                    }
-
-                });
-            }
-        });*/
-
-    }
-
-    public static void GetLastLocation()
-    {
 
     }
 }
