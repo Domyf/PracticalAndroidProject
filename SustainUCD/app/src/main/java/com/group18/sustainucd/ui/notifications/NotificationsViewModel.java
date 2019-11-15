@@ -1,4 +1,4 @@
-package com.example.sustainucd.ui.notifications;
+package com.group18.sustainucd.ui.notifications;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

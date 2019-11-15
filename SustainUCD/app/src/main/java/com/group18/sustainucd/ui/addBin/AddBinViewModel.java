@@ -1,4 +1,4 @@
-package com.example.sustainucd.ui.addBin;
+package com.group18.sustainucd.ui.addBin;
 
 import android.graphics.Bitmap;
 

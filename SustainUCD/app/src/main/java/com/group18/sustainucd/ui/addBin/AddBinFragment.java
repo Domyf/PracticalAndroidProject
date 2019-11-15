@@ -1,5 +1,6 @@
-package com.example.sustainucd.ui.addBin;
+package com.group18.sustainucd.ui.addBin;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -15,19 +16,21 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.AsyncTaskLoader;
+import androidx.loader.content.Loader;
 
-import com.example.sustainucd.AddBinActivity;
-import com.example.sustainucd.Permissions;
-import com.example.sustainucd.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.group18.sustainucd.Permissions;
+import com.group18.sustainucd.R;
 
 import java.io.File;
 import java.io.IOException;
@@ -117,7 +120,7 @@ public class AddBinFragment extends Fragment {
             }
 
             if (imageFile != null) {
-                Uri imageURI = FileProvider.getUriForFile(getActivity(), "com.example.sustainucd.fileprovider", imageFile);
+                Uri imageURI = FileProvider.getUriForFile(getActivity(), "com.group18.sustainucd.fileprovider", imageFile);
 
                 takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageURI);
                 startActivityForResult(takePhotoIntent, REQUEST_IMAGE_CAPTURE);

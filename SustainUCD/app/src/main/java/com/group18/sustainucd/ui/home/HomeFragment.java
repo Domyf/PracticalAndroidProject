@@ -1,4 +1,4 @@
-package com.example.sustainucd.ui.home;
+package com.group18.sustainucd.ui.home;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.sustainucd.R;
+import com.group18.sustainucd.R;
 
 public class HomeFragment extends Fragment {
 

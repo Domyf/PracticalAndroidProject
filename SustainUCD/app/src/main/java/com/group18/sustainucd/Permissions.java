@@ -1,4 +1,4 @@
-package com.example.sustainucd;
+package com.group18.sustainucd;
 
 import android.Manifest;
 import android.app.Activity;
