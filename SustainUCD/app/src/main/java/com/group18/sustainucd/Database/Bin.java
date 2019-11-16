@@ -1,7 +1,8 @@
 package com.group18.sustainucd.Database;
 /*
     This class represents the table 'bin' inside the database.
-    A bin is represented by an id, a picture file name and a description.
+    A bin is represented by an id, a picture file name, a description,
+    latitude and longitude.
     These values correspond to the columns of the table bin. The id is the
     primary key.
  */
@@ -18,4 +19,8 @@ public class Bin {
     public String pictureFileName;
     @ColumnInfo(name = "description")
     public String description;
+    @ColumnInfo(name = "latitude")
+    public float latitude;
+    @ColumnInfo(name = "longitude")
+    public float longitude;
 }

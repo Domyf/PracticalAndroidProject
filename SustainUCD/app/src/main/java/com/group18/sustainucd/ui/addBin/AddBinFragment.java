@@ -1,6 +1,5 @@
 package com.group18.sustainucd.ui.addBin;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -22,9 +21,6 @@ import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.loader.app.LoaderManager;
-import androidx.loader.content.AsyncTaskLoader;
-import androidx.loader.content.Loader;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -54,33 +50,51 @@ public class AddBinFragment extends Fragment {
     private int binCounter = 1;
     private String currentPhotoPath;
 
+    /*  The onCreateView method is called when the Fragment should
+        create its view, via XML layout inflation in this case.
+     */
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         //View Model initialization
         addBinViewModel = ViewModelProviders.of(this).get(AddBinViewModel.class);
         //Root view initialization
         View root = inflater.inflate(R.layout.fragment_add_bin, container, false);
-        //UI initialization
-        locationTextView = root.findViewById(R.id.locationTextView);
-        binImageView = root.findViewById(R.id.binImageView);
-        takePhotoBtn = root.findViewById(R.id.takePhotoBtn);
-        SetOnClickListeners();
+
         //Location initialization
         client = LocationServices.getFusedLocationProviderClient(getActivity());
+        //Model observation
         Observe();
 
         return root;
     }
 
+    /*  This event is triggered after a successfull onCreateView() event.
+        The view setup should be done here.
+    */
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        //UI initialization
+        locationTextView = view.findViewById(R.id.locationTextView);
+        binImageView = view.findViewById(R.id.binImageView);
+        takePhotoBtn = view.findViewById(R.id.takePhotoBtn);
+        SetOnClickListeners();
+    }
+
+
+    /*  This method will setup all on click listeners that are needed.
+        The button for taking a photo and the button for the addition
+        of the bin into the database.
+     */
     private void SetOnClickListeners()
     {
         takePhotoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Ask for external storage permission
+                //Ask for external storage permission, if needed
                 if (!Permissions.HasExternalStoragePermission(getActivity()))
                     Permissions.AskExternalStoragePermission(getActivity(), PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
-                //Ask for access fine location permission
+                //Ask for access fine location permission, if needed
                 if (!Permissions.HasAccessFineLocationPermission(getActivity()))
                     Permissions.AskAccessFineLocationPermission(getActivity(), 1);
                 //Take the photo with the phone camera app
@@ -89,6 +103,9 @@ public class AddBinFragment extends Fragment {
         });
     }
 
+    /*  View Model observation. After this method any change on the model
+        will reflect on the view.
+     */
     private void Observe()
     {
         addBinViewModel.getLocationText().observe(this, new Observer<String>() {

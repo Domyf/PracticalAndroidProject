@@ -5,6 +5,7 @@ package com.group18.sustainucd.Database;
  */
 
 import androidx.room.Dao;
+import androidx.room.Insert;
 import androidx.room.Query;
 
 import java.util.List;
@@ -13,4 +14,6 @@ import java.util.List;
 public interface BinDao {
     @Query("SELECT * FROM bin")
     List<Bin> getAll();
+    @Insert
+    void insertBin(Bin bin);
 }
