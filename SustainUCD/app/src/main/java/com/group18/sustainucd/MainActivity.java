@@ -4,8 +4,7 @@ import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.group18.sustainucd.Database.Bin;
-import com.group18.sustainucd.Database.BinDao;
-import com.group18.sustainucd.Database.BinsDatabase;
+import com.group18.sustainucd.Database.BinsManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -13,7 +12,11 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
+
+    private static List<Bin> allBins;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,5 +34,8 @@ public class MainActivity extends AppCompatActivity {
         //Ask for access fine location permission
         if (!Permissions.HasAccessFineLocationPermission(this))
             Permissions.AskAccessFineLocationPermission(this, 1);
+
+        BinsManager.Initialize(this);
     }
+
 }

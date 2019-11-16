@@ -7,21 +7,21 @@ package com.group18.sustainucd.Database;
     primary key.
  */
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
 public class Bin {
+    //@ColumnInfo(name = "picture_file_name")
     @PrimaryKey
-    public int binId;
-    @ColumnInfo(name = "picture_file_name")
-    public String pictureFileName;
+    @NonNull public String pictureFileName;
     @ColumnInfo(name = "description")
     public String description;
     @ColumnInfo(name = "latitude")
-    public float latitude;
+    public double latitude;
     @ColumnInfo(name = "longitude")
-    public float longitude;
+    public double longitude;
 
 }

@@ -4,6 +4,7 @@ package com.group18.sustainucd.Database;
  */
 
 import android.content.Context;
+import android.os.AsyncTask;
 
 import androidx.room.Database;
 import androidx.room.Room;
@@ -11,7 +12,7 @@ import androidx.room.RoomDatabase;
 
 @Database(entities = {Bin.class}, version = 1)
 public abstract class BinsDatabase extends RoomDatabase {
-    private static BinsDatabase binsDatabase;   //Single instance for the database for all activities
+    private static BinsDatabase binsDatabase;   //Single database instance for all activities
     private static final String DB_NAME = "bins_database";
 
     public static synchronized BinsDatabase getInstance(Context context) {
@@ -26,4 +27,5 @@ public abstract class BinsDatabase extends RoomDatabase {
     }
 
     public abstract BinDao binDao();
+
 }

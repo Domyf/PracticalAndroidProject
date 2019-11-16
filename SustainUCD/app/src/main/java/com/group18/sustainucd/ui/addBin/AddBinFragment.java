@@ -1,13 +1,16 @@
 package com.group18.sustainucd.ui.addBin;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,12 +50,24 @@ public class AddBinFragment extends Fragment {
     private TextView locationTextView;
     private ImageView binImageView;
     private Button takePhotoBtn;
+    private Button addBinBtn;
     //Location client
     private FusedLocationProviderClient client;
 
-    private int binCounter = 1;
     private Bin newBin;
-    private String currentPhotoPath;
+    private File binImageFile;
+    private boolean locationAcquired;
+    private boolean pictureTaken;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        locationAcquired = false;
+        pictureTaken = false;
+        newBin = new Bin();
+        //Location initialization
+        client = LocationServices.getFusedLocationProviderClient(getActivity());
+    }
 
     /*  The onCreateView method is called when the Fragment should
         create its view, via XML layout inflation in this case.
@@ -64,8 +79,6 @@ public class AddBinFragment extends Fragment {
         //Root view initialization
         View root = inflater.inflate(R.layout.fragment_add_bin, container, false);
 
-        //Location initialization
-        client = LocationServices.getFusedLocationProviderClient(getActivity());
         //Model observation
         Observe();
 
@@ -82,9 +95,9 @@ public class AddBinFragment extends Fragment {
         locationTextView = view.findViewById(R.id.locationTextView);
         binImageView = view.findViewById(R.id.binImageView);
         takePhotoBtn = view.findViewById(R.id.takePhotoBtn);
+        addBinBtn = view.findViewById(R.id.addBinBtn);
         SetOnClickListeners();
     }
-
 
     /*  This method will setup all on click listeners that are needed.
         The button for taking a photo and the button for the addition
@@ -103,6 +116,13 @@ public class AddBinFragment extends Fragment {
                     Permissions.AskAccessFineLocationPermission(getActivity(), 1);
                 //Take the photo with the phone camera app
                 TakePhoto();
+            }
+        });
+        addBinBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (pictureTaken && locationAcquired)
+                    AddBin();
             }
         });
     }
@@ -135,15 +155,15 @@ public class AddBinFragment extends Fragment {
         //and if the intent will resolve to an activity
         if (Permissions.HasExternalStoragePermission(getActivity()) &&
                 takePhotoIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-            File imageFile = null;
             try {
-                imageFile = createImageFile();
+                if (binImageFile == null)
+                    binImageFile = createImageFile();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
 
-            if (imageFile != null) {
-                Uri imageURI = FileProvider.getUriForFile(getActivity(), "com.group18.sustainucd.fileprovider", imageFile);
+            if (binImageFile != null) {
+                Uri imageURI = FileProvider.getUriForFile(getActivity(), "com.group18.sustainucd.fileprovider", binImageFile);
 
                 takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageURI);
                 startActivityForResult(takePhotoIntent, REQUEST_IMAGE_CAPTURE);
@@ -157,9 +177,10 @@ public class AddBinFragment extends Fragment {
             @Override
             public void onSuccess(Location location) {
                 if (location != null) {
-                    double latitude = location.getLatitude();
-                    double longitude = location.getLongitude();
-                    addBinViewModel.setLocationText(latitude+","+longitude);
+                    newBin.latitude = location.getLatitude();
+                    newBin.longitude = location.getLongitude();
+                    addBinViewModel.setLocationText("Location acquired successfully!");
+                    locationAcquired = true;
                 }
             }
 
@@ -168,11 +189,11 @@ public class AddBinFragment extends Fragment {
 
     private File createImageFile() throws IOException {
         // Create an image file name
-        String imageFileName = "BIN_" + binCounter;
+        String imageFileName = "BIN_";
         //Get the external storage directory. Because it's external I can copy the pictures later
         File storageDir = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File imageFile = new File(storageDir+"/"+imageFileName+".jpg");// File.createTempFile(imageFileName,".jpg", storageDir);
-        currentPhotoPath = imageFile.getAbsolutePath();
+        File imageFile = File.createTempFile(imageFileName, ".jpg", storageDir);
+        //new File(storageDir+"/"+imageFileName+".jpg");// File.createTempFile(imageFileName,".jpg", storageDir);
 
         return imageFile;
     }
@@ -197,26 +218,55 @@ public class AddBinFragment extends Fragment {
         bmOptions.inSampleSize = scaleFactor;
         bmOptions.inPurgeable = true;
 
-        Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath, bmOptions);
+        Bitmap bitmap = BitmapFactory.decodeFile(binImageFile.getAbsolutePath(), bmOptions);
+
+        newBin.pictureFileName = binImageFile.getName();
         addBinViewModel.setImageBitmap(bitmap);
     }
 
     private void AddBin() {
-        //Get instance of the bins database and the DAO
-        //Because the instance is single for the entire app, this is not
-        //an expensive method call but just reference return.
-        BinsDatabase database = BinsDatabase.getInstance(getActivity());
-        BinDao binDao = database.binDao();
-
-        binDao.insertBin(newBin);
+        Log.d("AddBinFragment", "latitude: "+newBin.latitude
+                +" longitude: "+newBin.longitude
+                +" picture file name: "+newBin.pictureFileName);
+        InsertTask(getContext(), newBin);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            addBinBtn.setVisibility(View.VISIBLE);
             GetAndSetLocation();
             setBinImageView();
+            pictureTaken = true;
+        }
+    }
+
+    public static void InsertTask(final Context context, final Bin newBin) {
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                BinDao binDao = BinsDatabase.getInstance(context).binDao();
+                binDao.insertBin(newBin);
+                Log.d("AddBinFragment", "Bin added");
+                return null;
+            }
+        }.execute();
+    }
+
+    private static class AddBinAsync extends AsyncTask<Void, Void, Void> {
+        private final BinDao binDao;
+        private final Bin bin;
+
+        public AddBinAsync(BinsDatabase instance, Bin bin) {
+            binDao = instance.binDao();
+            this.bin = bin;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            binDao.insertBin(bin);
+            return null;
         }
     }
 }
