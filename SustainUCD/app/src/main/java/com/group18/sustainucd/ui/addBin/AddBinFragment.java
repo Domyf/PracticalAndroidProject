@@ -25,6 +25,9 @@ import androidx.lifecycle.ViewModelProviders;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.group18.sustainucd.Database.Bin;
+import com.group18.sustainucd.Database.BinDao;
+import com.group18.sustainucd.Database.BinsDatabase;
 import com.group18.sustainucd.Permissions;
 import com.group18.sustainucd.R;
 
@@ -48,6 +51,7 @@ public class AddBinFragment extends Fragment {
     private FusedLocationProviderClient client;
 
     private int binCounter = 1;
+    private Bin newBin;
     private String currentPhotoPath;
 
     /*  The onCreateView method is called when the Fragment should
@@ -195,6 +199,16 @@ public class AddBinFragment extends Fragment {
 
         Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath, bmOptions);
         addBinViewModel.setImageBitmap(bitmap);
+    }
+
+    private void AddBin() {
+        //Get instance of the bins database and the DAO
+        //Because the instance is single for the entire app, this is not
+        //an expensive method call but just reference return.
+        BinsDatabase database = BinsDatabase.getInstance(getActivity());
+        BinDao binDao = database.binDao();
+
+        binDao.insertBin(newBin);
     }
 
     @Override

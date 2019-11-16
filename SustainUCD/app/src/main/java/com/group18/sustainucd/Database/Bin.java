@@ -23,4 +23,5 @@ public class Bin {
     public float latitude;
     @ColumnInfo(name = "longitude")
     public float longitude;
+
 }

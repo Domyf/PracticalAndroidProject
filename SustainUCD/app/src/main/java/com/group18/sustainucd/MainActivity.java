@@ -31,10 +31,5 @@ public class MainActivity extends AppCompatActivity {
         //Ask for access fine location permission
         if (!Permissions.HasAccessFineLocationPermission(this))
             Permissions.AskAccessFineLocationPermission(this, 1);
-        //Get instance of the bins database and the DAO
-        /*private BinsDatabase database;
-        private BinDao binDao;
-        database = BinsDatabase.getInstance(this);
-        binDao = database.binDao();*/
     }
 }
