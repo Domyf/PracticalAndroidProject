@@ -251,8 +251,11 @@ public class AddBinFragment extends Fragment {
                 +" longitude: "+newBin.longitude
                 +" picture file name: "+newBin.pictureFileName);
         InsertTask(getContext(), newBin);
-        getActivity().setResult(RESULT_OK);
-        getActivity().finish();
+        //TODO modify this after choosing between tabbed, single or bottombar main activity
+        if (getActivity().getIntent().hasExtra(AddBinActivity.PICTURE_PATH)) {
+            getActivity().setResult(RESULT_OK);
+            getActivity().finish();
+        }
     }
 
     private static void InsertTask(final Context context, final Bin newBin) {

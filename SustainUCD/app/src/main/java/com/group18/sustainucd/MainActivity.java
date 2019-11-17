@@ -3,7 +3,6 @@ package com.group18.sustainucd;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.group18.sustainucd.Database.Bin;
 import com.group18.sustainucd.Database.BinsManager;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,11 +11,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import java.util.List;
-
 public class MainActivity extends AppCompatActivity {
-
-    private static List<Bin> allBins;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
