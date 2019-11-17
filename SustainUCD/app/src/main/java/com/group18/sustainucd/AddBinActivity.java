@@ -5,8 +5,6 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import java.io.File;
-
 public class AddBinActivity extends AppCompatActivity {
 
     public static final String PICTURE_PATH = "PicturePath";

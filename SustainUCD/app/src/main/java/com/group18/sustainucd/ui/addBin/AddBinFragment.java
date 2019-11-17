@@ -70,7 +70,7 @@ public class AddBinFragment extends Fragment {
         client = LocationServices.getFusedLocationProviderClient(getActivity());
     }
 
-    /*  The onCreateView method is called when the Fragment should
+    /**  The onCreateView method is called when the Fragment should
         create its view, via XML layout inflation in this case.
      */
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -86,8 +86,8 @@ public class AddBinFragment extends Fragment {
         return root;
     }
 
-    /*  This event is triggered after a successfull onCreateView() event.
-        The view setup should be done here.
+    /**  This event is triggered after a successfull onCreateView() event.
+        The view setup is done here.
     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -121,10 +121,10 @@ public class AddBinFragment extends Fragment {
         }
     }
 
-    /*  This method will setup all on click listeners that are needed.
-            The button for taking a photo and the button for the addition
-            of the bin into the database.
-         */
+    /**  This method will setup all on click listeners that are needed.
+        The button for taking a photo and the button for the addition
+        of the bin into the database.
+    */
     private void SetOnClickListeners()
     {
         takePhotoBtn.setOnClickListener(new View.OnClickListener() {
@@ -149,7 +149,7 @@ public class AddBinFragment extends Fragment {
         });
     }
 
-    /*  View Model observation. After this method any change on the model
+    /**  View Model observation. After this method any change on the model
         will reflect on the view.
      */
     private void Observe()
@@ -251,6 +251,8 @@ public class AddBinFragment extends Fragment {
                 +" longitude: "+newBin.longitude
                 +" picture file name: "+newBin.pictureFileName);
         InsertTask(getContext(), newBin);
+        getActivity().setResult(RESULT_OK);
+        getActivity().finish();
     }
 
     private static void InsertTask(final Context context, final Bin newBin) {

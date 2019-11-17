@@ -32,19 +32,24 @@ public class SingleMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_single_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //Ask for access fine location permission, if not already granted
+        if (!Permissions.HasAccessFineLocationPermission(getApplicationContext()))
+            Permissions.AskAccessFineLocationPermission(this, 0);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO check permissions
+                //Ask for external storage permission, if not already granted
+                if (!Permissions.HasExternalStoragePermission(getApplicationContext()))
+                    Permissions.AskExternalStoragePermission(SingleMainActivity.this, 1);
+                //Take the photo with the phone camera app
                 TakePhoto();
             }
         });
     }
 
-    public void TakePhoto()
-    {
+    private void TakePhoto() {
         //Intent for phone camera app
         Intent takePhotoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
