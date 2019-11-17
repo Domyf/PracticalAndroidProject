@@ -47,7 +47,7 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
         recyclerView.setAdapter(adapter);
         // Set layout manager to position the items
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        Log.d("HomeFragment", adapter.getItemCount()+" bins");
+        Log.e("HomeFragment", adapter.getItemCount()+" bins");
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         //recyclerView.setHasFixedSize(true);
@@ -64,6 +64,6 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
 
     @Override
     public void OnBinClick(int position) {
-        Log.d("HomeFragment", "Bin clicked: "+position);
+        Log.e("HomeFragment", "Bin clicked: "+position);
     }
 }
