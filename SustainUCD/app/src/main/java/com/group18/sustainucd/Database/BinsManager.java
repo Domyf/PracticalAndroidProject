@@ -54,6 +54,12 @@ public class BinsManager {
         return databaseBins;
     }
 
+    public synchronized static List<Bin> GetNearestKBins(int k, double currentLatitude, double currentLongitude)
+    {
+        //TODO calculate and return the nearest k bins from the current location
+        return GetAllBins();
+    }
+    
     public static int GetBinsQuantity()
     {
         if (databaseBins == null)

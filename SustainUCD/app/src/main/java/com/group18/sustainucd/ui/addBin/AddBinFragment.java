@@ -28,6 +28,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.group18.sustainucd.AddBinActivity;
 import com.group18.sustainucd.Database.Bin;
 import com.group18.sustainucd.Database.BinDao;
 import com.group18.sustainucd.Database.BinsDatabase;
@@ -41,8 +42,8 @@ import static android.app.Activity.RESULT_OK;
 
 public class AddBinFragment extends Fragment {
 
-    static final int REQUEST_IMAGE_CAPTURE = 1;
-    static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 2;
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 2;
 
     //View Model
     private AddBinViewModel addBinViewModel;
@@ -99,10 +100,31 @@ public class AddBinFragment extends Fragment {
         SetOnClickListeners();
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        //TODO modify this after choosing between tabbed, single or bottombar main activity
+        if (getActivity().getIntent().hasExtra(AddBinActivity.PICTURE_PATH)) {
+            String picturePath = getActivity().getIntent().getStringExtra(AddBinActivity.PICTURE_PATH);
+            Log.d("AddBinFragment", picturePath);
+            binImageFile = new File(picturePath);
+            addBinBtn.setVisibility(View.VISIBLE);
+            takePhotoBtn.setVisibility(View.GONE);
+            GetAndSetLocation();
+            binImageView.post(new Runnable() {
+                @Override
+                public void run() {
+                    setBinImageView();
+                }
+            });
+            pictureTaken = true;
+        }
+    }
+
     /*  This method will setup all on click listeners that are needed.
-        The button for taking a photo and the button for the addition
-        of the bin into the database.
-     */
+            The button for taking a photo and the button for the addition
+            of the bin into the database.
+         */
     private void SetOnClickListeners()
     {
         takePhotoBtn.setOnClickListener(new View.OnClickListener() {
@@ -231,18 +253,7 @@ public class AddBinFragment extends Fragment {
         InsertTask(getContext(), newBin);
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            addBinBtn.setVisibility(View.VISIBLE);
-            GetAndSetLocation();
-            setBinImageView();
-            pictureTaken = true;
-        }
-    }
-
-    public static void InsertTask(final Context context, final Bin newBin) {
+    private static void InsertTask(final Context context, final Bin newBin) {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
@@ -254,19 +265,15 @@ public class AddBinFragment extends Fragment {
         }.execute();
     }
 
-    private static class AddBinAsync extends AsyncTask<Void, Void, Void> {
-        private final BinDao binDao;
-        private final Bin bin;
-
-        public AddBinAsync(BinsDatabase instance, Bin bin) {
-            binDao = instance.binDao();
-            this.bin = bin;
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            binDao.insertBin(bin);
-            return null;
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            addBinBtn.setVisibility(View.VISIBLE);
+            GetAndSetLocation();
+            setBinImageView();
+            pictureTaken = true;
         }
     }
+
 }
