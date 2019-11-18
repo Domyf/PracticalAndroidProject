@@ -23,7 +23,7 @@ import java.io.IOException;
 public class SingleMainActivity extends AppCompatActivity {
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
-    private static final int BIN_ADDED_SUCCESSFULLY = 2;
+    public static final int BIN_ADDED_SUCCESSFULLY = 2;
 
     private String new_picture_path;
 
@@ -31,7 +31,6 @@ public class SingleMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_main);
-        BinsManager.Initialize(this);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         //Ask for access fine location permission, if not already granted

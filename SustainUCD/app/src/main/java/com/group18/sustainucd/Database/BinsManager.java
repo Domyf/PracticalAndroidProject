@@ -16,7 +16,7 @@ public class BinsManager {
     private static List<Bin> databaseBins;
     private static BinDao binDao;
 
-    public static void Initialize(final Context context) {
+    public static void Initialize(final Context context, final BinsDatabaseListener listener) {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
@@ -24,6 +24,7 @@ public class BinsManager {
                     binDao = BinsDatabase.getInstance(context).binDao();
                 databaseBins = binDao.getAll();
                 Log.d(TAG, "Bins in database: "+databaseBins.size());
+                listener.OnBinsDatabaseLoaded();
                 return null;
             }
         }.execute();
@@ -65,5 +66,9 @@ public class BinsManager {
         if (databaseBins == null)
             return -1;
         return databaseBins.size();
+    }
+
+    public interface BinsDatabaseListener {
+        void OnBinsDatabaseLoaded();
     }
 }

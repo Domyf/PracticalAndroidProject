@@ -1,5 +1,6 @@
 package com.group18.sustainucd.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,14 +19,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.group18.sustainucd.BinsListAdapter;
 import com.group18.sustainucd.Database.Bin;
+import com.group18.sustainucd.Database.BinsDatabase;
+import com.group18.sustainucd.Database.BinsManager;
 import com.group18.sustainucd.R;
+import com.group18.sustainucd.SingleMainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends Fragment implements BinsListAdapter.OnClickListener {
+import static android.app.Activity.RESULT_OK;
 
+public class HomeFragment extends Fragment implements BinsListAdapter.OnClickListener, BinsManager.BinsDatabaseListener {
+
+    private static final String TAG = "HomeFragment";
     private HomeViewModel homeViewModel;
+    private RecyclerView recyclerView;
+    private BinsListAdapter adapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -33,25 +42,11 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         // Lookup the recyclerview in activity layout
-        RecyclerView recyclerView = (RecyclerView) root.findViewById(R.id.bins_recycler_view);
-
-        List<Bin> binsToShow = new ArrayList<>();
-        binsToShow.add(new Bin());
-        binsToShow.add(new Bin());
-        binsToShow.add(new Bin());
-        binsToShow.add(new Bin());
-        binsToShow.add(new Bin());
-        // Create adapter passing in the sample user data
-        BinsListAdapter adapter = new BinsListAdapter(binsToShow, this);
-        // Attach the adapter to the recyclerview to populate items
-        recyclerView.setAdapter(adapter);
+        recyclerView = (RecyclerView) root.findViewById(R.id.bins_recycler_view);
         // Set layout manager to position the items
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        Log.e("HomeFragment", adapter.getItemCount()+" bins");
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        //recyclerView.setHasFixedSize(true);
-
+        //Initialize the database
+        BinsManager.Initialize(getActivity(), this);
         /*final TextView textView = root.findViewById(R.id.text_home);
         homeViewModel.getText().observe(this, new Observer<String>() {
             @Override
@@ -64,6 +59,25 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
 
     @Override
     public void OnBinClick(int position) {
-        Log.e("HomeFragment", "Bin clicked: "+position);
+        Log.d(TAG, "Bin clicked: "+position);
+    }
+
+    @Override
+    public void OnBinsDatabaseLoaded() {
+        Log.d(TAG, "Database loaded");
+        InitializeBinsList();
+    }
+
+    public void InitializeBinsList()
+    {
+        List<Bin> binsToShow = BinsManager.GetAllBins();
+        // Create adapter passing bins list
+        adapter = new BinsListAdapter(binsToShow, this);
+        // Attach the adapter to the recyclerview to populate items
+        recyclerView.setAdapter(adapter);
+        Log.d("HomeFragment", adapter.getItemCount()+" bins");
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        //recyclerView.setHasFixedSize(true);
     }
 }
