@@ -28,8 +28,6 @@ public class Bin {
     public double longitude;
 
     @Ignore
-    public Bitmap bitmap;
-    @Ignore
     public double distance;
 
 }

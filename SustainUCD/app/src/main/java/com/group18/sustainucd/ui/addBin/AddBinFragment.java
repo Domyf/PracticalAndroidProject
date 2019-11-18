@@ -1,6 +1,5 @@
 package com.group18.sustainucd.ui.addBin;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -81,7 +80,22 @@ public class AddBinFragment extends Fragment {
         addBinViewModel = ViewModelProviders.of(this).get(AddBinViewModel.class);
         //Root view initialization
         View root = inflater.inflate(R.layout.fragment_add_bin, container, false);
-
+        if (getActivity().getIntent().hasExtra(AddBinActivity.PICTURE_PATH)) {
+            String picturePath = getActivity().getIntent().getStringExtra(AddBinActivity.PICTURE_PATH);
+            binImageFile = new File(picturePath);
+            newBin.pictureFileName = picturePath;
+            GetAndSetLocation();
+        }
+        //Get the dimensions of the imageview and then scale and set the bitmap
+        root.post(new Runnable() {
+            @Override
+            public void run() {
+                int width = binImageView.getWidth();
+                int height = binImageView.getHeight();
+                new ScalePictureTask(binImageView, binImageFile.getAbsolutePath(), width, height).execute();
+                pictureTaken = true;
+            }
+        });
         //Model observation
         Observe();
 
@@ -100,26 +114,17 @@ public class AddBinFragment extends Fragment {
         takePhotoBtn = view.findViewById(R.id.takePhotoBtn);
         addBinBtn = view.findViewById(R.id.addBinBtn);
         SetOnClickListeners();
+        //TODO modify this after choosing between tabbed, single or bottombar main activity
+        if (getActivity().getIntent().hasExtra(AddBinActivity.PICTURE_PATH)) {
+            addBinBtn.setVisibility(View.VISIBLE);
+            takePhotoBtn.setVisibility(View.GONE);
+        }
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        //TODO modify this after choosing between tabbed, single or bottombar main activity
-        if (getActivity().getIntent().hasExtra(AddBinActivity.PICTURE_PATH)) {
-            String picturePath = getActivity().getIntent().getStringExtra(AddBinActivity.PICTURE_PATH);
-            binImageFile = new File(picturePath);
-            addBinBtn.setVisibility(View.VISIBLE);
-            takePhotoBtn.setVisibility(View.GONE);
-            GetAndSetLocation();
-            binImageView.post(new Runnable() {
-                @Override
-                public void run() {
-                    setBinImageView();
-                }
-            });
-            pictureTaken = true;
-        }
+
     }
 
     /** This method will setup all on click listeners that are needed.
@@ -221,32 +226,6 @@ public class AddBinFragment extends Fragment {
         return imageFile;
     }
 
-    private void setBinImageView() {
-        // Get the dimensions of the View
-        int targetW = binImageView.getWidth();
-        int targetH = binImageView.getHeight();
-
-        // Get the dimensions of the bitmap
-        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-        bmOptions.inJustDecodeBounds = true;
-
-        int photoW = bmOptions.outWidth;
-        int photoH = bmOptions.outHeight;
-
-        // Determine how much to scale down the image
-        int scaleFactor = Math.min(photoW/targetW, photoH/targetH);
-
-        // Decode the image file into a Bitmap sized to fill the View
-        bmOptions.inJustDecodeBounds = false;
-        bmOptions.inSampleSize = scaleFactor;
-        bmOptions.inPurgeable = true;
-
-        Bitmap bitmap = BitmapFactory.decodeFile(binImageFile.getAbsolutePath(), bmOptions);
-
-        newBin.pictureFileName = binImageFile.getName();
-        addBinViewModel.setImageBitmap(bitmap);
-    }
-
     private void AddBin() {
         Log.d("AddBinFragment", "latitude: "+newBin.latitude
                 +" longitude: "+newBin.longitude
@@ -266,9 +245,50 @@ public class AddBinFragment extends Fragment {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             addBinBtn.setVisibility(View.VISIBLE);
             GetAndSetLocation();
-            setBinImageView();
+            new ScalePictureTask(binImageView, binImageFile.getAbsolutePath(),
+                    binImageView.getWidth(), binImageView.getHeight()).execute();
             pictureTaken = true;
         }
     }
 
+    private class ScalePictureTask extends AsyncTask<Void, Void, Bitmap> {
+        private ImageView imageView;
+        private String path;
+        private int imageViewWidth;
+        private int imageViewHeight;
+
+        public ScalePictureTask(ImageView imageView, String path, int binImageWidth, int binImageHeight) {
+            this.imageView = imageView;
+            this.path = path;
+            this.imageViewWidth = binImageWidth;
+            this.imageViewHeight = binImageHeight;
+        }
+
+        @Override
+        protected Bitmap doInBackground(Void... voids) {
+            // Get the dimensions of the bitmap
+            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+            bmOptions.inJustDecodeBounds = true;
+
+            int photoW = bmOptions.outWidth;
+            int photoH = bmOptions.outHeight;
+
+            // Determine how much to scale down the image
+            int scaleFactor = Math.min(photoW/imageViewWidth, photoH/imageViewHeight);
+
+            // Decode the image file into a Bitmap sized to fill the View
+            bmOptions.inJustDecodeBounds = false;
+            bmOptions.inSampleSize = scaleFactor;
+            bmOptions.inPurgeable = true;
+
+            Bitmap bitmap = BitmapFactory.decodeFile(path, bmOptions);
+            return bitmap;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            super.onPostExecute(bitmap);
+            imageView.setImageBitmap(bitmap);
+        }
+    }
 }
