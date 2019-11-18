@@ -24,10 +24,6 @@ public class BinsListAdapter extends RecyclerView.Adapter<BinsListAdapter.BinVie
         this.mainListener = listener;
     }
 
-    public void SetBins(List<Bin> newBins) {
-        bins = newBins;
-    }
-
     // Create new views (invoked by the layout manager)
     @Override
     public BinsListAdapter.BinViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -50,6 +46,8 @@ public class BinsListAdapter extends RecyclerView.Adapter<BinsListAdapter.BinVie
         // Set item views based on your views and data model
         TextView textView = holder.distanceTextView;
         textView.setText("Bin "+(position+1));
+        //holder.distanceTextView.setText(bin.distance+" m");
+        //holder.binImageView.setImageBitmap(bin.bitmap);
 
     }
 
@@ -85,4 +83,6 @@ public class BinsListAdapter extends RecyclerView.Adapter<BinsListAdapter.BinVie
     public interface OnClickListener {
         public void OnBinClick(int position);
     }
+
+
 }

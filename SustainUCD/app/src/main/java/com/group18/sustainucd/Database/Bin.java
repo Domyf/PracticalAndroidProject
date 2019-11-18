@@ -27,4 +27,9 @@ public class Bin {
     @ColumnInfo(name = "longitude")
     public double longitude;
 
+    @Ignore
+    public Bitmap bitmap;
+    @Ignore
+    public double distance;
+
 }

@@ -32,6 +32,7 @@ import com.group18.sustainucd.AddBinActivity;
 import com.group18.sustainucd.Database.Bin;
 import com.group18.sustainucd.Database.BinDao;
 import com.group18.sustainucd.Database.BinsDatabase;
+import com.group18.sustainucd.Database.BinsManager;
 import com.group18.sustainucd.Permissions;
 import com.group18.sustainucd.R;
 
@@ -250,24 +251,13 @@ public class AddBinFragment extends Fragment {
         Log.d("AddBinFragment", "latitude: "+newBin.latitude
                 +" longitude: "+newBin.longitude
                 +" picture file name: "+newBin.pictureFileName);
-        InsertTask(getContext(), newBin);
+        //InsertTask(getContext(), newBin);
+        BinsManager.Insert(getContext(), newBin);
         //TODO modify this after choosing between tabbed, single or bottombar main activity
         if (getActivity().getIntent().hasExtra(AddBinActivity.PICTURE_PATH)) {
             getActivity().setResult(RESULT_OK);
             getActivity().finish();
         }
-    }
-
-    private static void InsertTask(final Context context, final Bin newBin) {
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... voids) {
-                BinDao binDao = BinsDatabase.getInstance(context).binDao();
-                binDao.insertBin(newBin);
-                Log.d("AddBinFragment", "Bin added");
-                return null;
-            }
-        }.execute();
     }
 
     @Override

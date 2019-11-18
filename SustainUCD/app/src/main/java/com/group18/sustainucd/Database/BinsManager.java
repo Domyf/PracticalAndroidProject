@@ -5,9 +5,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.TreeSet;
 
 /**
  * This class will take track in RAM of all the bins while
