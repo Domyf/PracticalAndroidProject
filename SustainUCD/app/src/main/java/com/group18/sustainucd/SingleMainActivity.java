@@ -24,8 +24,10 @@ public class SingleMainActivity extends AppCompatActivity {
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     public static final int BIN_ADDED_SUCCESSFULLY = 2;
+    private static final String TAG = "SingleMainActivity";
 
     private String new_picture_path;
+    private static File binPicture;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,18 +60,19 @@ public class SingleMainActivity extends AppCompatActivity {
         //and if the intent will resolve to an activity
         if (Permissions.HasExternalStoragePermission(this) &&
                 takePhotoIntent.resolveActivity(getPackageManager()) != null) {
-            File binImageFile = null;
             try {
-                binImageFile = createImageFile();
+                if (binPicture == null)
+                    binPicture = createImageFile();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
 
-            if (binImageFile != null) {
-                Uri imageURI = FileProvider.getUriForFile(this, "com.group18.sustainucd.fileprovider", binImageFile);
+            if (binPicture != null) {
+                Uri imageURI = FileProvider.getUriForFile(this,
+                        "com.group18.sustainucd.fileprovider", binPicture);
 
-                new_picture_path = binImageFile.getAbsolutePath();
-                Log.d("SingleMainActivity", new_picture_path);
+                new_picture_path = binPicture.getAbsolutePath();
+                Log.d(TAG, "Picture path: "+new_picture_path);
                 takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageURI);
                 startActivityForResult(takePhotoIntent, REQUEST_IMAGE_CAPTURE);
             }
@@ -104,8 +107,11 @@ public class SingleMainActivity extends AppCompatActivity {
                 if (resultCode == RESULT_OK) {
                     Snackbar.make(findViewById(R.id.fab), "Bin added successfully!", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
+                    binPicture = null;
                 }
                 break;
         }
     }
+
+    //TODO remember to delete the file binPicture when the app is closed and binPicture != null
 }
