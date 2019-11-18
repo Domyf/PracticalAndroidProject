@@ -23,15 +23,20 @@ import java.io.IOException;
 public class SingleMainActivity extends AppCompatActivity {
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
-    private static final int BIN_ADDED_SUCCESSFULLY = 2;
+    public static final int BIN_ADDED_SUCCESSFULLY = 2;
+    private static final String TAG = "SingleMainActivity";
 
     private String new_picture_path;
+    //When you take a photo this file will store the photo. If the user add the bin successfully,
+    //then this file reference will be null and will be re-instantiated when the user wants to add
+    //another bin. If the user take a photo but the bin is not added for some reason this file
+    //reference won't change. The file is deleted if it isn't null when the activity is destroyed.
+    private static File binPicture;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_main);
-        BinsManager.Initialize(this);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         //Ask for access fine location permission, if not already granted
@@ -59,18 +64,19 @@ public class SingleMainActivity extends AppCompatActivity {
         //and if the intent will resolve to an activity
         if (Permissions.HasExternalStoragePermission(this) &&
                 takePhotoIntent.resolveActivity(getPackageManager()) != null) {
-            File binImageFile = null;
             try {
-                binImageFile = createImageFile();
+                if (binPicture == null)
+                    binPicture = createImageFile();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
 
-            if (binImageFile != null) {
-                Uri imageURI = FileProvider.getUriForFile(this, "com.group18.sustainucd.fileprovider", binImageFile);
+            if (binPicture != null) {
+                Uri imageURI = FileProvider.getUriForFile(this,
+                        "com.group18.sustainucd.fileprovider", binPicture);
 
-                new_picture_path = binImageFile.getAbsolutePath();
-                Log.d("SingleMainActivity", new_picture_path);
+                new_picture_path = binPicture.getAbsolutePath();
+                Log.d(TAG, "Picture path: "+new_picture_path);
                 takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageURI);
                 startActivityForResult(takePhotoIntent, REQUEST_IMAGE_CAPTURE);
             }
@@ -105,8 +111,19 @@ public class SingleMainActivity extends AppCompatActivity {
                 if (resultCode == RESULT_OK) {
                     Snackbar.make(findViewById(R.id.fab), "Bin added successfully!", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
+                    binPicture = null;
                 }
                 break;
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //The activity will be destroyed and there's a temp file that should be destroyed
+        if (isFinishing() && binPicture != null) {
+            Log.d(TAG, "Activity will be destroyed, deleting the temp file");
+            binPicture.delete();
         }
     }
 }

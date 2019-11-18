@@ -30,7 +30,5 @@ public class MainActivity extends AppCompatActivity {
         if (!Permissions.HasAccessFineLocationPermission(this))
             Permissions.AskAccessFineLocationPermission(this, 1);
 
-        BinsManager.Initialize(this);
     }
-
 }

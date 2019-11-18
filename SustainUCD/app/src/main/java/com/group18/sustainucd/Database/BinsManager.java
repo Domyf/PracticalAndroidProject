@@ -13,10 +13,11 @@ import java.util.List;
  */
 public class BinsManager {
     private static final String TAG = "DATABASE_MANAGER";
-    private static List<Bin> databaseBins;
+    private static List<Bin> databaseBins = null;
     private static BinDao binDao;
+    private static boolean initialized;
 
-    public static void Initialize(final Context context) {
+    public static void Initialize(final Context context, final BinsDatabaseListener listener) {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
@@ -24,9 +25,15 @@ public class BinsManager {
                     binDao = BinsDatabase.getInstance(context).binDao();
                 databaseBins = binDao.getAll();
                 Log.d(TAG, "Bins in database: "+databaseBins.size());
+                listener.OnBinsDatabaseLoaded();
+                initialized = true;
                 return null;
             }
         }.execute();
+    }
+
+    public static boolean HasBeenInitialized() {
+        return initialized;
     }
 
     /** Insert the new bin in the list of bins before starting
@@ -65,5 +72,9 @@ public class BinsManager {
         if (databaseBins == null)
             return -1;
         return databaseBins.size();
+    }
+
+    public interface BinsDatabaseListener {
+        void OnBinsDatabaseLoaded();
     }
 }
