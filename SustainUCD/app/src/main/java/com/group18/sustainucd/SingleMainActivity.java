@@ -27,6 +27,10 @@ public class SingleMainActivity extends AppCompatActivity {
     private static final String TAG = "SingleMainActivity";
 
     private String new_picture_path;
+    //When you take a photo this file will store the photo. If the user add the bin successfully,
+    //then this file reference will be null and will be re-instantiated when the user wants to add
+    //another bin. If the user take a photo but the bin is not added for some reason this file
+    //reference won't change. The file is deleted if it isn't null when the activity is destroyed.
     private static File binPicture;
 
     @Override
@@ -113,5 +117,13 @@ public class SingleMainActivity extends AppCompatActivity {
         }
     }
 
-    //TODO remember to delete the file binPicture when the app is closed and binPicture != null
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //The activity will be destroyed and there's a temp file that should be destroyed
+        if (isFinishing() && binPicture != null) {
+            Log.d(TAG, "Activity will be destroyed, deleting the temp file");
+            binPicture.delete();
+        }
+    }
 }
