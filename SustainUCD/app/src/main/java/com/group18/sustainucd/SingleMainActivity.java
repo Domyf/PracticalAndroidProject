@@ -65,7 +65,7 @@ public class SingleMainActivity extends AppCompatActivity {
                 takePhotoIntent.resolveActivity(getPackageManager()) != null) {
             try {
                 if (nextBinPicture == null)
-                    nextBinPicture = BinImageHelper.createBinImageFile(this);
+                    nextBinPicture = BinImageHelper.CreateBinImageFile(this);
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

@@ -23,6 +23,7 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.group18.sustainucd.AddBinActivity;
+import com.group18.sustainucd.BinImageHelper;
 import com.group18.sustainucd.Database.Bin;
 import com.group18.sustainucd.Database.BinsManager;
 import com.group18.sustainucd.R;
@@ -73,7 +74,7 @@ public class AddBinFragment extends Fragment {
         if (getActivity().getIntent().hasExtra(AddBinActivity.PICTURE_PATH)) {
             String picturePath = getActivity().getIntent().getStringExtra(AddBinActivity.PICTURE_PATH);
             binImageFile = new File(picturePath);
-            newBin.pictureFileName = binImageFile.getName();
+            newBin.pictureFileName = BinImageHelper.GetImageName(binImageFile);
             GetAndSetLocation();
         }
         //Get the dimensions of the imageview and then scale and set the bitmap

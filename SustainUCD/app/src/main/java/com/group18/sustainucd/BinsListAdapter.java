@@ -22,7 +22,6 @@ public class BinsListAdapter extends RecyclerView.Adapter<BinsListAdapter.BinVie
 
     private List<Bin> bins;
     private OnClickListener mainListener;
-    private File storageDir;
     private Context context;
 
     public BinsListAdapter(List<Bin> bins, OnClickListener listener, Context context) {
@@ -54,7 +53,7 @@ public class BinsListAdapter extends RecyclerView.Adapter<BinsListAdapter.BinVie
         TextView distanceTextView = holder.distanceTextView;
         distanceTextView.setText("Bin "+(position+1));
         ImageView im = holder.binImageView;
-        new LoadPictureTask(bin, im, BinImageHelper.getBinImagePath(context, bin.pictureFileName)).execute();
+        new LoadPictureTask(im, BinImageHelper.GetBinImagePath(context, bin.pictureFileName)).execute();
 
         //holder.distanceTextView.setText(bin.distance+" m");
 
@@ -94,12 +93,10 @@ public class BinsListAdapter extends RecyclerView.Adapter<BinsListAdapter.BinVie
     }
 
     private class LoadPictureTask extends AsyncTask<Void, Void, Bitmap> {
-        private Bin bin;
         private ImageView imageView;
         private String path;
 
-        public LoadPictureTask(Bin bin, ImageView imageView, String path) {
-            this.bin = bin;
+        public LoadPictureTask(ImageView imageView, String path) {
             this.imageView = imageView;
             this.path = path;
         }
@@ -114,7 +111,6 @@ public class BinsListAdapter extends RecyclerView.Adapter<BinsListAdapter.BinVie
         protected void onPostExecute(Bitmap bitmap) {
             super.onPostExecute(bitmap);
             imageView.setImageBitmap(bitmap);
-            bin.bitmap = bitmap;
         }
     }
 }
