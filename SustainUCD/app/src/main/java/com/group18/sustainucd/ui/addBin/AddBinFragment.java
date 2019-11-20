@@ -77,16 +77,14 @@ public class AddBinFragment extends Fragment {
             newBin.pictureFileName = BinImageHelper.GetImageName(binImageFile);
             GetAndSetLocation();
         }
-        //Get the dimensions of the imageview and then scale and set the bitmap
+        //Scale and set the bitmap
         root.post(new Runnable() {
             @Override
             public void run() {
-                int width = binImageView.getWidth();
-                int height = binImageView.getHeight();
-                new ScalePictureTask(binImageView, binImageFile.getAbsolutePath(), width, height).execute();
-                pictureTaken = true;
+                new ScalePictureTask(binImageView, binImageFile.getAbsolutePath(), binImageView.getWidth(), binImageView.getHeight()).execute();
             }
         });
+        pictureTaken = true;
         //Model observation
         Observe();
 
@@ -186,50 +184,29 @@ public class AddBinFragment extends Fragment {
 
         @Override
         protected Bitmap doInBackground(Void... voids) {
-            // Get the dimensions of the bitmap
-            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-            bmOptions.inJustDecodeBounds = true;
+            Bitmap resized = BitmapFactory.decodeFile(path);
+            if ( imageViewHeight > 0 && imageViewWidth > 0) {
+                int width = resized.getWidth();
+                int height = resized.getHeight();
+                float ratioBitmap = (float) width / (float) height;
+                float ratioMax = (float) imageViewWidth / (float) imageViewHeight;
 
-            int photoW = bmOptions.outWidth;
-            int photoH = bmOptions.outHeight;
+                int finalWidth = imageViewWidth;
+                int finalHeight = imageViewHeight;
+                if (ratioMax > ratioBitmap) {
+                    finalWidth = (int) ((float)imageViewHeight * ratioBitmap);
+                } else {
+                    finalHeight = (int) ((float)imageViewWidth / ratioBitmap);
+                }
+                resized = Bitmap.createScaledBitmap(resized, finalWidth, finalHeight, true);
+            }
 
-            // Determine how much to scale down the image
-            int scaleFactor = Math.min(photoW/imageViewWidth, photoH/imageViewHeight);
-
-            // Decode the image file into a Bitmap sized to fill the View
-            bmOptions.inJustDecodeBounds = false;
-            bmOptions.inSampleSize = scaleFactor;
-            bmOptions.inPurgeable = true;
-
-            Bitmap bitmap = BitmapFactory.decodeFile(path, bmOptions);
-
-            return bitmap;
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            super.onPostExecute(bitmap);
-            imageView.setImageBitmap(bitmap);
-            new SaveImageOnFile(bitmap, binImageFile).execute();
-        }
-    }
-
-    private class SaveImageOnFile extends AsyncTask<Void, Void, Void> {
-        private Bitmap bitmap;
-        private File imageFile;
-
-        public SaveImageOnFile(Bitmap bitmap, File file) {
-            this.bitmap = bitmap;
-            this.imageFile = file;
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
+            //Bitmap resized = Bitmap.createScaledBitmap(bitmap, imageViewWidth, imageViewHeight, true);
             //Save bitmap on file
             OutputStream fOut = null;
             try {
-                fOut = new FileOutputStream(imageFile);
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 70, fOut);
+                fOut = new FileOutputStream(new File(path));
+                resized.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
                 fOut.flush();
                 fOut.close();
             } catch (FileNotFoundException e) {
@@ -237,7 +214,13 @@ public class AddBinFragment extends Fragment {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return null;
+            return resized;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            super.onPostExecute(bitmap);
+            imageView.setImageBitmap(bitmap);
         }
     }
 }
