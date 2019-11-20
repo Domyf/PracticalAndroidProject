@@ -1,6 +1,7 @@
 package com.group18.sustainucd.ui.home;
 
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,7 +66,7 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
     {
         List<Bin> binsToShow = BinsManager.GetAllBins();
         // Create adapter passing bins list
-        adapter = new BinsListAdapter(binsToShow, this);
+        adapter = new BinsListAdapter(binsToShow, this, getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES));
         // Attach the adapter to the recyclerview to populate items
         recyclerView.setAdapter(adapter);
         Log.d("HomeFragment", adapter.getItemCount()+" bins");

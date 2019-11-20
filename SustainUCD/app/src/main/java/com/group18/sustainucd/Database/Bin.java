@@ -29,5 +29,7 @@ public class Bin {
 
     @Ignore
     public double distance;
+    @Ignore
+    public Bitmap bitmap = null;
 
 }

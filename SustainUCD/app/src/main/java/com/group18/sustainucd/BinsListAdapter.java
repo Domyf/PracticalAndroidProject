@@ -1,27 +1,32 @@
 package com.group18.sustainucd;
 
-import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.group18.sustainucd.Database.Bin;
 
+import java.io.File;
 import java.util.List;
 
 public class BinsListAdapter extends RecyclerView.Adapter<BinsListAdapter.BinViewHolder> {
 
     private List<Bin> bins;
     private OnClickListener mainListener;
+    private File storageDir;
 
-    public BinsListAdapter(List<Bin> bins, OnClickListener listener) {
+    public BinsListAdapter(List<Bin> bins, OnClickListener listener, File storageDir) {
         this.bins = bins;
         this.mainListener = listener;
+        this.storageDir = storageDir;
     }
 
     // Create new views (invoked by the layout manager)
@@ -44,10 +49,14 @@ public class BinsListAdapter extends RecyclerView.Adapter<BinsListAdapter.BinVie
         Bin bin = bins.get(position);
 
         // Set item views based on your views and data model
-        TextView textView = holder.distanceTextView;
-        textView.setText("Bin "+(position+1));
+        TextView distanceTextView = holder.distanceTextView;
+        distanceTextView.setText("Bin "+(position+1));
+        ImageView im = holder.binImageView;
+
+        //if (bin.bitmap == null)
+        new LoadPictureTask(bin, im, storageDir.getAbsolutePath()+"/"+bin.pictureFileName).execute();
+
         //holder.distanceTextView.setText(bin.distance+" m");
-        //holder.binImageView.setImageBitmap(bin.bitmap);
 
     }
 
@@ -81,8 +90,31 @@ public class BinsListAdapter extends RecyclerView.Adapter<BinsListAdapter.BinVie
     }
 
     public interface OnClickListener {
-        public void OnBinClick(int position);
+        void OnBinClick(int position);
     }
 
+    private class LoadPictureTask extends AsyncTask<Void, Void, Bitmap> {
+        private Bin bin;
+        private ImageView imageView;
+        private String path;
 
+        public LoadPictureTask(Bin bin, ImageView imageView, String path) {
+            this.bin = bin;
+            this.imageView = imageView;
+            this.path = path;
+        }
+
+        @Override
+        protected Bitmap doInBackground(Void... voids) {
+            Bitmap bitmap = BitmapFactory.decodeFile(path);
+            return bitmap;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            super.onPostExecute(bitmap);
+            imageView.setImageBitmap(bitmap);
+            bin.bitmap = bitmap;
+        }
+    }
 }

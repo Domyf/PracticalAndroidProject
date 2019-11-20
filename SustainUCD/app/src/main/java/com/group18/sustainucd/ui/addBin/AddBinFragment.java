@@ -1,14 +1,10 @@
 package com.group18.sustainucd.ui.addBin;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Location;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +15,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -29,29 +24,24 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.group18.sustainucd.AddBinActivity;
 import com.group18.sustainucd.Database.Bin;
-import com.group18.sustainucd.Database.BinDao;
-import com.group18.sustainucd.Database.BinsDatabase;
 import com.group18.sustainucd.Database.BinsManager;
-import com.group18.sustainucd.Permissions;
 import com.group18.sustainucd.R;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 
-import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 
 public class AddBinFragment extends Fragment {
-
-    private static final int REQUEST_IMAGE_CAPTURE = 1;
-    private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 2;
 
     //View Model
     private AddBinViewModel addBinViewModel;
     //UI
     private TextView locationTextView;
     private ImageView binImageView;
-    private Button takePhotoBtn;
     private Button addBinBtn;
     //Location client
     private FusedLocationProviderClient client;
@@ -83,7 +73,7 @@ public class AddBinFragment extends Fragment {
         if (getActivity().getIntent().hasExtra(AddBinActivity.PICTURE_PATH)) {
             String picturePath = getActivity().getIntent().getStringExtra(AddBinActivity.PICTURE_PATH);
             binImageFile = new File(picturePath);
-            newBin.pictureFileName = picturePath;
+            newBin.pictureFileName = binImageFile.getName();
             GetAndSetLocation();
         }
         //Get the dimensions of the imageview and then scale and set the bitmap
@@ -111,14 +101,8 @@ public class AddBinFragment extends Fragment {
         //UI initialization
         locationTextView = view.findViewById(R.id.locationTextView);
         binImageView = view.findViewById(R.id.binImageView);
-        takePhotoBtn = view.findViewById(R.id.takePhotoBtn);
         addBinBtn = view.findViewById(R.id.addBinBtn);
         SetOnClickListeners();
-        //TODO modify this after choosing between tabbed, single or bottombar main activity
-        if (getActivity().getIntent().hasExtra(AddBinActivity.PICTURE_PATH)) {
-            addBinBtn.setVisibility(View.VISIBLE);
-            takePhotoBtn.setVisibility(View.GONE);
-        }
     }
 
     @Override
@@ -133,19 +117,6 @@ public class AddBinFragment extends Fragment {
     */
     private void SetOnClickListeners()
     {
-        takePhotoBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Ask for external storage permission, if needed
-                if (!Permissions.HasExternalStoragePermission(getActivity()))
-                    Permissions.AskExternalStoragePermission(getActivity(), PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
-                //Ask for access fine location permission, if needed
-                if (!Permissions.HasAccessFineLocationPermission(getActivity()))
-                    Permissions.AskAccessFineLocationPermission(getActivity(), 1);
-                //Take the photo with the phone camera app
-                TakePhoto();
-            }
-        });
         addBinBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -174,31 +145,6 @@ public class AddBinFragment extends Fragment {
         });
     }
 
-    public void TakePhoto()
-    {
-        //Intent for phone camera app
-        Intent takePhotoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-        //Check again if the permission has been granted
-        //and if the intent will resolve to an activity
-        if (Permissions.HasExternalStoragePermission(getActivity()) &&
-                takePhotoIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-            try {
-                if (binImageFile == null)
-                    binImageFile = createImageFile();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-
-            if (binImageFile != null) {
-                Uri imageURI = FileProvider.getUriForFile(getActivity(), "com.group18.sustainucd.fileprovider", binImageFile);
-
-                takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageURI);
-                startActivityForResult(takePhotoIntent, REQUEST_IMAGE_CAPTURE);
-            }
-        }
-    }
-
     private void GetAndSetLocation()
     {
         client.getLastLocation().addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
@@ -215,40 +161,13 @@ public class AddBinFragment extends Fragment {
         });
     }
 
-    private File createImageFile() throws IOException {
-        // Create an image file name
-        String imageFileName = "BIN_";
-        //Get the external storage directory. Because it's external I can copy the pictures later
-        File storageDir = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File imageFile = File.createTempFile(imageFileName, ".jpg", storageDir);
-        //new File(storageDir+"/"+imageFileName+".jpg");// File.createTempFile(imageFileName,".jpg", storageDir);
-
-        return imageFile;
-    }
-
     private void AddBin() {
         Log.d("AddBinFragment", "latitude: "+newBin.latitude
                 +" longitude: "+newBin.longitude
                 +" picture file name: "+newBin.pictureFileName);
-        //InsertTask(getContext(), newBin);
         BinsManager.Insert(getContext(), newBin);
-        //TODO modify this after choosing between tabbed, single or bottombar main activity
-        if (getActivity().getIntent().hasExtra(AddBinActivity.PICTURE_PATH)) {
-            getActivity().setResult(RESULT_OK);
-            getActivity().finish();
-        }
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            addBinBtn.setVisibility(View.VISIBLE);
-            GetAndSetLocation();
-            new ScalePictureTask(binImageView, binImageFile.getAbsolutePath(),
-                    binImageView.getWidth(), binImageView.getHeight()).execute();
-            pictureTaken = true;
-        }
+        getActivity().setResult(RESULT_OK);
+        getActivity().finish();
     }
 
     private class ScalePictureTask extends AsyncTask<Void, Void, Bitmap> {
@@ -282,6 +201,7 @@ public class AddBinFragment extends Fragment {
             bmOptions.inPurgeable = true;
 
             Bitmap bitmap = BitmapFactory.decodeFile(path, bmOptions);
+
             return bitmap;
         }
 
@@ -289,6 +209,34 @@ public class AddBinFragment extends Fragment {
         protected void onPostExecute(Bitmap bitmap) {
             super.onPostExecute(bitmap);
             imageView.setImageBitmap(bitmap);
+            new SaveImageOnFile(bitmap, binImageFile).execute();
+        }
+    }
+
+    private class SaveImageOnFile extends AsyncTask<Void, Void, Void> {
+        private Bitmap bitmap;
+        private File imageFile;
+
+        public SaveImageOnFile(Bitmap bitmap, File file) {
+            this.bitmap = bitmap;
+            this.imageFile = file;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            //Save scaled bitmap
+            OutputStream fOut = null;
+            try {
+                fOut = new FileOutputStream(imageFile);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 70, fOut);
+                fOut.flush();
+                fOut.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
         }
     }
 }
