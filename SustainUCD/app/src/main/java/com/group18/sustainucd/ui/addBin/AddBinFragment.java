@@ -224,7 +224,7 @@ public class AddBinFragment extends Fragment {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            //Save scaled bitmap
+            //Save bitmap on file
             OutputStream fOut = null;
             try {
                 fOut = new FileOutputStream(imageFile);

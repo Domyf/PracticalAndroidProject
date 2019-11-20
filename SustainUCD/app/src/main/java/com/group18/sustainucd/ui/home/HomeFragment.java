@@ -66,7 +66,7 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
     {
         List<Bin> binsToShow = BinsManager.GetAllBins();
         // Create adapter passing bins list
-        adapter = new BinsListAdapter(binsToShow, this, getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES));
+        adapter = new BinsListAdapter(binsToShow, this, getContext());
         // Attach the adapter to the recyclerview to populate items
         recyclerView.setAdapter(adapter);
         Log.d("HomeFragment", adapter.getItemCount()+" bins");

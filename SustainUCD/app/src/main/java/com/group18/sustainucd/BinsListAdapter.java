@@ -1,5 +1,6 @@
 package com.group18.sustainucd;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -22,11 +23,12 @@ public class BinsListAdapter extends RecyclerView.Adapter<BinsListAdapter.BinVie
     private List<Bin> bins;
     private OnClickListener mainListener;
     private File storageDir;
+    private Context context;
 
-    public BinsListAdapter(List<Bin> bins, OnClickListener listener, File storageDir) {
+    public BinsListAdapter(List<Bin> bins, OnClickListener listener, Context context) {
         this.bins = bins;
         this.mainListener = listener;
-        this.storageDir = storageDir;
+        this.context = context;
     }
 
     // Create new views (invoked by the layout manager)
@@ -52,9 +54,7 @@ public class BinsListAdapter extends RecyclerView.Adapter<BinsListAdapter.BinVie
         TextView distanceTextView = holder.distanceTextView;
         distanceTextView.setText("Bin "+(position+1));
         ImageView im = holder.binImageView;
-
-        //if (bin.bitmap == null)
-        new LoadPictureTask(bin, im, storageDir.getAbsolutePath()+"/"+bin.pictureFileName).execute();
+        new LoadPictureTask(bin, im, BinImageHelper.getBinImagePath(context, bin.pictureFileName)).execute();
 
         //holder.distanceTextView.setText(bin.distance+" m");
 
