@@ -1,6 +1,7 @@
 package com.group18.sustainucd;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -20,9 +21,9 @@ import java.io.IOException;
 
 public class SingleMainActivity extends AppCompatActivity {
 
-    public static final int BIN_ADDED_SUCCESSFULLY = 2;
-
     private static final int REQUEST_IMAGE_CAPTURE = 1;
+    public static final int BIN_ADDED_SUCCESSFULLY = 2;
+    private static final int REQUEST_EXTERNAL_STORAGE = 3;
     private static final String TAG = "SingleMainActivity";
 
     private String newPicturePath;
@@ -48,9 +49,9 @@ public class SingleMainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //Ask for external storage permission, if not already granted
                 if (!Permissions.HasExternalStoragePermission(getApplicationContext()))
-                    Permissions.AskExternalStoragePermission(SingleMainActivity.this, 1);
-                //Take the photo with the phone camera app
-                TakePhoto();
+                    Permissions.AskExternalStoragePermission(SingleMainActivity.this, REQUEST_EXTERNAL_STORAGE);
+                else    //Take the photo with the phone camera app
+                    TakePhoto();
             }
         });
     }
@@ -61,8 +62,7 @@ public class SingleMainActivity extends AppCompatActivity {
 
         //Check again if the permission has been granted
         //and if the intent will resolve to an activity
-        if (Permissions.HasExternalStoragePermission(this) &&
-                takePhotoIntent.resolveActivity(getPackageManager()) != null) {
+        if (takePhotoIntent.resolveActivity(getPackageManager()) != null) {
             try {
                 if (nextBinPicture == null)
                     nextBinPicture = BinImageHelper.CreateBinImageFile(this);
@@ -102,6 +102,15 @@ public class SingleMainActivity extends AppCompatActivity {
                     nextBinPicture = null;
                 }
                 break;
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions, int[] grantResults) {
+        if (requestCode == REQUEST_EXTERNAL_STORAGE
+                && grantResults.length > 0
+                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            TakePhoto();
         }
     }
 

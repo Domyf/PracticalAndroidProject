@@ -41,13 +41,6 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
             BinsManager.Initialize(getActivity(), this);
         else
             InitializeBinsList();
-        /*final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });*/
         return root;
     }
 
