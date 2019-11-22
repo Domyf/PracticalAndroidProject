@@ -8,12 +8,15 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.FileProvider;
 
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import java.io.File;
@@ -122,5 +125,19 @@ public class SingleMainActivity extends AppCompatActivity {
             Log.d(TAG, "Activity will be destroyed, deleting the temp file");
             nextBinPicture.delete();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_single_main, menu);
+        return true;
+    }
+
+    //Event triggered on click on the top-right info icon (it's a menu item)
+    //This will call the info activity
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        //TODO call info activity
+        return super.onOptionsItemSelected(item);
     }
 }

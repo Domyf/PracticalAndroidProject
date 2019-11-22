@@ -1,12 +1,15 @@
 package com.group18.sustainucd.ui.addBin;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Location;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -52,9 +55,15 @@ public class AddBinFragment extends Fragment {
     private boolean locationAcquired;
     private boolean pictureTaken;
 
+    private final String mapsLabel = "Bin";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Has options menu if the user has Google Maps or other location app
+        if (HasLocationApp()) {
+            setHasOptionsMenu(true);
+        }
         locationAcquired = false;
         pictureTaken = false;
         newBin = new Bin();
@@ -81,10 +90,10 @@ public class AddBinFragment extends Fragment {
         root.post(new Runnable() {
             @Override
             public void run() {
-                new ScalePictureTask(binImageView, binImageFile.getAbsolutePath(), binImageView.getWidth(), binImageView.getHeight()).execute();
+                if (!pictureTaken)
+                    new ScalePictureTask(binImageView, binImageFile.getAbsolutePath(), binImageView.getWidth(), binImageView.getHeight()).execute();
             }
         });
-        pictureTaken = true;
         //Model observation
         Observe();
 
@@ -169,6 +178,41 @@ public class AddBinFragment extends Fragment {
         getActivity().finish();
     }
 
+    //Event triggered after clicking on the menu item. This will open google maps
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Intent mapIntent = GetMapIntent();
+        // Attempt to start an activity that can handle the Intent
+        if (mapIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivity(mapIntent);
+        } else {
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private Intent GetMapIntent() {
+        Uri gmmIntentUri = Uri.parse("geo:"+newBin.latitude+","+newBin.longitude
+                +"?z=18&q="+newBin.latitude+","+newBin.longitude+"("+mapsLabel+")");
+
+        // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        // Make the Intent explicit by setting the Google Maps package
+        mapIntent.setPackage("com.google.android.apps.maps");
+        return mapIntent;
+    }
+
+    private boolean HasLocationApp() {
+        //Simple example location, just for test
+        Uri gmmIntentUri = Uri.parse("geo:37.7749,-122.4194?q=37.7749,-122.4194(Bin)");
+
+        // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        // Make the Intent explicit by setting the Google Maps package
+        mapIntent.setPackage("com.google.android.apps.maps");
+        return mapIntent.resolveActivity(getActivity().getPackageManager()) != null;
+    }
+
     private class ScalePictureTask extends AsyncTask<Void, Void, Bitmap> {
         private ImageView imageView;
         private String path;
@@ -221,6 +265,8 @@ public class AddBinFragment extends Fragment {
         protected void onPostExecute(Bitmap bitmap) {
             super.onPostExecute(bitmap);
             imageView.setImageBitmap(bitmap);
+            pictureTaken = true;
+
         }
     }
 }
