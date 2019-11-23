@@ -15,7 +15,7 @@ import java.util.List;
  * In this way the access to data is faster.
  */
 public class BinsManager {
-    private static final String TAG = "DATABASE_MANAGER";
+    private static final String TAG = "BINS_MANAGER";
     private static List<Bin> databaseBins = null;
     private static BinDao binDao;
     private static boolean initialized;
@@ -69,33 +69,57 @@ public class BinsManager {
         return databaseBins;
     }
 
+    public static void CalculateDistances(double currentLatitude, double currentLongitude) {
+        for (Bin bin: databaseBins) {
+            bin.distance = Utils.CalculateDistance(currentLatitude, currentLongitude, bin.latitude, bin.longitude);
+            //Log.e(TAG, "from "+currentLatitude+", "+currentLongitude+" to: "+bin.latitude+", "+bin.longitude);
+        }
+    }
+
     public synchronized static List<Bin> GetNearestKBins(int k, double currentLatitude, double currentLongitude)
     {
         //TODO calculate and return the nearest k bins from the current location
-        List<Double> BinDistances = new ArrayList<Double>();
-        List<Bin> ClosestBins = new ArrayList<Bin>();
+        //List<Double> binDistances = new ArrayList<Double>();
+        List<Bin> closestBins = new ArrayList<>();
+        List<Integer> binsIndexes = new ArrayList<>();
+        /*for (Bin bin : databaseBins){
+            binDistances.add(Utils.CalculateDistance(currentLatitude, currentLongitude, bin));
+        }*/
 
-        for (Bin bin : databaseBins){
-            BinDistances.add(Utils.CalculateDistance(currentLatitude, currentLongitude, bin));
-        }
+        //double LargestSmallDistance = 0;
 
-
-        double LargestSmallDistance = 0;
         if (k > databaseBins.size())
             k = databaseBins.size();
 
-        for (int i = 0; i < k; i++){
-            double MinDistance = 99999;
-            for (double distance : BinDistances){
-                if(distance <= MinDistance && distance > LargestSmallDistance)
-                    MinDistance = distance;
-            }
-            int index = databaseBins.indexOf(MinDistance);
-            ClosestBins.add(databaseBins.get(index));
-            LargestSmallDistance = MinDistance;
-    }
+        double highestMin = 0;
+        int index = 0;
 
-        return ClosestBins;
+        for(int i=0; i<k; i++) {
+            double min = 999999;
+            for (int j = 0; j < databaseBins.size(); j++) {
+                double distance = databaseBins.get(j).distance;
+                if (distance <= min && !binsIndexes.contains(j)) {
+                    index = j;
+                    min = distance;
+                }
+            }
+            closestBins.add(databaseBins.get(index));
+            binsIndexes.add(index);
+            highestMin = min;
+        }
+
+        /*for (int i = 0; i < k; i++){
+            double minDistance = 99999;
+            for (double distance : binDistances){
+                if(distance <= minDistance && distance > LargestSmallDistance)
+                    minDistance = distance;
+            }
+            int index = databaseBins.indexOf(minDistance);
+            closestBins.add(databaseBins.get(index));
+            LargestSmallDistance = minDistance;
+        }*/
+
+        return closestBins;
 
 
     }

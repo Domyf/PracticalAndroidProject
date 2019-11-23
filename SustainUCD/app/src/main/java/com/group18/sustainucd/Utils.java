@@ -19,13 +19,13 @@ public class Utils {
         return mapIntent;
     }
 
-    public static double CalculateDistance(double CurrentLatitude, double CurrentLongitude, Bin bin2){
+    public static double CalculateDistance(double CurrentLatitude, double CurrentLongitude, double binLatitude, double binLongitude){
 
         // Convert lat and long values from decimal degrees to radians
         double lat1 = Math.toRadians(CurrentLatitude);
         double long1 = Math.toRadians(CurrentLongitude);
-        double lat2 = Math.toRadians(bin2.latitude);
-        double long2 = Math.toRadians(bin2.longitude);
+        double lat2 = Math.toRadians(binLatitude);
+        double long2 = Math.toRadians(binLongitude);
 
         // Earth's mean radius (km)
         double R = 6371;

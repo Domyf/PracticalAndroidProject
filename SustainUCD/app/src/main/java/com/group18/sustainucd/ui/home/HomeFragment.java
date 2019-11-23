@@ -62,6 +62,12 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume");
+    }
+
+    @Override
     public void OnBinClick(int position) {
         Log.d(TAG, "Bin clicked: "+position);
         Intent showBinIntent = new Intent(getActivity(), ShowBinActivity.class);
@@ -76,16 +82,22 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
     @Override
     public void OnBinsDatabaseLoaded() {
         Log.d(TAG, "Database loaded");
-        //List<Bin> binsToShow = BinsManager.GetNearestKBins(howManyBinsToShow, currentLatitude, currentLongitude);
-        List<Bin> binsToShow = BinsManager.GetAllBins();
-        adapter.SetList(binsToShow);// Attach the adapter to the recyclerview to populate items
-        recyclerView.setAdapter(adapter);
-        Log.d(TAG, adapter.getItemCount()+" bins");
+        SetBinsToShow();
     }
 
     private void GetLocation()
     {
         client.getLastLocation().addOnSuccessListener(this);
+    }
+
+    private void SetBinsToShow() {
+        BinsManager.CalculateDistances(adapter.getCurrentLatitude(), adapter.getCurrentLongitude());
+        List<Bin> binsToShow = BinsManager.GetNearestKBins(howManyBinsToShow,
+                adapter.getCurrentLatitude(), adapter.getCurrentLongitude());
+        //List<Bin> binsToShow = BinsManager.GetAllBins();
+        adapter.SetList(binsToShow);// Attach the adapter to the recyclerview to populate items
+        recyclerView.setAdapter(adapter);
+        Log.d(TAG, adapter.getItemCount()+" bins");
     }
 
     //Success on reciving location
@@ -96,7 +108,7 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
             if (!BinsManager.HasBeenInitialized())
                 BinsManager.Initialize(getActivity(), HomeFragment.this);
             else
-                OnBinsDatabaseLoaded();
+                SetBinsToShow();
         }
     }
 }

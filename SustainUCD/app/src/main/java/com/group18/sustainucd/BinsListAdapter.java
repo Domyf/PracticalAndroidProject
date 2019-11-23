@@ -42,6 +42,14 @@ public class BinsListAdapter extends RecyclerView.Adapter<BinsListAdapter.BinVie
         this.currentLongitude = longitude;
     }
 
+    public double getCurrentLatitude() {
+        return currentLatitude;
+    }
+
+    public double getCurrentLongitude() {
+        return currentLongitude;
+    }
+
     // Create new views (invoked by the layout manager)
     @Override
     public BinsListAdapter.BinViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -60,7 +68,7 @@ public class BinsListAdapter extends RecyclerView.Adapter<BinsListAdapter.BinVie
     public void onBindViewHolder(BinViewHolder holder, int position) {
         // Get the data model based on position
         Bin bin = bins.get(position);
-        bin.distance = Utils.CalculateDistance(currentLatitude, currentLongitude, bin);
+        //bin.distance = Utils.CalculateDistance(currentLatitude, currentLongitude, bin.latitude, bin.longitude);
         Log.d("BinsListAdapter", currentLatitude+" current longitude: "+currentLongitude);
         // Set item views based on views and data model
         ImageView im = holder.binImageView;
