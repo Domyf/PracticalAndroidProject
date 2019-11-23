@@ -138,9 +138,16 @@ public class SingleMainActivity extends AppCompatActivity {
     //This will call the info activity
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        //TODO call info activity or user bins activity
-        Intent showBinIntent = new Intent(this, UserBinsActivity.class);
-        startActivity(showBinIntent);
+        switch (item.getItemId()) {
+            case R.id.action_user:
+                Intent showBinIntent = new Intent(this, UserBinsActivity.class);
+                startActivity(showBinIntent);
+                break;
+            case R.id.action_info:
+                //Intent infosIntent = new Intent(this, UserBinsActivity.class);
+                //startActivity(infosIntent);
+                break;
+        }
 
         return super.onOptionsItemSelected(item);
     }

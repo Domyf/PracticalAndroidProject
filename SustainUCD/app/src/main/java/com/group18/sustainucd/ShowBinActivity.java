@@ -73,7 +73,7 @@ public class ShowBinActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.menu_single_main, menu);
+        getMenuInflater().inflate(R.menu.menu_show_bin, menu);
         return true;
     }
 
