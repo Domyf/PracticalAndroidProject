@@ -24,8 +24,8 @@ import java.io.IOException;
 
 public class SingleMainActivity extends AppCompatActivity {
 
-    private static final int REQUEST_IMAGE_CAPTURE = 1;
     public static final int BIN_ADDED_SUCCESSFULLY = 2;
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int REQUEST_EXTERNAL_STORAGE = 3;
     private static final String TAG = "SingleMainActivity";
 

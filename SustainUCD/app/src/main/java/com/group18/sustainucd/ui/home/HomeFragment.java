@@ -1,5 +1,6 @@
 package com.group18.sustainucd.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -13,10 +14,12 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.group18.sustainucd.AddBinActivity;
 import com.group18.sustainucd.BinsListAdapter;
 import com.group18.sustainucd.Database.Bin;
 import com.group18.sustainucd.Database.BinsManager;
 import com.group18.sustainucd.R;
+import com.group18.sustainucd.ShowBinActivity;
 
 import java.util.List;
 
@@ -47,6 +50,13 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
     @Override
     public void OnBinClick(int position) {
         Log.d(TAG, "Bin clicked: "+position);
+        Intent showBinIntent = new Intent(getActivity(), ShowBinActivity.class);
+        ShowBinActivity.bitmapToShow = adapter.getBinOnPosition(position).bitmap;
+
+        showBinIntent.putExtra(ShowBinActivity.PICTURE_PATH, adapter.getBinOnPosition(position).pictureFileName);
+        showBinIntent.putExtra(ShowBinActivity.LATITUDE, adapter.getBinOnPosition(position).latitude);
+        showBinIntent.putExtra(ShowBinActivity.LONGITUDE, adapter.getBinOnPosition(position).longitude);
+        startActivity(showBinIntent);
     }
 
     @Override
