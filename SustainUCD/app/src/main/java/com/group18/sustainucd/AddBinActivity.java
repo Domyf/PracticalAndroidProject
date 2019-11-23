@@ -3,14 +3,18 @@ package com.group18.sustainucd;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import java.io.File;
+
 public class AddBinActivity extends AppCompatActivity {
 
     public static final String PICTURE_PATH = "PicturePath";
+    private static String TAG = "AddBinActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,4 +49,5 @@ public class AddBinActivity extends AppCompatActivity {
         mapIntent.setPackage("com.google.android.apps.maps");
         return mapIntent.resolveActivity(getPackageManager()) != null;
     }
+
 }

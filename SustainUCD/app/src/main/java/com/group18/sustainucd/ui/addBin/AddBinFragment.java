@@ -44,7 +44,6 @@ public class AddBinFragment extends Fragment {
     //View Model
     private AddBinViewModel addBinViewModel;
     //UI
-    private TextView locationTextView;
     private ImageView binImageView;
     private Button addBinBtn;
     //Location client
@@ -60,10 +59,6 @@ public class AddBinFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Has options menu if the user has Google Maps or other location app
-        if (HasLocationApp()) {
-            setHasOptionsMenu(true);
-        }
         locationAcquired = false;
         pictureTaken = false;
         newBin = new Bin();
@@ -100,14 +95,13 @@ public class AddBinFragment extends Fragment {
         return root;
     }
 
-    /**  This event is triggered after a successfull onCreateView() event.
+    /** This event is triggered after a successfull onCreateView() event.
         The view setup is done here.
     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //UI initialization
-        locationTextView = view.findViewById(R.id.locationTextView);
         binImageView = view.findViewById(R.id.binImageView);
         addBinBtn = view.findViewById(R.id.addBinBtn);
         SetOnClickListeners();
@@ -139,12 +133,6 @@ public class AddBinFragment extends Fragment {
      */
     private void Observe()
     {
-        addBinViewModel.getLocationText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                locationTextView.setText(s);
-            }
-        });
         addBinViewModel.getImageBitmap().observe(this, new Observer<Bitmap>() {
             @Override
             public void onChanged(Bitmap bitmap) {
@@ -161,8 +149,12 @@ public class AddBinFragment extends Fragment {
                 if (location != null) {
                     newBin.latitude = location.getLatitude();
                     newBin.longitude = location.getLongitude();
-                    addBinViewModel.setLocationText("Location acquired successfully!");
                     locationAcquired = true;
+                    // Has options menu if the user has Google Maps or other location app
+                    // and there are no problems with the location client
+                    if (HasLocationApp()) {
+                        setHasOptionsMenu(true);
+                    }
                 }
             }
 

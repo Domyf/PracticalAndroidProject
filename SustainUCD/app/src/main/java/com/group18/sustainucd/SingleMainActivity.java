@@ -34,7 +34,7 @@ public class SingleMainActivity extends AppCompatActivity {
     //then this file reference will be null and will be re-instantiated when the user wants to add
     //another bin. If the user take a photo but the bin is not added for some reason this file
     //reference won't change. The file is deleted if it isn't null when the activity is destroyed.
-    private static File nextBinPicture;
+    private static File nextBinPictureFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,17 +67,17 @@ public class SingleMainActivity extends AppCompatActivity {
         //and if the intent will resolve to an activity
         if (takePhotoIntent.resolveActivity(getPackageManager()) != null) {
             try {
-                if (nextBinPicture == null)
-                    nextBinPicture = BinImageHelper.CreateBinImageFile(this);
+                if (nextBinPictureFile == null)
+                    nextBinPictureFile = BinImageHelper.CreateBinImageFile(this);
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
 
-            if (nextBinPicture != null) {
+            if (nextBinPictureFile != null) {
                 Uri imageURI = FileProvider.getUriForFile(this,
-                        "com.group18.sustainucd.fileprovider", nextBinPicture);
+                        "com.group18.sustainucd.fileprovider", nextBinPictureFile);
 
-                newPicturePath = nextBinPicture.getAbsolutePath();
+                newPicturePath = nextBinPictureFile.getAbsolutePath();
                 Log.d(TAG, "Picture path: "+ newPicturePath);
                 takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageURI);
                 startActivityForResult(takePhotoIntent, REQUEST_IMAGE_CAPTURE);
@@ -102,7 +102,7 @@ public class SingleMainActivity extends AppCompatActivity {
                 if (resultCode == RESULT_OK) {
                     Snackbar.make(findViewById(R.id.fab), "Bin added successfully!", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
-                    nextBinPicture = null;
+                    nextBinPictureFile = null;
                 }
                 break;
         }
@@ -118,12 +118,13 @@ public class SingleMainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-        //The activity will be destroyed and there's a temp file that should be destroyed
-        if (isFinishing() && nextBinPicture != null) {
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG,"onDestroy isFinishing: "+isFinishing());
+        //The activity or the entire app will be destroyed and there's a temp file that should be destroyed
+        if (isFinishing() && nextBinPictureFile != null) {
             Log.d(TAG, "Activity will be destroyed, deleting the temp file");
-            nextBinPicture.delete();
+            nextBinPictureFile.delete();
         }
     }
 
