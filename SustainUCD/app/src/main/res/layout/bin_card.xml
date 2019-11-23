@@ -36,24 +36,13 @@
                 android:id="@+id/binDistanceTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
                 android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_toStartOf="@+id/mapBtn"
-                android:layout_toLeftOf="@+id/mapBtn"
                 android:layout_toEndOf="@+id/binImageView"
                 android:layout_toRightOf="@+id/binImageView"
                 android:gravity="center"
                 android:text="Distance Text" />
-
-            <Button
-                android:id="@+id/mapBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"
-                android:text="Map" />
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

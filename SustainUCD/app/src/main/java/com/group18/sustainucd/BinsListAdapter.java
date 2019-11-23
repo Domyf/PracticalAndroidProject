@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.group18.sustainucd.Database.Bin;
 
-import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BinsListAdapter extends RecyclerView.Adapter<BinsListAdapter.BinViewHolder> {
@@ -23,11 +23,23 @@ public class BinsListAdapter extends RecyclerView.Adapter<BinsListAdapter.BinVie
     private List<Bin> bins;
     private OnClickListener mainListener;
     private Context context;
+    //Location values
+    private double currentLatitude;
+    private double currentLongitude;
 
-    public BinsListAdapter(List<Bin> bins, OnClickListener listener, Context context) {
-        this.bins = bins;
+    public BinsListAdapter(OnClickListener listener, Context context) {
+        this.bins = new ArrayList<>();
         this.mainListener = listener;
         this.context = context;
+    }
+
+    public void SetList(List<Bin> bins) {
+        this.bins = bins;
+    }
+
+    public void SetLocation(double latitude, double longitude) {
+        this.currentLatitude = latitude;
+        this.currentLongitude = longitude;
     }
 
     // Create new views (invoked by the layout manager)
@@ -48,14 +60,13 @@ public class BinsListAdapter extends RecyclerView.Adapter<BinsListAdapter.BinVie
     public void onBindViewHolder(BinViewHolder holder, int position) {
         // Get the data model based on position
         Bin bin = bins.get(position);
-
-        // Set item views based on your views and data model
-        TextView distanceTextView = holder.distanceTextView;
-        distanceTextView.setText("Bin "+(position+1));
+        bin.distance = Utils.CalculateDistance(currentLatitude, currentLongitude, bin);
+        Log.d("BinsListAdapter", currentLatitude+" current longitude: "+currentLongitude);
+        // Set item views based on views and data model
         ImageView im = holder.binImageView;
         new LoadPictureTask(bin, im, BinImageHelper.GetBinImagePath(context, bin.pictureFileName)).execute();
 
-        //holder.distanceTextView.setText(bin.distance+" m");
+        holder.distanceTextView.setText(String.format("%.2f m", bin.distance));
 
     }
 
@@ -65,7 +76,7 @@ public class BinsListAdapter extends RecyclerView.Adapter<BinsListAdapter.BinVie
         return bins.size();
     }
 
-    public Bin getBinOnPosition(int position) {
+    public Bin getBinAtPosition(int position) {
         if (position >= 0 && position < bins.size())
             return bins.get(position);
         return null;

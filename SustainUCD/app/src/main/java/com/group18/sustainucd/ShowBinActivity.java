@@ -38,15 +38,9 @@ public class ShowBinActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_bin);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        appBar = findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        appBar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "click");
-            }
-        });
+
         InitBin();
         ((ImageView) findViewById(R.id.headerImageView)).setImageBitmap(bitmapToShow);
 
@@ -54,13 +48,7 @@ public class ShowBinActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Uri gmmIntentUri = Uri.parse("geo:"+binToShow.latitude+","+binToShow.longitude
-                        +"?z=18&q="+binToShow.latitude+","+binToShow.longitude+"("+mapsLabel+")");
-
-                // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
-                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                // Make the Intent explicit by setting the Google Maps package
-                mapIntent.setPackage("com.google.android.apps.maps");
+                Intent mapIntent = Utils.GetMapIntent(binToShow, mapsLabel);
                 if (mapIntent.resolveActivity(getPackageManager()) != null) {
                     startActivity(mapIntent);
                 }
@@ -81,17 +69,6 @@ public class ShowBinActivity extends AppCompatActivity {
             binToShow.bitmap = bitmapToShow;
             Log.d(TAG, "latitude: " + binToShow.latitude + " longitude: " + binToShow.longitude);
         }
-    }
-
-    private Intent GetMapIntent() {
-        Uri gmmIntentUri = Uri.parse("geo:"+binToShow.latitude+","+binToShow.longitude
-                +"?z=18&q="+binToShow.latitude+","+binToShow.longitude+"("+mapsLabel+")");
-
-        // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
-        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-        // Make the Intent explicit by setting the Google Maps package
-        mapIntent.setPackage("com.google.android.apps.maps");
-        return mapIntent;
     }
 
     @Override

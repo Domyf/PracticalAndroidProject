@@ -1,8 +1,8 @@
 package com.group18.sustainucd.ui.home;
 
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,36 +14,50 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.group18.sustainucd.AddBinActivity;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.group18.sustainucd.BinsListAdapter;
 import com.group18.sustainucd.Database.Bin;
 import com.group18.sustainucd.Database.BinsManager;
 import com.group18.sustainucd.R;
 import com.group18.sustainucd.ShowBinActivity;
+import com.group18.sustainucd.Utils;
 
 import java.util.List;
 
-public class HomeFragment extends Fragment implements BinsListAdapter.OnClickListener, BinsManager.BinsDatabaseListener {
+public class HomeFragment extends Fragment implements BinsListAdapter.OnClickListener,
+        BinsManager.BinsDatabaseListener, OnSuccessListener<Location> {
 
     private static final String TAG = "HomeFragment";
     private HomeViewModel homeViewModel;
     private RecyclerView recyclerView;
     private BinsListAdapter adapter;
+    //Location client
+    private FusedLocationProviderClient client;
+    private int howManyBinsToShow = 10;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //Location initialization
+        client = LocationServices.getFusedLocationProviderClient(getContext());
+        adapter = new BinsListAdapter(this, getContext());
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel.class);
+        homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         // Lookup the recyclerview in activity layout
         recyclerView = (RecyclerView) root.findViewById(R.id.bins_recycler_view);
-        // Set layout manager to position the items if it has already the adapter
+        recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        //Initialize the database
-        if (!BinsManager.HasBeenInitialized())
-            BinsManager.Initialize(getActivity(), this);
-        else
-            InitializeBinsList();
+
+        //Get location and then look for nearest bins
+        GetLocation();
+
         return root;
     }
 
@@ -51,30 +65,38 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
     public void OnBinClick(int position) {
         Log.d(TAG, "Bin clicked: "+position);
         Intent showBinIntent = new Intent(getActivity(), ShowBinActivity.class);
-        ShowBinActivity.bitmapToShow = adapter.getBinOnPosition(position).bitmap;
+        ShowBinActivity.bitmapToShow = adapter.getBinAtPosition(position).bitmap;
 
-        showBinIntent.putExtra(ShowBinActivity.PICTURE_PATH, adapter.getBinOnPosition(position).pictureFileName);
-        showBinIntent.putExtra(ShowBinActivity.LATITUDE, adapter.getBinOnPosition(position).latitude);
-        showBinIntent.putExtra(ShowBinActivity.LONGITUDE, adapter.getBinOnPosition(position).longitude);
+        showBinIntent.putExtra(ShowBinActivity.PICTURE_PATH, adapter.getBinAtPosition(position).pictureFileName);
+        showBinIntent.putExtra(ShowBinActivity.LATITUDE, adapter.getBinAtPosition(position).latitude);
+        showBinIntent.putExtra(ShowBinActivity.LONGITUDE, adapter.getBinAtPosition(position).longitude);
         startActivity(showBinIntent);
     }
 
     @Override
     public void OnBinsDatabaseLoaded() {
         Log.d(TAG, "Database loaded");
-        InitializeBinsList();
+        //List<Bin> binsToShow = BinsManager.GetNearestKBins(howManyBinsToShow, currentLatitude, currentLongitude);
+        List<Bin> binsToShow = BinsManager.GetAllBins();
+        adapter.SetList(binsToShow);// Attach the adapter to the recyclerview to populate items
+        recyclerView.setAdapter(adapter);
+        Log.d(TAG, adapter.getItemCount()+" bins");
     }
 
-    public void InitializeBinsList()
+    private void GetLocation()
     {
-        List<Bin> binsToShow = BinsManager.GetAllBins();
-        // Create adapter passing bins list
-        adapter = new BinsListAdapter(binsToShow, this, getContext());
-        // Attach the adapter to the recyclerview to populate items
-        recyclerView.setAdapter(adapter);
-        Log.d("HomeFragment", adapter.getItemCount()+" bins");
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        //recyclerView.setHasFixedSize(true);
+        client.getLastLocation().addOnSuccessListener(this);
+    }
+
+    //Success on reciving location
+    @Override
+    public void onSuccess(Location location) {
+        if (location != null) {
+            adapter.SetLocation(location.getLatitude(), location.getLongitude());
+            if (!BinsManager.HasBeenInitialized())
+                BinsManager.Initialize(getActivity(), HomeFragment.this);
+            else
+                OnBinsDatabaseLoaded();
+        }
     }
 }

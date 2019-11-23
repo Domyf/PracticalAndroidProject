@@ -4,6 +4,8 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.group18.sustainucd.Utils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,9 +28,14 @@ public class BinsManager {
                     binDao = BinsDatabase.getInstance(context).binDao();
                 databaseBins = binDao.getAll();
                 Log.d(TAG, "Bins in database: "+databaseBins.size());
-                listener.OnBinsDatabaseLoaded();
                 initialized = true;
                 return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                listener.OnBinsDatabaseLoaded();
             }
         }.execute();
     }
@@ -62,39 +69,20 @@ public class BinsManager {
         return databaseBins;
     }
 
-    private static double CalculateDistance(double CurrentLatitude, double CurrentLongitude, Bin bin2){
-
-        // Convert lat and long values from decimal degrees to radians
-        double lat1 = Math.toRadians(CurrentLatitude);
-        double long1 = Math.toRadians(CurrentLongitude);
-        double lat2 = Math.toRadians(bin2.latitude);
-        double long2 = Math.toRadians(bin2.longitude);
-
-        // Earth's mean radius (km)
-        double R = 6371;
-
-        // series of formulas used to calculate distance between points on Earth's surface using lat
-        // and long
-        double a = Math.sin((lat2 - lat1)/2)*Math.sin((lat2 - lat1)/2) + Math.cos(lat1)*Math.cos(lat2)*Math.sin((long2-long1)/2)*Math.sin((long2-long1));
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-        double distance = R * c; // distance between two bins in meters
-
-        return distance;
-
-    }
-
-    public synchronized static List<Bin> GetNearestKBins(int k, double CurrentLatitude, double CurrentLongitude)
+    public synchronized static List<Bin> GetNearestKBins(int k, double currentLatitude, double currentLongitude)
     {
         //TODO calculate and return the nearest k bins from the current location
         List<Double> BinDistances = new ArrayList<Double>();
         List<Bin> ClosestBins = new ArrayList<Bin>();
 
         for (Bin bin : databaseBins){
-            BinDistances.add(CalculateDistance(CurrentLatitude, CurrentLongitude, bin));
+            BinDistances.add(Utils.CalculateDistance(currentLatitude, currentLongitude, bin));
         }
 
 
         double LargestSmallDistance = 0;
+        if (k > databaseBins.size())
+            k = databaseBins.size();
 
         for (int i = 0; i < k; i++){
             double MinDistance = 99999;
