@@ -3,6 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.group18.sustainucd.SingleMainActivity">
     <item
+        android:id="@+id/action_user"
+        android:icon="@drawable/baseline_face_24"
+        android:orderInCategory="100"
+        android:title="user"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/action_location"
         android:icon="@drawable/baseline_info_24"
         android:orderInCategory="100"

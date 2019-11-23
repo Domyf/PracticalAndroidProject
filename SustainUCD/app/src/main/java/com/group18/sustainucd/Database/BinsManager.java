@@ -123,7 +123,16 @@ public class BinsManager {
 
 
     }
-    
+
+    public static List<Bin> GetUserBins() {
+        List<Bin> list = new ArrayList<>();
+        for(Bin bin: databaseBins) {
+            if (bin.addedByUser)
+                list.add(bin);
+        }
+        return list;
+    }
+
     public static int GetBinsQuantity()
     {
         if (databaseBins == null)

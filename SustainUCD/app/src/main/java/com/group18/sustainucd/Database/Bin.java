@@ -26,6 +26,8 @@ public class Bin {
     public double latitude;
     @ColumnInfo(name = "longitude")
     public double longitude;
+    @ColumnInfo(name = "addedByUser")
+    public boolean addedByUser;
 
     @Ignore
     public double distance;

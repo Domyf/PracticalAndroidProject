@@ -17,6 +17,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".UserBinsActivity"
+            android:label="@string/title_activity_user_bins"
+            android:parentActivityName=".SingleMainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.group18.sustainucd.SingleMainActivity" />
+        </activity>
+        <activity
             android:name=".ShowBinActivity"
             android:label="@string/title_activity_show_bin"
             android:parentActivityName=".SingleMainActivity"
@@ -61,7 +70,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name"></activity>
+            android:label="@string/app_name" />
     </application>
 
 </manifest>

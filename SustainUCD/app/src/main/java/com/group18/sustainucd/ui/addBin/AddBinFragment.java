@@ -62,6 +62,7 @@ public class AddBinFragment extends Fragment {
         locationAcquired = false;
         pictureTaken = false;
         newBin = new Bin();
+        newBin.addedByUser = true;
         //Location initialization
         client = LocationServices.getFusedLocationProviderClient(getActivity());
     }
