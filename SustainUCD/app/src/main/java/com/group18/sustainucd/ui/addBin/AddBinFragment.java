@@ -31,9 +31,7 @@ import com.group18.sustainucd.AddBinActivity;
 import com.group18.sustainucd.BinImageHelper;
 import com.group18.sustainucd.Database.Bin;
 import com.group18.sustainucd.Database.BinsManager;
-import com.group18.sustainucd.Permissions;
 import com.group18.sustainucd.R;
-import com.group18.sustainucd.SingleMainActivity;
 
 import java.io.File;
 import java.io.FileNotFoundException;

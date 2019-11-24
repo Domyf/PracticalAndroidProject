@@ -77,6 +77,18 @@ public class BinsListAdapter extends RecyclerView.Adapter<BinsListAdapter.BinVie
         else
             im.setImageBitmap(bin.bitmap);
         holder.distanceTextView.setText(String.format("%.2f m", bin.distance));
+        if (!bin.paper)
+            holder.paperImageView.setVisibility(View.GONE);
+        if (!bin.plastic)
+            holder.plasticImageView.setVisibility(View.GONE);
+        if (!bin.food)
+            holder.foodImageView.setVisibility(View.GONE);
+        if (!bin.glass)
+            holder.glassImageView.setVisibility(View.GONE);
+        if (!bin.battery)
+            holder.batteryImageView.setVisibility(View.GONE);
+        if (!bin.electronic)
+            holder.electronicImageView.setVisibility(View.GONE);
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -99,11 +111,23 @@ public class BinsListAdapter extends RecyclerView.Adapter<BinsListAdapter.BinVie
         public TextView distanceTextView;
         public ImageView binImageView;
         public OnClickListener onClickListener;
+        private ImageView paperImageView;
+        private ImageView foodImageView;
+        private ImageView batteryImageView;
+        private ImageView glassImageView;
+        private ImageView plasticImageView;
+        private ImageView electronicImageView;
 
         public BinViewHolder(View view, OnClickListener listener) {
             super(view);
             distanceTextView = (TextView) view.findViewById(R.id.binDistanceTextView);
             binImageView = (ImageView) view.findViewById(R.id.binImageView);
+            paperImageView = (ImageView) view.findViewById(R.id.paperImageView);
+            foodImageView = (ImageView) view.findViewById(R.id.foodImageView);
+            batteryImageView = (ImageView) view.findViewById(R.id.batteryImageView);
+            glassImageView = (ImageView) view.findViewById(R.id.glassImageView);
+            plasticImageView = (ImageView) view.findViewById(R.id.plasticImageView);
+            electronicImageView = (ImageView) view.findViewById(R.id.electronicImageView);
             this.onClickListener = listener;
             view.setOnClickListener(this);
         }
