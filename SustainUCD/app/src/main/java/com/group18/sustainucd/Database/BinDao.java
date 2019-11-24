@@ -5,6 +5,7 @@ package com.group18.sustainucd.Database;
  */
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
@@ -16,4 +17,6 @@ public interface BinDao {
     List<Bin> getAll();
     @Insert
     void insertBin(Bin bin);
+    @Delete
+    void delete(Bin bin);
 }

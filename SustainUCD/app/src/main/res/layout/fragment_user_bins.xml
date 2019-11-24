@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserBinsActivityFragment"
+    tools:context=".UserBinsFragment"
     tools:showIn="@layout/activity_user_bins">
 
     <androidx.recyclerview.widget.RecyclerView

@@ -2,12 +2,10 @@ package com.group18.sustainucd;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.group18.sustainucd.Database.Bin;
 
 import androidx.annotation.NonNull;

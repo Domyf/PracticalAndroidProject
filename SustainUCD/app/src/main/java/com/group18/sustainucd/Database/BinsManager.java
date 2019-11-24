@@ -64,6 +64,20 @@ public class BinsManager {
         }.execute();
     }
 
+    public static void Delete(final Context context, final Bin bin) {
+        databaseBins.remove(bin);
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                if (binDao == null)
+                    binDao = BinsDatabase.getInstance(context).binDao();
+                binDao.delete(bin);
+                Log.d(TAG, "Bin deleted");
+                return null;
+            }
+        }.execute();
+    }
+
     public static List<Bin> GetAllBins()
     {
         return databaseBins;
@@ -76,22 +90,14 @@ public class BinsManager {
         }
     }
 
-    public synchronized static List<Bin> GetNearestKBins(int k, double currentLatitude, double currentLongitude)
+    public static List<Bin> GetNearestKBins(int k, double currentLatitude, double currentLongitude)
     {
-        //TODO calculate and return the nearest k bins from the current location
-        //List<Double> binDistances = new ArrayList<Double>();
         List<Bin> closestBins = new ArrayList<>();
         List<Integer> binsIndexes = new ArrayList<>();
-        /*for (Bin bin : databaseBins){
-            binDistances.add(Utils.CalculateDistance(currentLatitude, currentLongitude, bin));
-        }*/
-
-        //double LargestSmallDistance = 0;
 
         if (k > databaseBins.size())
             k = databaseBins.size();
 
-        double highestMin = 0;
         int index = 0;
 
         for(int i=0; i<k; i++) {
@@ -105,23 +111,9 @@ public class BinsManager {
             }
             closestBins.add(databaseBins.get(index));
             binsIndexes.add(index);
-            highestMin = min;
         }
 
-        /*for (int i = 0; i < k; i++){
-            double minDistance = 99999;
-            for (double distance : binDistances){
-                if(distance <= minDistance && distance > LargestSmallDistance)
-                    minDistance = distance;
-            }
-            int index = databaseBins.indexOf(minDistance);
-            closestBins.add(databaseBins.get(index));
-            LargestSmallDistance = minDistance;
-        }*/
-
         return closestBins;
-
-
     }
 
     public static List<Bin> GetUserBins() {

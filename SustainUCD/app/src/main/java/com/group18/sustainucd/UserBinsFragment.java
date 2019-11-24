@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class UserBinsActivityFragment extends Fragment implements UserBinsAdapter.OnClickListener {
+public class UserBinsFragment extends Fragment implements UserBinsAdapter.OnClickListener {
 
     private static final String TAG = "UserBinsFragment";
     private RecyclerView recyclerView;
@@ -59,7 +59,8 @@ public class UserBinsActivityFragment extends Fragment implements UserBinsAdapte
     @Override
     public void OnDeleteBtnClick(int position) {
         //TODO ask if the user is sure or not with a dialog
-        //TODO implement delete from database
+        BinsManager.Delete(getContext(), adapter.getBinAtPosition(position));
+        //TODO update recycleview
         Log.d(TAG, "Delete button clicked");
     }
 }
