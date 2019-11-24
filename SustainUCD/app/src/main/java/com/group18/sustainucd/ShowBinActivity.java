@@ -80,6 +80,13 @@ public class ShowBinActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         //TODO call info activity
+        switch (item.getItemId()) {
+            //If the button pressed is the back arrow
+            //then will happen the same behavior of onBackPressed()
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 }

@@ -31,7 +31,11 @@ public class UserBinsAdapter extends RecyclerView.Adapter<UserBinsAdapter.BinVie
         this.context = context;
     }
 
-    public void SetList(List<Bin> bins) {
+    public void deleteBinAt(int position) {
+        bins.remove(position);
+    }
+
+    public void setList(List<Bin> bins) {
         this.bins = bins;
     }
 
@@ -55,8 +59,10 @@ public class UserBinsAdapter extends RecyclerView.Adapter<UserBinsAdapter.BinVie
         Bin bin = bins.get(position);
         // Set item views based on views and data model
         ImageView im = holder.binImageView;
-        new LoadPictureTask(bin, im, BinImageHelper.GetBinImagePath(context, bin.pictureFileName)).execute();
-
+        if (bin.bitmap == null)
+            new LoadPictureTask(bin, im, BinImageHelper.GetBinImagePath(context, bin.pictureFileName)).execute();
+        else
+            im.setImageBitmap(bin.bitmap);
     }
 
     // Return the size of your dataset (invoked by the layout manager)

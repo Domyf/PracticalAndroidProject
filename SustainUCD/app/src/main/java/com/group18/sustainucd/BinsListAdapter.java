@@ -72,10 +72,11 @@ public class BinsListAdapter extends RecyclerView.Adapter<BinsListAdapter.BinVie
         Log.d("BinsListAdapter", currentLatitude+" current longitude: "+currentLongitude);
         // Set item views based on views and data model
         ImageView im = holder.binImageView;
-        new LoadPictureTask(bin, im, BinImageHelper.GetBinImagePath(context, bin.pictureFileName)).execute();
-
+        if (bin.bitmap == null)
+            new LoadPictureTask(bin, im, BinImageHelper.GetBinImagePath(context, bin.pictureFileName)).execute();
+        else
+            im.setImageBitmap(bin.bitmap);
         holder.distanceTextView.setText(String.format("%.2f m", bin.distance));
-
     }
 
     // Return the size of your dataset (invoked by the layout manager)

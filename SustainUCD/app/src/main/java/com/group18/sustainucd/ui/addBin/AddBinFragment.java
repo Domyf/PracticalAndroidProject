@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -52,7 +51,7 @@ public class AddBinFragment extends Fragment {
     private Bin newBin;
     private File binImageFile;
     private boolean locationAcquired;
-    private boolean pictureTaken;
+    private boolean pictureSet;
 
     private final String mapsLabel = "Bin";
 
@@ -60,11 +59,17 @@ public class AddBinFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         locationAcquired = false;
-        pictureTaken = false;
+        pictureSet = false;
         newBin = new Bin();
         newBin.addedByUser = true;
         //Location initialization
         client = LocationServices.getFusedLocationProviderClient(getActivity());
+        if (getActivity().getIntent().hasExtra(AddBinActivity.PICTURE_PATH)) {
+            String picturePath = getActivity().getIntent().getStringExtra(AddBinActivity.PICTURE_PATH);
+            binImageFile = new File(picturePath);
+            newBin.pictureFileName = BinImageHelper.GetImageName(binImageFile);
+            GetAndSetLocation();
+        }
     }
 
     /**  The onCreateView method is called when the Fragment should
@@ -76,17 +81,11 @@ public class AddBinFragment extends Fragment {
         addBinViewModel = ViewModelProviders.of(this).get(AddBinViewModel.class);
         //Root view initialization
         View root = inflater.inflate(R.layout.fragment_add_bin, container, false);
-        if (getActivity().getIntent().hasExtra(AddBinActivity.PICTURE_PATH)) {
-            String picturePath = getActivity().getIntent().getStringExtra(AddBinActivity.PICTURE_PATH);
-            binImageFile = new File(picturePath);
-            newBin.pictureFileName = BinImageHelper.GetImageName(binImageFile);
-            GetAndSetLocation();
-        }
         //Scale and set the bitmap
         root.post(new Runnable() {
             @Override
             public void run() {
-                if (!pictureTaken)
+                if (!pictureSet)
                     new ScalePictureTask(binImageView, binImageFile.getAbsolutePath(), binImageView.getWidth(), binImageView.getHeight()).execute();
             }
         });
@@ -123,7 +122,7 @@ public class AddBinFragment extends Fragment {
         addBinBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (pictureTaken && locationAcquired)
+                if (pictureSet && locationAcquired)
                     AddBin();
             }
         });
@@ -187,7 +186,6 @@ public class AddBinFragment extends Fragment {
     private Intent GetMapIntent() {
         Uri gmmIntentUri = Uri.parse("geo:"+newBin.latitude+","+newBin.longitude
                 +"?z=18&q="+newBin.latitude+","+newBin.longitude+"("+mapsLabel+")");
-
         // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         // Make the Intent explicit by setting the Google Maps package
@@ -198,7 +196,6 @@ public class AddBinFragment extends Fragment {
     private boolean HasLocationApp() {
         //Simple example location, just for test
         Uri gmmIntentUri = Uri.parse("geo:37.7749,-122.4194?q=37.7749,-122.4194(Bin)");
-
         // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         // Make the Intent explicit by setting the Google Maps package
@@ -222,6 +219,7 @@ public class AddBinFragment extends Fragment {
         @Override
         protected Bitmap doInBackground(Void... voids) {
             Bitmap resized = BitmapFactory.decodeFile(path);
+            //Resize bitmap
             if ( imageViewHeight > 0 && imageViewWidth > 0) {
                 int width = resized.getWidth();
                 int height = resized.getHeight();
@@ -238,7 +236,6 @@ public class AddBinFragment extends Fragment {
                 resized = Bitmap.createScaledBitmap(resized, finalWidth, finalHeight, true);
             }
 
-            //Bitmap resized = Bitmap.createScaledBitmap(bitmap, imageViewWidth, imageViewHeight, true);
             //Save bitmap on file
             OutputStream fOut = null;
             try {
@@ -258,8 +255,7 @@ public class AddBinFragment extends Fragment {
         protected void onPostExecute(Bitmap bitmap) {
             super.onPostExecute(bitmap);
             imageView.setImageBitmap(bitmap);
-            pictureTaken = true;
-
+            pictureSet = true;
         }
     }
 }

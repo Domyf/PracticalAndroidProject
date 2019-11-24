@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.group18.sustainucd.BinsListAdapter;
@@ -23,7 +22,6 @@ import com.group18.sustainucd.Database.Bin;
 import com.group18.sustainucd.Database.BinsManager;
 import com.group18.sustainucd.R;
 import com.group18.sustainucd.ShowBinActivity;
-import com.group18.sustainucd.Utils;
 
 import java.util.List;
 
@@ -62,12 +60,6 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        Log.d(TAG, "onResume");
-    }
-
-    @Override
     public void OnBinClick(int position) {
         Log.d(TAG, "Bin clicked: "+position);
         Intent showBinIntent = new Intent(getActivity(), ShowBinActivity.class);
@@ -83,6 +75,8 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
     public void OnBinsDatabaseLoaded() {
         Log.d(TAG, "Database loaded");
         SetBinsToShow();
+        // Attach the adapter to the recyclerview to populate items
+        recyclerView.setAdapter(adapter);
     }
 
     private void GetLocation()
@@ -94,9 +88,8 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
         BinsManager.CalculateDistances(adapter.getCurrentLatitude(), adapter.getCurrentLongitude());
         List<Bin> binsToShow = BinsManager.GetNearestKBins(howManyBinsToShow,
                 adapter.getCurrentLatitude(), adapter.getCurrentLongitude());
-        //List<Bin> binsToShow = BinsManager.GetAllBins();
-        adapter.SetList(binsToShow);// Attach the adapter to the recyclerview to populate items
-        recyclerView.setAdapter(adapter);
+
+        adapter.SetList(binsToShow);
         Log.d(TAG, adapter.getItemCount()+" bins");
     }
 
@@ -108,7 +101,8 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
             if (!BinsManager.HasBeenInitialized())
                 BinsManager.Initialize(getActivity(), HomeFragment.this);
             else
-                SetBinsToShow();
+                OnBinsDatabaseLoaded();
         }
     }
+
 }

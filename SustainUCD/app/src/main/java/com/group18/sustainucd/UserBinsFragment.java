@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import com.group18.sustainucd.Database.Bin;
 import com.group18.sustainucd.Database.BinsManager;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -37,8 +38,7 @@ public class UserBinsFragment extends Fragment implements UserBinsAdapter.OnClic
 
     private void SetBinsToShow() {
         List<Bin> binsToShow = BinsManager.GetUserBins();
-        //List<Bin> binsToShow = BinsManager.GetAllBins();
-        adapter.SetList(binsToShow);// Attach the adapter to the recyclerview to populate items
+        adapter.setList(binsToShow);// Attach the adapter to the recyclerview to populate items
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         Log.d(TAG, adapter.getItemCount()+" bins");
@@ -60,7 +60,10 @@ public class UserBinsFragment extends Fragment implements UserBinsAdapter.OnClic
     public void OnDeleteBtnClick(int position) {
         //TODO ask if the user is sure or not with a dialog
         BinsManager.Delete(getContext(), adapter.getBinAtPosition(position));
-        //TODO update recycleview
+        String path = BinImageHelper.GetBinImagePath(getContext(), adapter.getBinAtPosition(position).pictureFileName);
+        new File(path).delete();
+        adapter.deleteBinAt(position);
+        adapter.notifyItemRemoved(position);
         Log.d(TAG, "Delete button clicked");
     }
 }
