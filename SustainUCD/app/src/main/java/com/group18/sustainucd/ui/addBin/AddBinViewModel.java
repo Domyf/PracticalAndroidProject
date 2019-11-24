@@ -13,12 +13,18 @@ public class AddBinViewModel extends ViewModel {
     private MutableLiveData<Drawable> paperDrawable;
     private MutableLiveData<Drawable> batteryDrawable;
     private MutableLiveData<Drawable> foodDrawable;
+    private MutableLiveData<Drawable> glassDrawable;
+    private MutableLiveData<Drawable> plasticDrawable;
+    private MutableLiveData<Drawable> electronicDrawable;
 
     public AddBinViewModel() {
         imageBitmap = new MutableLiveData<>();
         paperDrawable = new MutableLiveData<>();
         batteryDrawable = new MutableLiveData<>();
         foodDrawable = new MutableLiveData<>();
+        glassDrawable = new MutableLiveData<>();
+        plasticDrawable = new MutableLiveData<>();
+        electronicDrawable = new MutableLiveData<>();
     }
 
     public LiveData<Bitmap> getImageBitmap() { return imageBitmap; }
@@ -33,5 +39,17 @@ public class AddBinViewModel extends ViewModel {
 
     public MutableLiveData<Drawable> getFoodDrawable() {
         return foodDrawable;
+    }
+
+    public MutableLiveData<Drawable> getGlassDrawable() {
+        return glassDrawable;
+    }
+
+    public MutableLiveData<Drawable> getPlasticDrawable() {
+        return plasticDrawable;
+    }
+
+    public MutableLiveData<Drawable> getElectronicDrawable() {
+        return electronicDrawable;
     }
 }

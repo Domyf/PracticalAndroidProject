@@ -103,4 +103,11 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="title_activity_user_bins">Your Bins</string>
+    <string name="select_icons_title">What can go in this bin?</string>
+    <string name="paper_label">Paper</string>
+    <string name="food_label">Food</string>
+    <string name="plastic_label">Plastic</string>
+    <string name="glass_label">Glass</string>
+    <string name="battery_label">Battery</string>
+    <string name="electronic_label">Electronic</string>
 </resources>

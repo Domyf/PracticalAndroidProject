@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="Add Bin"
+        android:text="Add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -25,46 +25,15 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-    <LinearLayout
+    <include
+        layout="@layout/flag_buttons_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="16dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/addBinBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/binImageView">
 
-        <ImageView
-            android:id="@+id/paperImageView"
-            android:layout_width="@dimen/flag_btn_width"
-            android:layout_height="@dimen/flag_btn_height"
-            android:layout_marginLeft="@dimen/flag_btn_spaces"
-            android:layout_marginRight="@dimen/flag_btn_spaces"
-            app:srcCompat="@drawable/baseline_description_24" />
-
-        <ImageView
-            android:id="@+id/foodImageView"
-            android:layout_width="@dimen/flag_btn_width"
-            android:layout_height="@dimen/flag_btn_height"
-            android:layout_marginLeft="@dimen/flag_btn_spaces"
-            android:layout_marginRight="@dimen/flag_btn_spaces"
-            app:srcCompat="@drawable/baseline_fastfood_24" />
-
-        <ImageView
-            android:id="@+id/batteryImageView"
-            android:layout_width="@dimen/flag_btn_width"
-            android:layout_height="@dimen/flag_btn_height"
-            android:layout_marginLeft="@dimen/flag_btn_spaces"
-            android:layout_marginRight="@dimen/flag_btn_spaces"
-            app:srcCompat="@drawable/baseline_battery_charging_full_24" />
-
-    </LinearLayout>
+    </include>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

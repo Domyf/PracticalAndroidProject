@@ -35,6 +35,12 @@ public class Bin {
     public boolean battery;
     @ColumnInfo(name = "food")
     public boolean food;
+    @ColumnInfo(name = "glass")
+    public boolean glass;
+    @ColumnInfo(name = "plastic")
+    public boolean plastic;
+    @ColumnInfo(name = "electronic")
+    public boolean electronic;
 
     @Ignore
     public double distance;

@@ -49,6 +49,9 @@ public class AddBinFragment extends Fragment {
     private ImageView paperImageView;
     private ImageView foodImageView;
     private ImageView batteryImageView;
+    private ImageView glassImageView;
+    private ImageView plasticImageView;
+    private ImageView electronicImageView;
     private Button addBinBtn;
     //Location client
     private FusedLocationProviderClient client;
@@ -94,8 +97,6 @@ public class AddBinFragment extends Fragment {
                     new ScalePictureTask(binImageView, binImageFile.getAbsolutePath(), binImageView.getWidth(), binImageView.getHeight()).execute();
             }
         });
-        //Model observation
-        Observe();
 
         return root;
     }
@@ -112,6 +113,12 @@ public class AddBinFragment extends Fragment {
         paperImageView = view.findViewById(R.id.paperImageView);
         foodImageView = view.findViewById(R.id.foodImageView);
         batteryImageView = view.findViewById(R.id.batteryImageView);
+        glassImageView = view.findViewById(R.id.glassImageView);
+        plasticImageView = view.findViewById(R.id.plasticImageView);
+        electronicImageView = view.findViewById(R.id.electronicImageView);
+        //Model observation
+        Observe();
+        //Listeners
         SetOnClickListeners();
     }
 
@@ -148,10 +155,10 @@ public class AddBinFragment extends Fragment {
                 newBin.food = !newBin.food;
                 if (newBin.food) { //Selected
                     foodImageView.setImageDrawable(ContextCompat.getDrawable(getActivity(),
-                            R.drawable.baseline_fastfood_24_selected));
+                            R.drawable.round_local_pizza_24_selected));
                 } else {    //Not selected
                     foodImageView.setImageDrawable(ContextCompat.getDrawable(getActivity(),
-                            R.drawable.baseline_fastfood_24));
+                            R.drawable.round_local_pizza_24));
                 }
             }
         });
@@ -166,6 +173,48 @@ public class AddBinFragment extends Fragment {
                 } else {    //Not selected
                     batteryImageView.setImageDrawable(ContextCompat.getDrawable(getActivity(),
                             R.drawable.baseline_battery_charging_full_24));
+                }
+            }
+        });
+
+        glassImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                newBin.glass = !newBin.glass;
+                if (newBin.glass) { //Selected
+                    glassImageView.setImageDrawable(ContextCompat.getDrawable(getActivity(),
+                            R.drawable.round_local_bar_24_selected));
+                } else {    //Not selected
+                    glassImageView.setImageDrawable(ContextCompat.getDrawable(getActivity(),
+                            R.drawable.round_local_bar_24));
+                }
+            }
+        });
+
+        plasticImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                newBin.plastic = !newBin.plastic;
+                if (newBin.plastic) { //Selected
+                    plasticImageView.setImageDrawable(ContextCompat.getDrawable(getActivity(),
+                            R.drawable.round_local_drink_24_selected));
+                } else {    //Not selected
+                    plasticImageView.setImageDrawable(ContextCompat.getDrawable(getActivity(),
+                            R.drawable.round_local_drink_24));
+                }
+            }
+        });
+
+        electronicImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                newBin.electronic = !newBin.electronic;
+                if (newBin.electronic) { //Selected
+                    electronicImageView.setImageDrawable(ContextCompat.getDrawable(getActivity(),
+                            R.drawable.round_phone_android_24_selected));
+                } else {    //Not selected
+                    electronicImageView.setImageDrawable(ContextCompat.getDrawable(getActivity(),
+                            R.drawable.round_phone_android_24));
                 }
             }
         });
@@ -202,6 +251,27 @@ public class AddBinFragment extends Fragment {
             @Override
             public void onChanged(Drawable drawable) {
                 batteryImageView.setImageDrawable(drawable);
+            }
+        });
+
+        addBinViewModel.getGlassDrawable().observe(this, new Observer<Drawable>() {
+            @Override
+            public void onChanged(Drawable drawable) {
+                glassImageView.setImageDrawable(drawable);
+            }
+        });
+
+        addBinViewModel.getPlasticDrawable().observe(this, new Observer<Drawable>() {
+            @Override
+            public void onChanged(Drawable drawable) {
+                plasticImageView.setImageDrawable(drawable);
+            }
+        });
+
+        addBinViewModel.getElectronicDrawable().observe(this, new Observer<Drawable>() {
+            @Override
+            public void onChanged(Drawable drawable) {
+                electronicImageView.setImageDrawable(drawable);
             }
         });
     }
