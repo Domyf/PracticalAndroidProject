@@ -14,7 +14,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.group18.sustainucd.BinImageHelper;
-import com.group18.sustainucd.Database.Bin;
+import com.group18.sustainucd.database.Bin;
 import com.group18.sustainucd.R;
 
 import java.util.ArrayList;

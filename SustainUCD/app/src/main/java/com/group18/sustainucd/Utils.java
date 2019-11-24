@@ -3,7 +3,7 @@ package com.group18.sustainucd;
 import android.content.Intent;
 import android.net.Uri;
 
-import com.group18.sustainucd.Database.Bin;
+import com.group18.sustainucd.database.Bin;
 
 /**
  * This class will provide some general utilities to all the classes in the app.

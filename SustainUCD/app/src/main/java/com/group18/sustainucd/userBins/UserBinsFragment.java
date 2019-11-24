@@ -14,11 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.group18.sustainucd.BinImageHelper;
-import com.group18.sustainucd.Database.Bin;
-import com.group18.sustainucd.Database.BinsManager;
+import com.group18.sustainucd.database.Bin;
+import com.group18.sustainucd.database.BinsManager;
 import com.group18.sustainucd.R;
 import com.group18.sustainucd.showBin.ShowBinActivity;
-import com.group18.sustainucd.userBins.UserBinsAdapter;
 
 import java.io.File;
 import java.util.List;

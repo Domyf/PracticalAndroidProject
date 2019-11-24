@@ -16,8 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.group18.sustainucd.Database.Bin;
-import com.group18.sustainucd.Database.BinsManager;
+import com.group18.sustainucd.database.Bin;
+import com.group18.sustainucd.database.BinsManager;
 import com.group18.sustainucd.R;
 import com.group18.sustainucd.showBin.ShowBinActivity;
 

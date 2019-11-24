@@ -4,9 +4,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 
-import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.group18.sustainucd.Database.Bin;
+import com.group18.sustainucd.database.Bin;
 import com.group18.sustainucd.R;
 import com.group18.sustainucd.Utils;
 

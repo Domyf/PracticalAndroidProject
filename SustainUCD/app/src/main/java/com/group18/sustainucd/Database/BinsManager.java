@@ -1,4 +1,4 @@
-package com.group18.sustainucd.Database;
+package com.group18.sustainucd.database;
 
 import android.content.Context;
 import android.os.AsyncTask;

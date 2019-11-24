@@ -1,4 +1,4 @@
-package com.group18.sustainucd.Database;
+package com.group18.sustainucd.database;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
