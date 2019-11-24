@@ -42,7 +42,7 @@ public class ShowBinActivity extends AppCompatActivity {
         InitBin();
         ((ImageView) findViewById(R.id.headerImageView)).setImageBitmap(bitmapToShow);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.done_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

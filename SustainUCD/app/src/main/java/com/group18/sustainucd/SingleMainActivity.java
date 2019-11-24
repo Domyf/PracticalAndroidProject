@@ -25,6 +25,8 @@ import java.io.IOException;
 public class SingleMainActivity extends AppCompatActivity {
 
     public static final int BIN_ADDED_SUCCESSFULLY = 2;
+
+    private static final int REQUEST_ACCESS_FINE_LOCATION = 0;
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int REQUEST_EXTERNAL_STORAGE = 3;
     private static final String TAG = "SingleMainActivity";
@@ -44,14 +46,17 @@ public class SingleMainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         //Ask for access fine location permission, if not already granted
         if (!Permissions.HasAccessFineLocationPermission(getApplicationContext()))
-            Permissions.AskAccessFineLocationPermission(this, 0);
+            Permissions.AskAccessFineLocationPermission(this, REQUEST_ACCESS_FINE_LOCATION);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.done_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Ask for external storage permission, if not already granted
-                if (!Permissions.HasExternalStoragePermission(getApplicationContext()))
+                //Ask for fine location permission
+                if (!Permissions.HasAccessFineLocationPermission(getApplicationContext()))
+                    Permissions.AskAccessFineLocationPermission(SingleMainActivity.this, REQUEST_ACCESS_FINE_LOCATION);
+                else if (!Permissions.HasExternalStoragePermission(getApplicationContext()))
+                    //Ask for external storage permission, if not already granted
                     Permissions.AskExternalStoragePermission(SingleMainActivity.this, REQUEST_EXTERNAL_STORAGE);
                 else    //Take the photo with the phone camera app
                     TakePhoto();
@@ -100,7 +105,7 @@ public class SingleMainActivity extends AppCompatActivity {
                 break;
             case BIN_ADDED_SUCCESSFULLY:
                 if (resultCode == RESULT_OK) {
-                    Snackbar.make(findViewById(R.id.fab), "Bin added successfully!", Snackbar.LENGTH_LONG)
+                    Snackbar.make(findViewById(R.id.done_fab), "Bin added successfully!", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                     nextBinPictureFile = null;
                 }

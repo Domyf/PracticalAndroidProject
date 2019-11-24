@@ -26,11 +26,14 @@ import androidx.lifecycle.ViewModelProviders;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.group18.sustainucd.AddBinActivity;
 import com.group18.sustainucd.BinImageHelper;
 import com.group18.sustainucd.Database.Bin;
 import com.group18.sustainucd.Database.BinsManager;
+import com.group18.sustainucd.Permissions;
 import com.group18.sustainucd.R;
+import com.group18.sustainucd.SingleMainActivity;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -98,6 +101,14 @@ public class AddBinFragment extends Fragment {
             }
         });
 
+        FloatingActionButton fab = root.findViewById(R.id.done_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (pictureSet && locationAcquired)
+                    AddBin();
+            }
+        });
         return root;
     }
 
@@ -109,7 +120,6 @@ public class AddBinFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         //UI initialization
         binImageView = view.findViewById(R.id.binImageView);
-        addBinBtn = view.findViewById(R.id.addBinBtn);
         paperImageView = view.findViewById(R.id.paperImageView);
         foodImageView = view.findViewById(R.id.foodImageView);
         batteryImageView = view.findViewById(R.id.batteryImageView);
@@ -127,14 +137,6 @@ public class AddBinFragment extends Fragment {
     */
     private void SetOnClickListeners()
     {
-        addBinBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (pictureSet && locationAcquired)
-                    AddBin();
-            }
-        });
-
         paperImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

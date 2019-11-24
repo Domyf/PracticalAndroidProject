@@ -38,7 +38,7 @@ public class TabbedMainActivity extends AppCompatActivity {
         tabs.setupWithViewPager(viewPager);
 
         //Floating button setup
-        FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.done_fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +60,7 @@ public class TabbedMainActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Snackbar.make(findViewById(R.id.fab), "Photo taken successfully!", Snackbar.LENGTH_LONG)
+            Snackbar.make(findViewById(R.id.done_fab), "Photo taken successfully!", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
         }
     }
