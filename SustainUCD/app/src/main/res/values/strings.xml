@@ -110,4 +110,7 @@
     <string name="glass_label">Glass</string>
     <string name="battery_label">Battery</string>
     <string name="electronic_label">Electronic</string>
+    <string name="delete_dialog_title">Are you sure?</string>
+    <string name="delete_dialog_cancel">Cancel</string>
+    <string name="delete_dialog_ok">Ok</string>
 </resources>

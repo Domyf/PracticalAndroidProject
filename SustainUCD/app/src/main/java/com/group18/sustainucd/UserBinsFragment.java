@@ -1,9 +1,11 @@
 package com.group18.sustainucd;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,18 +20,21 @@ import java.io.File;
 import java.util.List;
 
 /**
- * A placeholder fragment containing a simple view.
+ * A fragment containing the view of the user bins list.
  */
 public class UserBinsFragment extends Fragment implements UserBinsAdapter.OnClickListener {
 
     private static final String TAG = "UserBinsFragment";
     private RecyclerView recyclerView;
     private UserBinsAdapter adapter;
+    private AlertDialog dialog;     //Dialog to show to ask confirm
+    private int binToDelete;        //Index of the bin that should be deleted if the user confirms
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_user_bins, container, false);
+        SetupDialog();
         adapter = new UserBinsAdapter(this, getContext());
         recyclerView = (RecyclerView) root.findViewById(R.id.user_bins_recycler_view);
         SetBinsToShow();
@@ -56,14 +61,39 @@ public class UserBinsFragment extends Fragment implements UserBinsAdapter.OnClic
         startActivity(showBinIntent);
     }
 
+    private void SetupDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        //Pressing on cancel button does nothing. Pressing on ok button will delete the bin
+        builder.setPositiveButton(R.string.delete_dialog_ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                Delete();
+            }
+        });
+        builder.setNegativeButton(R.string.delete_dialog_cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // Nothing to do
+            }
+        });
+        builder.setTitle(R.string.delete_dialog_title);
+
+        //Create the dialog
+        dialog = builder.create();
+    }
+
     @Override
     public void OnDeleteBtnClick(int position) {
-        //TODO ask if the user is sure or not with a dialog
-        BinsManager.Delete(getContext(), adapter.getBinAtPosition(position));
-        String path = BinImageHelper.GetBinImagePath(getContext(), adapter.getBinAtPosition(position).pictureFileName);
+        //Set the position of the bin that should be deleted
+        binToDelete = position;
+        //Ask if the user is sure or not with a dialog
+        dialog.show();
+    }
+
+    private void Delete() {
+        BinsManager.Delete(getContext(), adapter.getBinAtPosition(binToDelete));
+        String path = BinImageHelper.GetBinImagePath(getContext(), adapter.getBinAtPosition(binToDelete).pictureFileName);
         new File(path).delete();
-        adapter.deleteBinAt(position);
-        adapter.notifyItemRemoved(position);
-        Log.d(TAG, "Delete button clicked");
+        adapter.deleteBinAt(binToDelete);
+        adapter.notifyItemRemoved(binToDelete);
+        Log.d(TAG, "Bin deleted");
     }
 }
