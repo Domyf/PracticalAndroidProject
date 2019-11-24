@@ -1,4 +1,4 @@
-package com.group18.sustainucd.ui.addBin;
+package com.group18.sustainucd.addBin;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -13,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -27,7 +26,6 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.group18.sustainucd.AddBinActivity;
 import com.group18.sustainucd.BinImageHelper;
 import com.group18.sustainucd.Database.Bin;
 import com.group18.sustainucd.Database.BinsManager;
@@ -41,6 +39,12 @@ import java.io.OutputStream;
 
 import static android.app.Activity.RESULT_OK;
 
+/**
+ * This Fragment implements the user interface and the logic for the addition of a new bin by the
+ * user. The user can select what goes inside this new bin. The last known location is taken
+ * in background. It implements also a floating action button used to add the bin. A view model
+ * is also used to survive configuration changes like screen rotations.
+ */
 public class AddBinFragment extends Fragment {
 
     //View Model
@@ -53,7 +57,6 @@ public class AddBinFragment extends Fragment {
     private ImageView glassImageView;
     private ImageView plasticImageView;
     private ImageView electronicImageView;
-    private Button addBinBtn;
     //Location client
     private FusedLocationProviderClient client;
 

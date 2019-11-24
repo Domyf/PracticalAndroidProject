@@ -1,4 +1,4 @@
-package com.group18.sustainucd.ui.addBin;
+package com.group18.sustainucd.addBin;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
@@ -7,6 +7,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+/**
+ * View model used by the AddBinFragment. After any kind of configuration changes this class
+ * will help to don't lose data and to survive to this kind of under control events
+ */
 public class AddBinViewModel extends ViewModel {
 
     private MutableLiveData<Bitmap> imageBitmap;

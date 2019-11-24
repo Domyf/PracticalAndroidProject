@@ -1,16 +1,20 @@
-package com.group18.sustainucd;
+package com.group18.sustainucd.addBin;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.group18.sustainucd.R;
 
+/**
+ * This activity shows the picture taken by the user and implements a clickable imageviews to let
+ * the user select what kind of things can go inside this bin. This class implements the toolbar
+ * and the option menu logic. The rest is implemented in a fragment.
+ */
 public class AddBinActivity extends AppCompatActivity {
 
     public static final String PICTURE_PATH = "PicturePath";

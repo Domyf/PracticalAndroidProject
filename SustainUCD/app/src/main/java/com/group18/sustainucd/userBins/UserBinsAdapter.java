@@ -1,24 +1,33 @@
-package com.group18.sustainucd;
+package com.group18.sustainucd.userBins;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.group18.sustainucd.BinImageHelper;
 import com.group18.sustainucd.Database.Bin;
+import com.group18.sustainucd.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Adapter used for the list of bins showed in the "user bins" screen. It has also
+ * an interface that should be implemented by who use this class. A reference of who implements
+ * the interface will be passed by constructor. Who implements the interface will receive
+ * the click events. The "user bin" activity implements this interface and instantiate an object
+ * of this class and uses it with a recycle view.
+ * Thanks to this interface, if the user clicks on a bin then the OnBinClick() method of the
+ * "user bins" activity will be called.
+ */
 public class UserBinsAdapter extends RecyclerView.Adapter<UserBinsAdapter.BinViewHolder> {
 
     private List<Bin> bins;

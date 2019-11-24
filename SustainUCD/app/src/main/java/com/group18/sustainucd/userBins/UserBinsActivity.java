@@ -1,4 +1,4 @@
-package com.group18.sustainucd;
+package com.group18.sustainucd.userBins;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,6 +8,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.group18.sustainucd.R;
+
+/**
+ * Activity that shows the user contribution to the app. The bins the have been added by the user
+ * are showed in this activity. This class implement the toolbar and option menu logic. The rest
+ * is implemented into a fragment.
+ */
 public class UserBinsActivity extends AppCompatActivity {
 
     @Override

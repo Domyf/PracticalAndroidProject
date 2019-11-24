@@ -1,7 +1,4 @@
 package com.group18.sustainucd.Database;
-/*
-    This class is the main access point for the app database that contains all the bins.
- */
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -10,6 +7,9 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+/**
+ * This class is the main access point for the android room database that contains all the bins.
+ */
 @Database(entities = {Bin.class}, version = 1)
 public abstract class BinsDatabase extends RoomDatabase {
     private static BinsDatabase binsDatabase;   //Single database instance for all activities

@@ -1,4 +1,4 @@
-package com.group18.sustainucd;
+package com.group18.sustainucd.showBin;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -7,6 +7,8 @@ import android.os.Bundle;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.group18.sustainucd.Database.Bin;
+import com.group18.sustainucd.R;
+import com.group18.sustainucd.Utils;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +20,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
+/**
+ * Activity that shows all the information about a bin. Who starts this activity will pass all this
+ * information. This class implements a toolbar, an option menu and a floating button.
+ * An imageview that shows the bin picture is implemented inside the toolbar. Because a bitmap object
+ * can be very big, Android doesn't permit to share this object via Extras. The bitmap is set
+ * statically by the activity that starts this activity.
+ */
 public class ShowBinActivity extends AppCompatActivity {
 
     public static final String PICTURE_PATH = "Path";
@@ -28,8 +37,6 @@ public class ShowBinActivity extends AppCompatActivity {
     private final String TAG = "ShowBinActivity";
     private final String mapsLabel = "Bin";
     private Bin binToShow;
-
-    private AppBarLayout appBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

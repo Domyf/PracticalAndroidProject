@@ -1,4 +1,4 @@
-package com.group18.sustainucd;
+package com.group18.sustainucd.home;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -7,6 +7,11 @@ import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.group18.sustainucd.addBin.AddBinActivity;
+import com.group18.sustainucd.BinImageHelper;
+import com.group18.sustainucd.Permissions;
+import com.group18.sustainucd.R;
+import com.group18.sustainucd.userBins.UserBinsActivity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +27,17 @@ import android.view.View;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Home screen activity. This activity shows the bins that are near the user. It's the launcher
+ * activity. It asks to the user to access the fine location and the external storage.
+ * It implements the floating action button that will call the user camera app when the user clicks
+ * it. It implements a static file used to store the next picture. If the user takes a photo the file
+ * is not deleted but will be overwritten the next time the user will take a new photo. When the user
+ * takes a photo and adds the bin, this file will become null and next time the user will take a
+ * photo the file will be recreated with a new path (using BinImageHelper class).
+ * If the user takes a photo but doesn't add the bin and then the app is destroyed by the OS or by
+ * the user then the file is deleted.
+ */
 public class SingleMainActivity extends AppCompatActivity {
 
     public static final int BIN_ADDED_SUCCESSFULLY = 2;

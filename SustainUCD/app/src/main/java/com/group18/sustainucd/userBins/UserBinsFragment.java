@@ -1,4 +1,4 @@
-package com.group18.sustainucd;
+package com.group18.sustainucd.userBins;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
@@ -13,14 +13,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.group18.sustainucd.BinImageHelper;
 import com.group18.sustainucd.Database.Bin;
 import com.group18.sustainucd.Database.BinsManager;
+import com.group18.sustainucd.R;
+import com.group18.sustainucd.showBin.ShowBinActivity;
+import com.group18.sustainucd.userBins.UserBinsAdapter;
 
 import java.io.File;
 import java.util.List;
 
 /**
- * A fragment containing the view of the user bins list.
+ * A fragment containing the view of the user bins list. Every bin in list has a delete button.
+ * If the user presses the button a dialog will show and will ask for a confirm.
  */
 public class UserBinsFragment extends Fragment implements UserBinsAdapter.OnClickListener {
 

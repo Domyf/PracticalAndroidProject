@@ -5,9 +5,17 @@ import android.net.Uri;
 
 import com.group18.sustainucd.Database.Bin;
 
+/**
+ * This class will provide some general utilities to all the classes in the app.
+ * - Get the intent to show a bin on Google Maps
+ * - Calculate distance from two locations
+ */
 public class Utils {
 
-
+    /**
+     * Returns an intent to show show on google maps the bin passed by parameter with the
+     * String label passed by parameter
+     */
     public static Intent GetMapIntent(Bin binToShow, String mapsLabel) {
         Uri gmmIntentUri = Uri.parse("geo:"+binToShow.latitude+","+binToShow.longitude
                 +"?z=18&q="+binToShow.latitude+","+binToShow.longitude+"("+mapsLabel+")");
@@ -19,6 +27,9 @@ public class Utils {
         return mapIntent;
     }
 
+    /**
+     *  Returns the distance from two locations. The locations are described by latitude and longitude
+     */
     public static double CalculateDistance(double CurrentLatitude, double CurrentLongitude, double binLatitude, double binLongitude){
 
         // Convert lat and long values from decimal degrees to radians

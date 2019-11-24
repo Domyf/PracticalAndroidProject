@@ -1,4 +1,4 @@
-package com.group18.sustainucd.ui.home;
+package com.group18.sustainucd.home;
 
 import android.content.Intent;
 import android.location.Location;
@@ -10,26 +10,29 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.group18.sustainucd.BinsListAdapter;
 import com.group18.sustainucd.Database.Bin;
 import com.group18.sustainucd.Database.BinsManager;
 import com.group18.sustainucd.R;
-import com.group18.sustainucd.ShowBinActivity;
+import com.group18.sustainucd.showBin.ShowBinActivity;
 
 import java.util.List;
 
+/**
+ * This Fragment implements the user interface and the logic for the home screen
+ * A list of bins that are near is showed. First bin is the nearest. The last known location is taken
+ * in background. It implements also a floating action button used to take a photo and then add
+ * a new bin.
+ */
 public class HomeFragment extends Fragment implements BinsListAdapter.OnClickListener,
         BinsManager.BinsDatabaseListener, OnSuccessListener<Location> {
 
     private static final String TAG = "HomeFragment";
-    private HomeViewModel homeViewModel;
     private RecyclerView recyclerView;
     private BinsListAdapter adapter;
     //Location client
@@ -46,7 +49,6 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         // Lookup the recyclerview in activity layout
         recyclerView = (RecyclerView) root.findViewById(R.id.bins_recycler_view);

@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.provider.MediaStore;
 import android.view.View;
 
-import com.group18.sustainucd.ui.home.HomeFragment;
+import com.group18.sustainucd.home.HomeFragment;
 import com.group18.sustainucd.ui.tabbed_main.SectionsPagerAdapter;
 import com.group18.sustainucd.ui.notifications.NotificationsFragment;
 

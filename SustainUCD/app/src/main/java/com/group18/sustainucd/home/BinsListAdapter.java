@@ -1,4 +1,4 @@
-package com.group18.sustainucd;
+package com.group18.sustainucd.home;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -13,11 +13,22 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.group18.sustainucd.BinImageHelper;
 import com.group18.sustainucd.Database.Bin;
+import com.group18.sustainucd.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Adapter used for the list of bins showed in the home screen. It has also an interface that should
+ * be implemented by who use this class. A reference of who implements the interface will be passed
+ * by constructor. Who implements the interface will receive the click events.
+ * The home screen activity implements this interface and instantiate an object of this class and
+ * uses it with a recycle view.
+ * Thanks to this interface, if the user clicks on a bin then the OnBinClick() method of the
+ * home screen activity will be called.
+ */
 public class BinsListAdapter extends RecyclerView.Adapter<BinsListAdapter.BinViewHolder> {
 
     private List<Bin> bins;
@@ -66,17 +77,17 @@ public class BinsListAdapter extends RecyclerView.Adapter<BinsListAdapter.BinVie
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(BinViewHolder holder, int position) {
-        // Get the data model based on position
         Bin bin = bins.get(position);
-        //bin.distance = Utils.CalculateDistance(currentLatitude, currentLongitude, bin.latitude, bin.longitude);
         Log.d("BinsListAdapter", currentLatitude+" current longitude: "+currentLongitude);
-        // Set item views based on views and data model
-        ImageView im = holder.binImageView;
+        //If the bitmap is still in RAM then it shouldn't be loaded again
         if (bin.bitmap == null)
-            new LoadPictureTask(bin, im, BinImageHelper.GetBinImagePath(context, bin.pictureFileName)).execute();
+            new LoadPictureTask(bin, holder.binImageView, BinImageHelper.GetBinImagePath(context, bin.pictureFileName)).execute();
         else
-            im.setImageBitmap(bin.bitmap);
+            holder.binImageView.setImageBitmap(bin.bitmap);
+        //Set distance text view
         holder.distanceTextView.setText(String.format("%.2f m", bin.distance));
+        //Shows only the right images. View.GONE because the remaining images should
+        //be near each other without spaces
         if (!bin.paper)
             holder.paperImageView.setVisibility(View.GONE);
         if (!bin.plastic)
@@ -103,20 +114,18 @@ public class BinsListAdapter extends RecyclerView.Adapter<BinsListAdapter.BinVie
         return null;
     }
 
-    // Provide a reference to the views for each data item
-    // Complex data items may need more than one view per item, and
-    // you provide access to all the views for a data item in a view holder
+    //Custom view holder
     public static class BinViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        // each data item is just a string in this case
+
         public TextView distanceTextView;
         public ImageView binImageView;
-        public OnClickListener onClickListener;
         private ImageView paperImageView;
         private ImageView foodImageView;
         private ImageView batteryImageView;
         private ImageView glassImageView;
         private ImageView plasticImageView;
         private ImageView electronicImageView;
+        public OnClickListener onClickListener;
 
         public BinViewHolder(View view, OnClickListener listener) {
             super(view);
@@ -142,10 +151,16 @@ public class BinsListAdapter extends RecyclerView.Adapter<BinsListAdapter.BinVie
         void OnBinClick(int position);
     }
 
+    /**
+     * ASyncTask that will load a picture in background from a file.
+     * It recive an ImageView, the path of the file and a Bin.
+     * After loading the picture will set the bin bitmap and the imageview.
+     */
     private class LoadPictureTask extends AsyncTask<Void, Void, Bitmap> {
         private ImageView imageView;
         private String path;
         private Bin bin;
+
         public LoadPictureTask(Bin bin, ImageView imageView, String path) {
             this.imageView = imageView;
             this.path = path;
