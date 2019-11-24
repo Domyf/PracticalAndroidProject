@@ -47,6 +47,8 @@ public class AddBinFragment extends Fragment {
     //UI
     private ImageView binImageView;
     private ImageView paperImageView;
+    private ImageView foodImageView;
+    private ImageView batteryImageView;
     private Button addBinBtn;
     //Location client
     private FusedLocationProviderClient client;
@@ -108,12 +110,13 @@ public class AddBinFragment extends Fragment {
         binImageView = view.findViewById(R.id.binImageView);
         addBinBtn = view.findViewById(R.id.addBinBtn);
         paperImageView = view.findViewById(R.id.paperImageView);
+        foodImageView = view.findViewById(R.id.foodImageView);
+        batteryImageView = view.findViewById(R.id.batteryImageView);
         SetOnClickListeners();
     }
 
     /** This method will setup all on click listeners that are needed.
-        The button for taking a photo and the button for the addition
-        of the bin into the database.
+     *  It implements the logic for the recycle buttons
     */
     private void SetOnClickListeners()
     {
@@ -139,6 +142,34 @@ public class AddBinFragment extends Fragment {
             }
         });
 
+        foodImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                newBin.food = !newBin.food;
+                if (newBin.food) { //Selected
+                    foodImageView.setImageDrawable(ContextCompat.getDrawable(getActivity(),
+                            R.drawable.baseline_fastfood_24_selected));
+                } else {    //Not selected
+                    foodImageView.setImageDrawable(ContextCompat.getDrawable(getActivity(),
+                            R.drawable.baseline_fastfood_24));
+                }
+            }
+        });
+
+        batteryImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                newBin.battery = !newBin.battery;
+                if (newBin.battery) { //Selected
+                    batteryImageView.setImageDrawable(ContextCompat.getDrawable(getActivity(),
+                            R.drawable.baseline_battery_charging_full_24_selected));
+                } else {    //Not selected
+                    batteryImageView.setImageDrawable(ContextCompat.getDrawable(getActivity(),
+                            R.drawable.baseline_battery_charging_full_24));
+                }
+            }
+        });
+
     }
 
     /** View Model observation. After this method any change on the model
@@ -157,6 +188,20 @@ public class AddBinFragment extends Fragment {
             @Override
             public void onChanged(Drawable drawable) {
                 paperImageView.setImageDrawable(drawable);
+            }
+        });
+
+        addBinViewModel.getFoodDrawable().observe(this, new Observer<Drawable>() {
+            @Override
+            public void onChanged(Drawable drawable) {
+                foodImageView.setImageDrawable(drawable);
+            }
+        });
+
+        addBinViewModel.getBatteryDrawable().observe(this, new Observer<Drawable>() {
+            @Override
+            public void onChanged(Drawable drawable) {
+                batteryImageView.setImageDrawable(drawable);
             }
         });
     }

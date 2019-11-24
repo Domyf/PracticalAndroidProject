@@ -33,8 +33,8 @@ public class Bin {
     public boolean paper;
     @ColumnInfo(name = "battery")
     public boolean battery;
-    @ColumnInfo(name = "glass")
-    public boolean glass;
+    @ColumnInfo(name = "food")
+    public boolean food;
 
     @Ignore
     public double distance;
