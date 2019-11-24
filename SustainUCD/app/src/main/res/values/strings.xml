@@ -1,14 +1,7 @@
 <resources>
     <string name="app_name">SustainUCD</string>
-    <string name="title_home">Home</string>
-    <string name="title_add_bin">Add</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="title_activity_tabbed_main">TabbedMainActivity</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
-    <string name="title_activity_single_main">SingleMainActivity</string>
-    <string name="action_settings">Settings</string>
     <string name="title_activity_add_bin">Add a new bin</string>
+    <string name="title_activity_user_bins">Your Bins</string>
     <string name="info_button_text">Info</string>
     <string name="name_of_material">Name of Material</string>
     <string name="header_placeholder">Header Placeholder</string>
@@ -102,7 +95,6 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
-    <string name="title_activity_user_bins">Your Bins</string>
     <string name="select_icons_title">What can go in this bin?</string>
     <string name="paper_label">Paper</string>
     <string name="food_label">Food</string>
@@ -112,5 +104,5 @@
     <string name="electronic_label">Electronic</string>
     <string name="delete_dialog_title">Are you sure?</string>
     <string name="delete_dialog_cancel">Cancel</string>
-    <string name="delete_dialog_ok">Ok</string>
+    <string name="delete_dialog_ok">Yes</string>
 </resources>
