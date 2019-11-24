@@ -25,4 +25,14 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
+    <ImageView
+        android:id="@+id/paperImageView"
+        android:layout_width="@dimen/flag_btn_width"
+        android:layout_height="@dimen/flag_btn_height"
+        app:layout_constraintBottom_toTopOf="@+id/addBinBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/binImageView"
+        app:srcCompat="@drawable/baseline_description_24" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

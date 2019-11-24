@@ -27,7 +27,6 @@
         </activity>
         <activity
             android:name=".ShowBinActivity"
-            android:label="@string/title_activity_show_bin"
             android:parentActivityName=".SingleMainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data

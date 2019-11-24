@@ -2,7 +2,8 @@ package com.group18.sustainucd.Database;
 /**
     This class represents the table 'bin' inside the database.
     A bin is represented by an id, a picture file name, a description,
-    latitude and longitude.
+    latitude and longitude. A boolean addedByUser is set to true if the bin
+    was added by the user.
     These values correspond to the columns of the table bin. The id is the
     primary key.
  */
@@ -28,6 +29,12 @@ public class Bin {
     public double longitude;
     @ColumnInfo(name = "addedByUser")
     public boolean addedByUser;
+    @ColumnInfo(name = "paper")
+    public boolean paper;
+    @ColumnInfo(name = "battery")
+    public boolean battery;
+    @ColumnInfo(name = "glass")
+    public boolean glass;
 
     @Ignore
     public double distance;

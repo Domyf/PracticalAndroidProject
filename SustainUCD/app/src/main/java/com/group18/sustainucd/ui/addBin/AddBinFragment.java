@@ -3,6 +3,7 @@ package com.group18.sustainucd.ui.addBin;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -17,6 +18,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -44,6 +46,7 @@ public class AddBinFragment extends Fragment {
     private AddBinViewModel addBinViewModel;
     //UI
     private ImageView binImageView;
+    private ImageView paperImageView;
     private Button addBinBtn;
     //Location client
     private FusedLocationProviderClient client;
@@ -104,13 +107,8 @@ public class AddBinFragment extends Fragment {
         //UI initialization
         binImageView = view.findViewById(R.id.binImageView);
         addBinBtn = view.findViewById(R.id.addBinBtn);
+        paperImageView = view.findViewById(R.id.paperImageView);
         SetOnClickListeners();
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
     }
 
     /** This method will setup all on click listeners that are needed.
@@ -126,6 +124,21 @@ public class AddBinFragment extends Fragment {
                     AddBin();
             }
         });
+
+        paperImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                newBin.paper = !newBin.paper;
+                if (newBin.paper) { //Selected
+                    paperImageView.setImageDrawable(ContextCompat.getDrawable(getActivity(),
+                            R.drawable.baseline_description_24_selected));
+                } else {    //Not selected
+                    paperImageView.setImageDrawable(ContextCompat.getDrawable(getActivity(),
+                            R.drawable.baseline_description_24));
+                }
+            }
+        });
+
     }
 
     /** View Model observation. After this method any change on the model
@@ -137,6 +150,13 @@ public class AddBinFragment extends Fragment {
             @Override
             public void onChanged(Bitmap bitmap) {
                 binImageView.setImageBitmap(bitmap);
+            }
+        });
+
+        addBinViewModel.getPaperDrawable().observe(this, new Observer<Drawable>() {
+            @Override
+            public void onChanged(Drawable drawable) {
+                paperImageView.setImageDrawable(drawable);
             }
         });
     }

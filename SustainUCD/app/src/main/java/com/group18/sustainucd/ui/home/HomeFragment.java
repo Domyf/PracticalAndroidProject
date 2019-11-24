@@ -93,7 +93,7 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
         Log.d(TAG, adapter.getItemCount()+" bins");
     }
 
-    //Success on reciving location
+    //Success on location request
     @Override
     public void onSuccess(Location location) {
         if (location != null) {

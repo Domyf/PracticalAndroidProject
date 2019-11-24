@@ -9,7 +9,7 @@
         android:title="user"
         app:showAsAction="always" />
     <item
-        android:id="@+id/action_location"
+        android:id="@+id/action_info"
         android:icon="@drawable/baseline_info_24"
         android:orderInCategory="100"
         android:title="info"
