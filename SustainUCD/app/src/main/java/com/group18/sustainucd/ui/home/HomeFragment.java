@@ -43,10 +43,13 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         // Lookup the recyclerview in activity layout
         recyclerView = (RecyclerView) root.findViewById(R.id.bins_recycler_view);
-        // Set layout manager to position the items
+        // Set layout manager to position the items if it has already the adapter
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         //Initialize the database
-        BinsManager.Initialize(getActivity(), this);
+        if (!BinsManager.HasBeenInitialized())
+            BinsManager.Initialize(getActivity(), this);
+        else
+            InitializeBinsList();
         /*final TextView textView = root.findViewById(R.id.text_home);
         homeViewModel.getText().observe(this, new Observer<String>() {
             @Override

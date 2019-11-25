@@ -38,6 +38,7 @@ import com.group18.sustainucd.R;
 import java.io.File;
 import java.io.IOException;
 
+import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 
 public class AddBinFragment extends Fragment {
@@ -106,7 +107,6 @@ public class AddBinFragment extends Fragment {
         //TODO modify this after choosing between tabbed, single or bottombar main activity
         if (getActivity().getIntent().hasExtra(AddBinActivity.PICTURE_PATH)) {
             String picturePath = getActivity().getIntent().getStringExtra(AddBinActivity.PICTURE_PATH);
-            Log.d("AddBinFragment", picturePath);
             binImageFile = new File(picturePath);
             addBinBtn.setVisibility(View.VISIBLE);
             takePhotoBtn.setVisibility(View.GONE);
@@ -121,7 +121,7 @@ public class AddBinFragment extends Fragment {
         }
     }
 
-    /**  This method will setup all on click listeners that are needed.
+    /** This method will setup all on click listeners that are needed.
         The button for taking a photo and the button for the addition
         of the bin into the database.
     */
@@ -149,7 +149,7 @@ public class AddBinFragment extends Fragment {
         });
     }
 
-    /**  View Model observation. After this method any change on the model
+    /** View Model observation. After this method any change on the model
         will reflect on the view.
      */
     private void Observe()
