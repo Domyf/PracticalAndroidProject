@@ -2,10 +2,6 @@
     <string name="app_name">SustainUCD</string>
     <string name="title_activity_add_bin">Add a new bin</string>
     <string name="title_activity_user_bins">Your Bins</string>
-    <string name="info_button_text">Info</string>
-    <string name="name_of_material">Name of Material</string>
-    <string name="header_placeholder">Header Placeholder</string>
-    <string name="text_info_placeholder">Info Placeholder</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 
