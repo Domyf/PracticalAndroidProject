@@ -1,11 +1,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".addBin.AddBinActivity">
+    tools:context="com.group18.sustainucd.showBin.ShowBinActivity">
     <item
-        android:id="@+id/action_location"
-        android:icon="@drawable/baseline_room_24"
+        android:id="@+id/action_info"
+        android:icon="@drawable/baseline_info_24"
         android:orderInCategory="100"
-        android:title="location"
+        android:title="infos"
         app:showAsAction="always" />
 </menu>

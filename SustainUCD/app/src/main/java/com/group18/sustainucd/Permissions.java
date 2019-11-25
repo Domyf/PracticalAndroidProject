@@ -8,6 +8,12 @@ import android.content.pm.PackageManager;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+/**
+ * This class will provide the logic for asking and checking for permission to the whole app.
+ * It can only ask and check the permissions that are needed for the app. Other permissions are not
+ * implemented. Every class will refer to this class when asking and checking permissions.
+ */
+
 public class Permissions {
 
     public static void AskExternalStoragePermission(Activity activity, int permission_request)
