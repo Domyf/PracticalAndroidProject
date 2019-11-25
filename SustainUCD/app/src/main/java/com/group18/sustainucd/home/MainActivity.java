@@ -38,14 +38,14 @@ import java.io.IOException;
  * If the user takes a photo but doesn't add the bin and then the app is destroyed by the OS or by
  * the user then the file is deleted.
  */
-public class SingleMainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     public static final int BIN_ADDED_SUCCESSFULLY = 2;
 
     private static final int REQUEST_ACCESS_FINE_LOCATION = 0;
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int REQUEST_EXTERNAL_STORAGE = 3;
-    private static final String TAG = "SingleMainActivity";
+    private static final String TAG = "MainActivity";
 
     private String newPicturePath;
     //When you take a photo this file will store the photo. If the user add the bin successfully,
@@ -57,7 +57,7 @@ public class SingleMainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_single_main);
+        setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         //Ask for access fine location permission, if not already granted
@@ -70,10 +70,10 @@ public class SingleMainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //Ask for fine location permission
                 if (!Permissions.HasAccessFineLocationPermission(getApplicationContext()))
-                    Permissions.AskAccessFineLocationPermission(SingleMainActivity.this, REQUEST_ACCESS_FINE_LOCATION);
+                    Permissions.AskAccessFineLocationPermission(MainActivity.this, REQUEST_ACCESS_FINE_LOCATION);
                 else if (!Permissions.HasExternalStoragePermission(getApplicationContext()))
                     //Ask for external storage permission, if not already granted
-                    Permissions.AskExternalStoragePermission(SingleMainActivity.this, REQUEST_EXTERNAL_STORAGE);
+                    Permissions.AskExternalStoragePermission(MainActivity.this, REQUEST_EXTERNAL_STORAGE);
                 else    //Take the photo with the phone camera app
                     TakePhoto();
             }
@@ -128,6 +128,7 @@ public class SingleMainActivity extends AppCompatActivity {
                 break;
         }
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String[] permissions, int[] grantResults) {
@@ -151,7 +152,7 @@ public class SingleMainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.menu_single_main, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
