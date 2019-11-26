@@ -190,7 +190,7 @@
             <TextView
                 android:id="@+id/bat_desc"
                 android:layout_width="168dp"
-                android:layout_height="81dp"
+                android:layout_height="52dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
@@ -231,7 +231,7 @@
             <TextView
                 android:id="@+id/electronic_desc"
                 android:layout_width="168dp"
-                android:layout_height="81dp"
+                android:layout_height="52dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"

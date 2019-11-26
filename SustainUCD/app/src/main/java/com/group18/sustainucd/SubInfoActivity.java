@@ -30,7 +30,7 @@ public class SubInfoActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        int category = intent.getIntExtra(MainInfoActivity.EXTRA_MESSAGE, 0);
+        int category = intent.getIntExtra(MainInfoActivity.EXTRA_MESSAGE, SubInfoActivity.INVALID);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
