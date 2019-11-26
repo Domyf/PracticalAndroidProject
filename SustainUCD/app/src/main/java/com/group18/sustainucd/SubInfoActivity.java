@@ -11,6 +11,12 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 
 public class SubInfoActivity extends AppCompatActivity {
+    public static final int PAPER = 1;
+    public static final int PLASTIC = 2;
+    public static final int FOOD = 3;
+    public static final int GLASS = 4;
+    public static final int BATTERY = 5;
+    public static final int ELECTRONICS = 6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
