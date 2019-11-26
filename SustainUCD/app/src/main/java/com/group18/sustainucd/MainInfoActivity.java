@@ -10,10 +10,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
+import android.util.Log;
 import android.view.View;
 
 public class MainInfoActivity extends AppCompatActivity {
-
+    public static final String EXTRA_MESSAGE = "com.group18.sustainucd.MESSAGE";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +36,9 @@ public class MainInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainInfoActivity.this, SubInfoActivity.class);
+                view.getId();
+                Log.e(TAG, "onClick: test");
+                intent.putExtra(EXTRA_MESSAGE, SubInfoActivity.PAPER);
                 startActivity(intent);
             }
         });
