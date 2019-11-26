@@ -12,8 +12,10 @@ import com.group18.sustainucd.Utils;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 
 import android.util.Log;
+import android.view.FocusFinder;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,6 +33,13 @@ public class ShowBinActivity extends AppCompatActivity {
     public static final String PICTURE_PATH = "Path";
     public static final String LATITUDE = "Latitude";
     public static final String LONGITUDE = "Longitude";
+    public static final String PAPER = "Paper";
+    public static final String PLASTIC = "Plastic";
+    public static final String FOOD = "Food";
+    public static final String GLASS = "Glass";
+    public static final String BATTERY = "Battery";
+    public static final String ELECTRONICS = "Electonics";
+
     public static Bitmap bitmapToShow;
 
     private final String TAG = "ShowBinActivity";
@@ -47,7 +56,7 @@ public class ShowBinActivity extends AppCompatActivity {
 
         InitBin();
         ((ImageView) findViewById(R.id.headerImageView)).setImageBitmap(bitmapToShow);
-
+        SetRecycleIcons();
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.done_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +72,33 @@ public class ShowBinActivity extends AppCompatActivity {
 
     }
 
+    private void SetRecycleIcons() {
+        if (binToShow.paper)
+            ((ImageView)findViewById(R.id.paperImageView)).setImageDrawable(
+                    ContextCompat.getDrawable(this,
+                    R.drawable.baseline_description_24_selected));
+        if (binToShow.food)
+            ((ImageView)findViewById(R.id.foodImageView)).setImageDrawable(
+                    ContextCompat.getDrawable(this,
+                            R.drawable.round_local_pizza_24_selected));
+        if (binToShow.plastic)
+            ((ImageView)findViewById(R.id.plasticImageView)).setImageDrawable(
+                    ContextCompat.getDrawable(this,
+                            R.drawable.round_local_drink_24_selected));
+        if (binToShow.glass)
+            ((ImageView)findViewById(R.id.glassImageView)).setImageDrawable(
+                    ContextCompat.getDrawable(this,
+                            R.drawable.round_local_bar_24_selected));
+        if (binToShow.battery)
+            ((ImageView)findViewById(R.id.batteryImageView)).setImageDrawable(
+                    ContextCompat.getDrawable(this,
+                            R.drawable.baseline_battery_charging_full_24_selected));
+        if (binToShow.electronic)
+            ((ImageView)findViewById(R.id.electronicImageView)).setImageDrawable(
+                    ContextCompat.getDrawable(this,
+                            R.drawable.round_phone_android_24_selected));
+    }
+
     private void InitBin() {
         binToShow = new Bin();
         Bundle extras = getIntent().getExtras();
@@ -71,7 +107,12 @@ public class ShowBinActivity extends AppCompatActivity {
             binToShow.latitude = (Double) extras.get(LATITUDE);
             binToShow.longitude = (Double) extras.get(LONGITUDE);
             binToShow.bitmap = bitmapToShow;
-            Log.d(TAG, "latitude: " + binToShow.latitude + " longitude: " + binToShow.longitude);
+            binToShow.paper = (Boolean) extras.get(PAPER);
+            binToShow.food = (Boolean) extras.get(FOOD);
+            binToShow.plastic = (Boolean) extras.get(PLASTIC);
+            binToShow.glass = (Boolean) extras.get(GLASS);
+            binToShow.battery = (Boolean) extras.get(BATTERY);
+            binToShow.electronic = (Boolean) extras.get(ELECTRONICS);
         }
     }
 
