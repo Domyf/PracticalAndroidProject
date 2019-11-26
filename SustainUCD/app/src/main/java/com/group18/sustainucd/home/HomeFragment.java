@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -38,6 +39,7 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
     //Location client
     private FusedLocationProviderClient client;
     private int howManyBinsToShow = 10;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,8 +61,23 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
 
         //Get location and then look for nearest bins
         GetLocation();
+        swipeRefreshLayout = root.findViewById(R.id.refresh);
+        swipeRefreshLayout.setOnRefreshListener(
+                new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        // Refresh operations
+                        Update();
+                    }
+                }
+        );
 
         return root;
+    }
+
+    private void Update() {
+        //Get location and then look for nearest bins
+        GetLocation();
     }
 
     @Override
@@ -89,6 +106,7 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
         SetBinsToShow();
         // Attach the adapter to the recyclerview to populate items
         recyclerView.setAdapter(adapter);
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     private void GetLocation()
@@ -114,6 +132,8 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
                 BinsManager.Initialize(getActivity(), HomeFragment.this);
             else
                 OnBinsDatabaseLoaded();
+        } else {
+            swipeRefreshLayout.setRefreshing(false);
         }
     }
 
