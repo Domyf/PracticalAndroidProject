@@ -118,6 +118,9 @@ public class BinsManager {
 
     public static List<Bin> GetUserBins() {
         List<Bin> list = new ArrayList<>();
+        if (databaseBins == null) {
+            return list;
+        }
         for(Bin bin: databaseBins) {
             if (bin.addedByUser)
                 list.add(bin);

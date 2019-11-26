@@ -45,6 +45,8 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
         //Location initialization
         client = LocationServices.getFusedLocationProviderClient(getContext());
         adapter = new BinsListAdapter(this, getContext());
+        if (!BinsManager.HasBeenInitialized())
+            BinsManager.Initialize(getActivity(), HomeFragment.this);
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -104,6 +106,7 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
                 BinsManager.Initialize(getActivity(), HomeFragment.this);
             else
                 OnBinsDatabaseLoaded();
+            Log.e(TAG, "onSuccess: ");
         }
     }
 

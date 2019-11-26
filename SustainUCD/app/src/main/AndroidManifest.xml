@@ -17,6 +17,33 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".MaterialInfoActivity"
+            android:label="@string/title_activity_material_info"
+            android:parentActivityName=".SubInfoActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.group18.sustainucd.SubInfoActivity" />
+        </activity>
+        <activity
+            android:name=".SubInfoActivity"
+            android:label="@string/title_activity_sub_info"
+            android:parentActivityName=".MainInfoActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.group18.sustainucd.MainInfoActivity" />
+        </activity>
+        <activity
+            android:name=".MainInfoActivity"
+            android:label="@string/title_activity_main_info"
+            android:parentActivityName=".home.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.group18.sustainucd.home.MainActivity" />
+        </activity>
+        <activity
             android:name=".userBins.UserBinsActivity"
             android:label="@string/title_activity_user_bins"
             android:parentActivityName=".home.MainActivity"
