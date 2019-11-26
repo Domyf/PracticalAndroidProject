@@ -36,9 +36,52 @@ public class MainInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainInfoActivity.this, SubInfoActivity.class);
-                view.getId();
-                Log.e("test", "onClick: success");
+                intent.putExtra(EXTRA_MESSAGE, SubInfoActivity.PLASTIC);
+                startActivity(intent);
+            }
+        });
+        CardView paperCardView = findViewById(R.id.paperCardView);
+        paperCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainInfoActivity.this, SubInfoActivity.class);
                 intent.putExtra(EXTRA_MESSAGE, SubInfoActivity.PAPER);
+                startActivity(intent);
+            }
+        });
+        CardView foodCardView = findViewById(R.id.foodCardView);
+        foodCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainInfoActivity.this, SubInfoActivity.class);
+                intent.putExtra(EXTRA_MESSAGE, SubInfoActivity.FOOD);
+                startActivity(intent);
+            }
+        });
+        CardView glassCardView = findViewById(R.id.glassCardView);
+        foodCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainInfoActivity.this, SubInfoActivity.class);
+                intent.putExtra(EXTRA_MESSAGE, SubInfoActivity.GLASS);
+                startActivity(intent);
+            }
+        });
+        CardView batteryCardView = findViewById(R.id.batteryCardView);
+        batteryCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainInfoActivity.this, SubInfoActivity.class);
+                intent.putExtra(EXTRA_MESSAGE, SubInfoActivity.BATTERY);
+                startActivity(intent);
+            }
+        });
+        CardView electronicCardView = findViewById(R.id.electronicCardView);
+        electronicCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainInfoActivity.this, SubInfoActivity.class);
+                intent.putExtra(EXTRA_MESSAGE, SubInfoActivity.ELECTRONICS);
                 startActivity(intent);
             }
         });
