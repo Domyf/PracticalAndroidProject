@@ -37,7 +37,7 @@ public class MainInfoActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainInfoActivity.this, SubInfoActivity.class);
                 view.getId();
-                Log.e(TAG, "onClick: test");
+                Log.e("test", "onClick: success");
                 intent.putExtra(EXTRA_MESSAGE, SubInfoActivity.PAPER);
                 startActivity(intent);
             }
