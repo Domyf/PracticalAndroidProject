@@ -14,7 +14,9 @@ import android.util.Log;
 import android.view.View;
 
 public class MainInfoActivity extends AppCompatActivity {
-    public static final String EXTRA_MESSAGE = "com.group18.sustainucd.MESSAGE";
+
+    public static final String WHAT_TO_SHOW = "What";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,21 +24,13 @@ public class MainInfoActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         CardView plasticCardView = findViewById(R.id.pasticCardView);
         plasticCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainInfoActivity.this, SubInfoActivity.class);
-                intent.putExtra(EXTRA_MESSAGE, SubInfoActivity.PLASTIC);
+                intent.putExtra(WHAT_TO_SHOW, SubInfoActivity.PLASTIC);
                 startActivity(intent);
             }
         });
@@ -45,7 +39,7 @@ public class MainInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainInfoActivity.this, SubInfoActivity.class);
-                intent.putExtra(EXTRA_MESSAGE, SubInfoActivity.PAPER);
+                intent.putExtra(WHAT_TO_SHOW, SubInfoActivity.PAPER);
                 startActivity(intent);
             }
         });
@@ -54,16 +48,16 @@ public class MainInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainInfoActivity.this, SubInfoActivity.class);
-                intent.putExtra(EXTRA_MESSAGE, SubInfoActivity.FOOD);
+                intent.putExtra(WHAT_TO_SHOW, SubInfoActivity.FOOD);
                 startActivity(intent);
             }
         });
         CardView glassCardView = findViewById(R.id.glassCardView);
-        foodCardView.setOnClickListener(new View.OnClickListener() {
+        glassCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainInfoActivity.this, SubInfoActivity.class);
-                intent.putExtra(EXTRA_MESSAGE, SubInfoActivity.GLASS);
+                intent.putExtra(WHAT_TO_SHOW, SubInfoActivity.GLASS);
                 startActivity(intent);
             }
         });
@@ -72,7 +66,7 @@ public class MainInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainInfoActivity.this, SubInfoActivity.class);
-                intent.putExtra(EXTRA_MESSAGE, SubInfoActivity.BATTERY);
+                intent.putExtra(WHAT_TO_SHOW, SubInfoActivity.BATTERY);
                 startActivity(intent);
             }
         });
@@ -81,7 +75,7 @@ public class MainInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainInfoActivity.this, SubInfoActivity.class);
-                intent.putExtra(EXTRA_MESSAGE, SubInfoActivity.ELECTRONICS);
+                intent.putExtra(WHAT_TO_SHOW, SubInfoActivity.ELECTRONICS);
                 startActivity(intent);
             }
         });

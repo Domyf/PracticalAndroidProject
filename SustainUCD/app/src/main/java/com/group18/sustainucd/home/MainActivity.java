@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.group18.sustainucd.MainInfoActivity;
 import com.group18.sustainucd.addBin.AddBinActivity;
 import com.group18.sustainucd.BinImageHelper;
 import com.group18.sustainucd.Permissions;
@@ -156,18 +157,17 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    //Event triggered on click on the top-right info icon (it's a menu item)
-    //This will call the info activity
+    //Event triggered on click on one of the top-right menu icon
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_user:
+            case R.id.action_user:  //Face icon. Should go to UserBinsActivity
                 Intent showBinIntent = new Intent(this, UserBinsActivity.class);
                 startActivity(showBinIntent);
                 break;
-            case R.id.action_info:
-                //Intent infosIntent = new Intent(this, UserBinsActivity.class);
-                //startActivity(infosIntent);
+            case R.id.action_info:  //Info icon. Should go to MainInfoActivity
+                Intent infosIntent = new Intent(this, MainInfoActivity.class);
+                startActivity(infosIntent);
                 break;
         }
 

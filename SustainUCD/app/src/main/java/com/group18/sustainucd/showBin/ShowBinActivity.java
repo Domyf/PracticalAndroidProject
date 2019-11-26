@@ -72,6 +72,9 @@ public class ShowBinActivity extends AppCompatActivity {
 
     }
 
+    /** Setup the "selected" drawable to the icons that correspond to the things
+     * that can go inside this bin
+     * */
     private void SetRecycleIcons() {
         if (binToShow.paper)
             ((ImageView)findViewById(R.id.paperImageView)).setImageDrawable(

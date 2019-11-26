@@ -114,7 +114,6 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
                 BinsManager.Initialize(getActivity(), HomeFragment.this);
             else
                 OnBinsDatabaseLoaded();
-            Log.e(TAG, "onSuccess: ");
         }
     }
 

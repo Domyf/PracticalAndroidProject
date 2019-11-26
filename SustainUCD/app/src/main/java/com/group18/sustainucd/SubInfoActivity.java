@@ -1,19 +1,14 @@
 package com.group18.sustainucd;
 
-import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.group18.sustainucd.home.MainActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.view.View;
+import android.util.Log;
 
 public class SubInfoActivity extends AppCompatActivity {
-    public static final int INVALID = 0;
+
     public static final int PAPER = 1;
     public static final int PLASTIC = 2;
     public static final int FOOD = 3;
@@ -28,18 +23,9 @@ public class SubInfoActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Intent intent = getIntent();
-
-        int category = intent.getIntExtra(MainInfoActivity.EXTRA_MESSAGE, SubInfoActivity.INVALID);
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        Bundle extras = getIntent().getExtras();
+        int category = (Integer) extras.get(MainInfoActivity.WHAT_TO_SHOW);
+        Log.d("SubInfoActivity", category+"");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
