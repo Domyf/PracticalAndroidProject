@@ -38,11 +38,10 @@ public class ShowBinActivity extends AppCompatActivity {
     public static final String FOOD = "Food";
     public static final String GLASS = "Glass";
     public static final String BATTERY = "Battery";
-    public static final String ELECTRONICS = "Electonics";
+    public static final String ELECTRONICS = "Electronics";
 
     public static Bitmap bitmapToShow;
 
-    private final String TAG = "ShowBinActivity";
     private final String mapsLabel = "Bin";
     private Bin binToShow;
 

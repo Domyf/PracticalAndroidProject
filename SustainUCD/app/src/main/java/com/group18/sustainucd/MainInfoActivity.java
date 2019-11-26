@@ -3,14 +3,10 @@ package com.group18.sustainucd;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
-import android.util.Log;
 import android.view.View;
 
 public class MainInfoActivity extends AppCompatActivity {
@@ -25,6 +21,11 @@ public class MainInfoActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        SetCards();
+
+    }
+
+    private void SetCards() {
         CardView plasticCardView = findViewById(R.id.pasticCardView);
         plasticCardView.setOnClickListener(new View.OnClickListener() {
             @Override
