@@ -105,5 +105,5 @@
     <string name="title_activity_sub_info">SubInfoActivity</string>
     <string name="title_activity_material_info">MaterialInfoActivity</string>
     <string name="action_settings">Settings</string>
-    <string name="bat_label">Batteries or Electronics</string>
+    <string name="bat_label">Batteries</string>
 </resources>
