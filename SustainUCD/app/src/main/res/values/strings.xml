@@ -69,6 +69,10 @@ Your compost is a nutrient-rich food product for your garden and will help impro
     <string name="glass_other">Vases, Cups, Pyrex, etc...</string>
     <string name="glass_other_desc">Because these materials are thicker than bottles and jars, they have a higher melting point, and will not break down properly in the recycling center.  Do you best to reuse, and in worst case, properly dispose of in the waste bin.</string>
     <string name="source_for_glass">https://lbre.stanford.edu/pssistanford-recycling/frequently-asked-questions/frequently-asked-questions-glass-recycling</string>
-
+    <string name="paper_normal">Non-treated/coated paper</string>
+    <string name="paper_normal_desc">Any paper material that doesn\'t come with a plastic coating or finish can be recycled in commingled or 'paper' </string>
+    <string name="paper_coated">Treated or Coated Paper</string>
+    <string name="paper_coated_desc">If your paper is laminated or has a plastic coating like a juice box, do not recycle, properly dispose of the product in the waste bin</string>
+    <string name="source_for_paper">https://pw.lacounty.gov/general/faq/index.cfm</string>
 
 </resources>
