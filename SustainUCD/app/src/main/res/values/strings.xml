@@ -97,5 +97,10 @@ Recently, however, the increased use of lithium-ion batteries has become a hazar
 
 The most important priority to support the safe disposal of scrap or spent batteries is to sort them by type. Each battery chemistry has a different process for recycling and disposal, and mixing them can be extremely dangerous. With systems in place to recycle or otherwise safely dispose of batteries, it’s easy to stay sustainable.</string>
     <string name="source_for_battery">https://www.crownbattery.com/news/which-batteries-are-recyclable</string>
-    
+    <string name="electronic_all">Electronics</string>
+    <string name="electronic_all_desc">As you may have guessed, electronics are not commonly recyclable in the same manner!
+        One of the important things to realize is that many electronics will be useful to others, even if you have replaced it.  You can sell it at a garage sale, leave it at a swap shop, or give it to a friend.
+        If the item is beyond use, your best bet is to lookup the nearest electronic recycling near you.  Some towns will offer processing services for free, and in other cases private companies may dispose of your goods for a small fee.
+    </string>
+    <string name="source_for_electronics">Common Sense</string>
 </resources>
