@@ -50,4 +50,19 @@ Only about 3% of polypropylene products are recycled in the US, but interestingl
 Since polystyrene is lightweight and easy to form into plastic materials, it also breaks effortlessly, making it more harmful to the environment. Beaches all over the world are littered with pieces of polystyrene, endangering the health of marine animals. Polystyrene accounts for about 35% of US landfill materials.
     </string>
     <string name="source_for_plastic">https://www.qualitylogoproducts.com/promo-university/different-types-of-plastic.htm</string>
+    <string name="food_all">Edible material</string>
+    <string name="food_all_desc">Environmental reasons
+
+Do your bit to reduce the amount of waste sent to landfill. Even for households that are already composting, new research has found that almost half of the food waste in their rubbish bins could have been composted.
+
+Did you know, composting at home for just one year can save global warming gases equivalent to all the CO2 your kettle produces annually, or your washing machine produces in three months?
+
+We\'re often asked "Why do I need to compost when my waste will break down in landfill anyway - and why should I worry when my local council does food waste collections?"
+
+When waste is sent to landfill, air cannot get to the organic waste. Therefore as the waste breaks down it creates a harmful greenhouse gas, methane, which damages the Earth\'s atmosphere. However, when this same waste is composted above ground at home, oxygen helps the waste to decompose aerobically which means hardly any methane is produced, which is good news for the planet. And what's more, after nine to twelve months, you get a free fertiliser for your garden and plant pots to keep them looking beautiful.
+
+Benefits for your garden
+Your compost is a nutrient-rich food product for your garden and will help improve soil structure, maintain moisture levels, and keep your soil's pH balance in check while helping to suppress plant disease. It will have everything your plants need including nitrogen, phosphorus and potassium and it will help buffer soils that are very acidic or alkaline. Compost improves your soil's condition and your plants and flowers will love it!</string>
+    <string name="source_for_food">https://www.recyclenow.com/reduce-waste/composting/why-compost</string>
+
 </resources>
