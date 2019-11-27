@@ -74,5 +74,28 @@ Your compost is a nutrient-rich food product for your garden and will help impro
     <string name="paper_coated">Treated or Coated Paper</string>
     <string name="paper_coated_desc">If your paper is laminated or has a plastic coating like a juice box, do not recycle, properly dispose of the product in the waste bin</string>
     <string name="source_for_paper">https://pw.lacounty.gov/general/faq/index.cfm</string>
+    <string name="battery_lead">Lead Battery</string>
+    <string name="battery_lead_desc">Lead, or lead acid, batteries have the distinction of having a recycling rate of close to 100% in North America and Europe. Relatively simple, the process for lead battery recycling is also cost-effective, since reclaimed lead can be used in new batteries. Battery manufacturers lead the charge in lead battery recycling, partly because recovered materials are often for cheaper than new materials. Many lead battery retailers will base their sale price for new batteries on the return of the spent battery core at the time of sale, or provide a discount on the purchase of new batteries with the return of old batteries.
 
+Recently, however, the increased use of lithium-ion batteries has become a hazard in lead battery recycling. Li-ion battery assemblers often package these batteries using battery containers that appear very similar to lead-acid battery containers - something that can result in consumers and wholesalers alike confusing the material content of scrap batteries they collect. Li-ion batteries are extremely volatile and raise a major risk of explosions when they are inadvertently placed in the lead battery recycling process. This can cause devastating fires and injuries at lead battery recycling operations. Sorting and pre-shipment inspection of scrap batteries to verify material content before disposal can help prevent such incidents.</string>
+    <string name="battery_nickel">Nickel-Cadmium Battery</string>
+    <string name="battery_nickel_desc">Nickel-cadmium batteries pose a serious environmental risk if not disposed of properly, so much so that the European Union banned the production and use of nickel-cadmium in 2009. In order to dispose of these batteries, they must first be isolated from other batteries and battery systems. We encourage the utilization of programs like Call2Recycle if necessary. If there are no disposal services or recycling drop-off points in your area, a secure hazardous waste landfill is your best option.</string>
+    <string name="battery_nickelMetal">Nickel Metal Hydride Battery</string>
+    <string name="battery_nickelMetal_desc">
+        Less toxic than nickel-cadmium, but still dangerous in large quantities, spent NiMH batteries have several options for disposal. According to Battery University by Cadex Electronics, individual NiMH batteries can be disposed of with household waste, but 10 or more batteries should go to a disposal service, recycling program, or secure waste landfill.
+    </string>
+    <string name="battery_lithium">Primary Lithium Battery</string>
+    <string name="battery_lithium_desc">
+        The metallic lithium in these batteries is highly reactive when placed in contact with moisture or subjected to a container wall breach. These batteries present a high risk potential when crushed or broken open in landfills - something that can ignite fires that can burn underground for years. Primary lithium batteries should be disposed of in strict compliance with the battery supplier\'s recommendations. Due to the fire hazards these batteries present to consumers, they should not be disposed of in any quantity with household waste, and should instead be disposed of according to the suppliers' instructions or those of your local waste management provider.
+    </string>
+    <string name="battery_lion">Lithium-Ion Battery</string>
+    <string name="battery_lion_desc">Lithium-ion batteries have become increasingly prevalent in the market, and the proportion of these batteries being sent to landfilles for disposal has increased greatly over the past few years. Though intact Li-ion batteries are relatively non-toxic, the sheer number being produced and used make them a concern. Recycling Li-ion batteries is done more for environmental reasons than profitability, as the product is highly toxic when broken apart. Since the process is often subsidized by Lithium-ion battery producers, there is no reason for them to go to landfills, which could cause unforeseen problems in the future.</string>
+    <string name="battery_alkaline">Alkaline Batteries</string>
+    <string name="battery_alkaline_desc">Alkaline battery systems are safe to dispose of as regular waste due to a regulated decrease in mercury content in 1996. These batteries do contain the reusable materials zinc and manganese, but the recovery process is difficult and dangerous. Alkaline batteries are approved for disposal via household waste streams, but best-practice efforts to recycle them for environmental reasons are increasing. Check with local disposal services or recycling programs as to whether they will accept them.
+
+
+
+The most important priority to support the safe disposal of scrap or spent batteries is to sort them by type. Each battery chemistry has a different process for recycling and disposal, and mixing them can be extremely dangerous. With systems in place to recycle or otherwise safely dispose of batteries, it’s easy to stay sustainable.</string>
+    <string name="source_for_battery">https://www.crownbattery.com/news/which-batteries-are-recyclable</string>
+    
 </resources>
