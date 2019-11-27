@@ -64,5 +64,11 @@ When waste is sent to landfill, air cannot get to the organic waste. Therefore a
 Benefits for your garden
 Your compost is a nutrient-rich food product for your garden and will help improve soil structure, maintain moisture levels, and keep your soil's pH balance in check while helping to suppress plant disease. It will have everything your plants need including nitrogen, phosphorus and potassium and it will help buffer soils that are very acidic or alkaline. Compost improves your soil's condition and your plants and flowers will love it!</string>
     <string name="source_for_food">https://www.recyclenow.com/reduce-waste/composting/why-compost</string>
+    <string name="glass_bottles">Food Bottles and Jars</string>
+    <string name="glass_bottles_desc">The ability for glass to be recycled depends on the melting point.  For this reason, they ask that you do your part by recycling all glass bottles and jars</string>
+    <string name="glass_other">Vases, Cups, Pyrex, etc...</string>
+    <string name="glass_other_desc">Because these materials are thicker than bottles and jars, they have a higher melting point, and will not break down properly in the recycling center.  Do you best to reuse, and in worst case, properly dispose of in the waste bin.</string>
+    <string name="source_for_glass">https://lbre.stanford.edu/pssistanford-recycling/frequently-asked-questions/frequently-asked-questions-glass-recycling</string>
+
 
 </resources>
