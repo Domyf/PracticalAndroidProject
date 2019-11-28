@@ -9,8 +9,10 @@
     tools:showIn="@layout/activity_material_info">
 
     <TextView
+        android:id="@+id/materialInfoText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin" />
+        android:layout_margin="24dp"
+        android:textSize="18sp" />
 
 </androidx.core.widget.NestedScrollView>

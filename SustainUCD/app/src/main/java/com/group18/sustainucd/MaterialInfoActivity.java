@@ -11,8 +11,12 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 public class MaterialInfoActivity extends AppCompatActivity {
+
+    public static final String DATA = "Data";
+    private RecycleData dataToShow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +26,9 @@ public class MaterialInfoActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        dataToShow = (RecycleData) getIntent().getExtras().get(MaterialInfoActivity.DATA);
+        setTitle(dataToShow.getNameID());
+        ((TextView)findViewById(R.id.materialInfoText)).setText(dataToShow.getDescriptionID());
     }
 
     @Override

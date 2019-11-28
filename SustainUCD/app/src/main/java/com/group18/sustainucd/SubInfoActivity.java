@@ -1,15 +1,23 @@
 package com.group18.sustainucd;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.MenuItem;
 
-public class SubInfoActivity extends AppCompatActivity {
+import com.group18.sustainucd.home.BinsListAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class SubInfoActivity extends AppCompatActivity implements RecycleInfoAdapter.OnClickListener {
 
     public static final int PAPER = 1;
     public static final int FOOD = 2;
@@ -18,6 +26,9 @@ public class SubInfoActivity extends AppCompatActivity {
     public static final int BATTERY = 5;
     public static final int ELECTRONICS = 6;
 
+    private RecyclerView recyclerView;
+    private RecycleInfoAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,12 +36,18 @@ public class SubInfoActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Bundle extras = getIntent().getExtras();
         int category = (Integer) extras.get(MainInfoActivity.WHAT_TO_SHOW);
-        SetTitleByCategory(category);
+        List list = (List) extras.get(MainInfoActivity.DATA);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        adapter = new RecycleInfoAdapter( this, list);
+        recyclerView = (RecyclerView) findViewById(R.id.sub_info_recycler_view);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        SetTitleByCategory(category);
     }
 
     private void SetTitleByCategory(int category) {
@@ -66,5 +83,13 @@ public class SubInfoActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void OnElementClick(int position) {
+        RecycleData data = adapter.getDataAtPosition(position);
+        Intent intent = new Intent(SubInfoActivity.this, MaterialInfoActivity.class);
+        intent.putExtra(MaterialInfoActivity.DATA, data);
+        startActivity(intent);
     }
 }

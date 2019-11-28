@@ -37,7 +37,6 @@ public class UserBinsActivity extends AppCompatActivity {
     //Event triggered on click on the menu item in the toolbar
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        //TODO call info activity
         switch (item.getItemId()) {
             case R.id.action_info:
                 Intent infosIntent = new Intent(this, MainInfoActivity.class);
@@ -51,5 +50,5 @@ public class UserBinsActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-    
+
 }

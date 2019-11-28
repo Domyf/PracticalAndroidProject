@@ -26,7 +26,7 @@ import java.util.List;
  * by constructor. Who implements the interface will receive the click events.
  * The home screen activity implements this interface and instantiate an object of this class and
  * uses it with a recycle view.
- * Thanks to this interface, if the user clicks on a bin then the OnBinClick() method of the
+ * Thanks to this interface, if the user clicks on a bin then the OnElementClick() method of the
  * home screen activity will be called.
  */
 public class BinsListAdapter extends RecyclerView.Adapter<BinsListAdapter.BinViewHolder> {

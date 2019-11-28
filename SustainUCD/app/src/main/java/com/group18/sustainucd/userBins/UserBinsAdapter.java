@@ -25,7 +25,7 @@ import java.util.List;
  * the interface will be passed by constructor. Who implements the interface will receive
  * the click events. The "user bin" activity implements this interface and instantiate an object
  * of this class and uses it with a recycle view.
- * Thanks to this interface, if the user clicks on a bin then the OnBinClick() method of the
+ * Thanks to this interface, if the user clicks on a bin then the OnElementClick() method of the
  * "user bins" activity will be called.
  */
 public class UserBinsAdapter extends RecyclerView.Adapter<UserBinsAdapter.BinViewHolder> {
