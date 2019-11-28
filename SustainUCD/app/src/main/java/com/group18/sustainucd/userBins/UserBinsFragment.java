@@ -62,6 +62,13 @@ public class UserBinsFragment extends Fragment implements UserBinsAdapter.OnClic
         showBinIntent.putExtra(ShowBinActivity.PICTURE_PATH, adapter.getBinAtPosition(position).pictureFileName);
         showBinIntent.putExtra(ShowBinActivity.LATITUDE, adapter.getBinAtPosition(position).latitude);
         showBinIntent.putExtra(ShowBinActivity.LONGITUDE, adapter.getBinAtPosition(position).longitude);
+        showBinIntent.putExtra(ShowBinActivity.PAPER, adapter.getBinAtPosition(position).paper);
+        showBinIntent.putExtra(ShowBinActivity.FOOD, adapter.getBinAtPosition(position).food);
+        showBinIntent.putExtra(ShowBinActivity.PLASTIC, adapter.getBinAtPosition(position).plastic);
+        showBinIntent.putExtra(ShowBinActivity.GLASS, adapter.getBinAtPosition(position).glass);
+        showBinIntent.putExtra(ShowBinActivity.BATTERY, adapter.getBinAtPosition(position).battery);
+        showBinIntent.putExtra(ShowBinActivity.ELECTRONICS, adapter.getBinAtPosition(position).electronic);
+
         startActivity(showBinIntent);
     }
 

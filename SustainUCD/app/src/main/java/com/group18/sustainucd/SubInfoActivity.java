@@ -2,10 +2,12 @@ package com.group18.sustainucd;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.util.Log;
+import android.view.MenuItem;
 
 public class SubInfoActivity extends AppCompatActivity {
 
@@ -54,4 +56,15 @@ public class SubInfoActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            //If the button pressed is the back arrow
+            //then will happen the same behavior of onBackPressed()
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

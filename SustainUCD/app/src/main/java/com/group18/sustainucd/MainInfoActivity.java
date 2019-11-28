@@ -3,10 +3,12 @@ package com.group18.sustainucd;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
+import android.view.MenuItem;
 import android.view.View;
 
 public class MainInfoActivity extends AppCompatActivity {
@@ -80,6 +82,18 @@ public class MainInfoActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            //If the button pressed is the back arrow
+            //then will happen the same behavior of onBackPressed()
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

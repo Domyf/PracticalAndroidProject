@@ -6,6 +6,6 @@
         android:id="@+id/action_info"
         android:icon="@drawable/baseline_info_24"
         android:orderInCategory="100"
-        android:title="infos"
+        android:title="Recycle Info"
         app:showAsAction="always" />
 </menu>

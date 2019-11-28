@@ -1,5 +1,6 @@
 package com.group18.sustainucd.userBins;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -8,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.group18.sustainucd.MainInfoActivity;
 import com.group18.sustainucd.R;
 
 /**
@@ -37,6 +39,10 @@ public class UserBinsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         //TODO call info activity
         switch (item.getItemId()) {
+            case R.id.action_info:
+                Intent infosIntent = new Intent(this, MainInfoActivity.class);
+                startActivity(infosIntent);
+                break;
             //If the button pressed is the back arrow
             //then will happen the same behavior of onBackPressed()
             case android.R.id.home:
@@ -45,4 +51,5 @@ public class UserBinsActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    
 }

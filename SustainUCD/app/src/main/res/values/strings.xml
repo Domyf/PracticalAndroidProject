@@ -24,7 +24,7 @@
     <string name="plastic_ps">PS</string>
     <string name="plastic_pete_desc"> Introduced by J. Rex Whinfield and James T. Dickson in 1940, this plastic is one of the most commonly used on the planet. Interestingly enough, it took another 30 years before it was used for crystal-clear beverage bottles, such as the ones produced by Coca-Cola and Pepsi.
 
-PETE plastics make up 96% of all plastic bottles and containers in the United States, yet only 25% of these products are recycled. By being mindful and making sure to recycle code 1 plastics, you’re helping to ensure a cleaner environment and less landfill pollution!</string>
+PETE plastics make up 96% of all plastic bottles and containers in the United States, yet only 25% of these products are recycled. By being mindful and making sure to recycle code 1 plastics, you\’re helping to ensure a cleaner environment and less landfill pollution!</string>
     <string name="plastic_hdpe_desc">
         In 1953, Karl Ziegler and Erhard Holzkamp used catalysts and low pressure to create high-density polyethylene. It was first used for pipes in storm sewers, drains, and culverts. Today, this plastic is used for a widevariety of products.
 
@@ -59,10 +59,10 @@ Did you know, composting at home for just one year can save global warming gases
 
 We\'re often asked "Why do I need to compost when my waste will break down in landfill anyway - and why should I worry when my local council does food waste collections?"
 
-When waste is sent to landfill, air cannot get to the organic waste. Therefore as the waste breaks down it creates a harmful greenhouse gas, methane, which damages the Earth\'s atmosphere. However, when this same waste is composted above ground at home, oxygen helps the waste to decompose aerobically which means hardly any methane is produced, which is good news for the planet. And what's more, after nine to twelve months, you get a free fertiliser for your garden and plant pots to keep them looking beautiful.
+When waste is sent to landfill, air cannot get to the organic waste. Therefore as the waste breaks down it creates a harmful greenhouse gas, methane, which damages the Earth\'s atmosphere. However, when this same waste is composted above ground at home, oxygen helps the waste to decompose aerobically which means hardly any methane is produced, which is good news for the planet. And what\'s more, after nine to twelve months, you get a free fertiliser for your garden and plant pots to keep them looking beautiful.
 
 Benefits for your garden
-Your compost is a nutrient-rich food product for your garden and will help improve soil structure, maintain moisture levels, and keep your soil's pH balance in check while helping to suppress plant disease. It will have everything your plants need including nitrogen, phosphorus and potassium and it will help buffer soils that are very acidic or alkaline. Compost improves your soil's condition and your plants and flowers will love it!</string>
+Your compost is a nutrient-rich food product for your garden and will help improve soil structure, maintain moisture levels, and keep your soil\'s pH balance in check while helping to suppress plant disease. It will have everything your plants need including nitrogen, phosphorus and potassium and it will help buffer soils that are very acidic or alkaline. Compost improves your soil\'s condition and your plants and flowers will love it!</string>
     <string name="source_for_food">https://www.recyclenow.com/reduce-waste/composting/why-compost</string>
     <string name="glass_bottles">Food Bottles and Jars</string>
     <string name="glass_bottles_desc">The ability for glass to be recycled depends on the melting point.  For this reason, they ask that you do your part by recycling all glass bottles and jars</string>
@@ -70,7 +70,7 @@ Your compost is a nutrient-rich food product for your garden and will help impro
     <string name="glass_other_desc">Because these materials are thicker than bottles and jars, they have a higher melting point, and will not break down properly in the recycling center.  Do you best to reuse, and in worst case, properly dispose of in the waste bin.</string>
     <string name="source_for_glass">https://lbre.stanford.edu/pssistanford-recycling/frequently-asked-questions/frequently-asked-questions-glass-recycling</string>
     <string name="paper_normal">Non-treated/coated paper</string>
-    <string name="paper_normal_desc">Any paper material that doesn\'t come with a plastic coating or finish can be recycled in commingled or 'paper' </string>
+    <string name="paper_normal_desc">Any paper material that doesn\'t come with a plastic coating or finish can be recycled in commingled or \'paper\' </string>
     <string name="paper_coated">Treated or Coated Paper</string>
     <string name="paper_coated_desc">If your paper is laminated or has a plastic coating like a juice box, do not recycle, properly dispose of the product in the waste bin</string>
     <string name="source_for_paper">https://pw.lacounty.gov/general/faq/index.cfm</string>
@@ -86,7 +86,7 @@ Recently, however, the increased use of lithium-ion batteries has become a hazar
     </string>
     <string name="battery_lithium">Primary Lithium Battery</string>
     <string name="battery_lithium_desc">
-        The metallic lithium in these batteries is highly reactive when placed in contact with moisture or subjected to a container wall breach. These batteries present a high risk potential when crushed or broken open in landfills - something that can ignite fires that can burn underground for years. Primary lithium batteries should be disposed of in strict compliance with the battery supplier\'s recommendations. Due to the fire hazards these batteries present to consumers, they should not be disposed of in any quantity with household waste, and should instead be disposed of according to the suppliers' instructions or those of your local waste management provider.
+        The metallic lithium in these batteries is highly reactive when placed in contact with moisture or subjected to a container wall breach. These batteries present a high risk potential when crushed or broken open in landfills - something that can ignite fires that can burn underground for years. Primary lithium batteries should be disposed of in strict compliance with the battery supplier\'s recommendations. Due to the fire hazards these batteries present to consumers, they should not be disposed of in any quantity with household waste, and should instead be disposed of according to the suppliers\' instructions or those of your local waste management provider.
     </string>
     <string name="battery_lion">Lithium-Ion Battery</string>
     <string name="battery_lion_desc">Lithium-ion batteries have become increasingly prevalent in the market, and the proportion of these batteries being sent to landfilles for disposal has increased greatly over the past few years. Though intact Li-ion batteries are relatively non-toxic, the sheer number being produced and used make them a concern. Recycling Li-ion batteries is done more for environmental reasons than profitability, as the product is highly toxic when broken apart. Since the process is often subsidized by Lithium-ion battery producers, there is no reason for them to go to landfills, which could cause unforeseen problems in the future.</string>

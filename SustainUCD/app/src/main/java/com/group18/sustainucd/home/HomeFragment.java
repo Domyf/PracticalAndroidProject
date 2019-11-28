@@ -5,8 +5,10 @@ import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -44,6 +46,7 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         //Location initialization
         client = LocationServices.getFusedLocationProviderClient(getContext());
         adapter = new BinsListAdapter(this, getContext());
@@ -106,6 +109,7 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
         SetBinsToShow();
         // Attach the adapter to the recyclerview to populate items
         recyclerView.setAdapter(adapter);
+        Toast.makeText(getContext(), "Refreshed", Toast.LENGTH_SHORT).show();
         swipeRefreshLayout.setRefreshing(false);
     }
 
@@ -134,7 +138,17 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
                 OnBinsDatabaseLoaded();
         } else {
             swipeRefreshLayout.setRefreshing(false);
+            Toast.makeText(getContext(), "Not Refreshed", Toast.LENGTH_SHORT).show();
         }
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        // Refresh operations
+        if (item.getItemId() == R.id.action_refresh) {
+            swipeRefreshLayout.setRefreshing(true);
+            Update();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

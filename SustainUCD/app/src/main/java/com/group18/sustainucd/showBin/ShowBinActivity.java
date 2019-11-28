@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.group18.sustainucd.MainInfoActivity;
 import com.group18.sustainucd.database.Bin;
 import com.group18.sustainucd.R;
 import com.group18.sustainucd.Utils;
@@ -128,8 +129,11 @@ public class ShowBinActivity extends AppCompatActivity {
     //This will call the info activity
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        //TODO call info activity
         switch (item.getItemId()) {
+            case R.id.action_info:
+                Intent infosIntent = new Intent(this, MainInfoActivity.class);
+                startActivity(infosIntent);
+                break;
             //If the button pressed is the back arrow
             //then will happen the same behavior of onBackPressed()
             case android.R.id.home:
