@@ -33,7 +33,7 @@ HDPE is the most commonly recycled plastic because it will not break under expos
     <string name="plastic_pvc_desc">May not recycle! Call your recycler. If recycling is not possible, re-purpose or dispose
     PVC is one of the oldest synthetic materials in industrial production. It was actually discovered on accident twice; once in 1838 by French physicist Henri Victor Regnault and again in 1872 by German chemist Eugen Baumann. On both occasions, these men found it inside vinyl chloride flasks left exposed to sunlight.
 
-PVC is one of the least recycled materials; generally less than 1% of PVC plastic is recycled each year. It has been called the “poison plastic”because it contains numerous toxins and is harmful to our health and the environment.
+PVC is one of the least recycled materials; generally less than 1% of PVC plastic is recycled each year. It has been called the “poison plastic” because it contains numerous toxins and is harmful to our health and the environment.
     </string>
     <string name="plastic_ldpe_desc">May not recycle! Call your recycler. If recycling is not possible, re-purpose or dispose
         LDPE was the first polyethylene to be produced, making it the grandfather of the material. It has less mass than HDPE, which is why it’s considered a separate material for recycling.
@@ -65,14 +65,14 @@ Benefits for your garden
 Your compost is a nutrient-rich food product for your garden and will help improve soil structure, maintain moisture levels, and keep your soil\'s pH balance in check while helping to suppress plant disease. It will have everything your plants need including nitrogen, phosphorus and potassium and it will help buffer soils that are very acidic or alkaline. Compost improves your soil\'s condition and your plants and flowers will love it!</string>
     <string name="source_for_food">https://www.recyclenow.com/reduce-waste/composting/why-compost</string>
     <string name="glass_bottles">Food Bottles and Jars</string>
-    <string name="glass_bottles_desc">The ability for glass to be recycled depends on the melting point.  For this reason, they ask that you do your part by recycling all glass bottles and jars</string>
+    <string name="glass_bottles_desc">The ability for glass to be recycled depends on the melting point. For this reason, they ask that you do your part by recycling all glass bottles and jars.</string>
     <string name="glass_other">Vases, Cups, Pyrex, etc...</string>
-    <string name="glass_other_desc">Because these materials are thicker than bottles and jars, they have a higher melting point, and will not break down properly in the recycling center.  Do you best to reuse, and in worst case, properly dispose of in the waste bin.</string>
-    <string name="source_for_glass">https://lbre.stanford.edu/pssistanford-recycling/frequently-asked-questions/frequently-asked-questions-glass-recycling</string>
+    <string name="glass_other_desc">Because these materials are thicker than bottles and jars, they have a higher melting point, and will not break down properly in the recycling center. Do you best to reuse, and in worst case, properly dispose of in the waste bin.</string>
+    <string name="source_for_glass">https://lbre.stanford.edu/pssistanford-recycling/frequently-asked-questions/frequently-asked-questions-glass-recycling.</string>
     <string name="paper_normal">Non-treated/coated paper</string>
-    <string name="paper_normal_desc">Any paper material that doesn\'t come with a plastic coating or finish can be recycled in commingled or \'paper\' </string>
+    <string name="paper_normal_desc">Any paper material that doesn\'t come with a plastic coating or finish can be recycled in commingled or \'paper\'.</string>
     <string name="paper_coated">Treated or Coated Paper</string>
-    <string name="paper_coated_desc">If your paper is laminated or has a plastic coating like a juice box, do not recycle, properly dispose of the product in the waste bin</string>
+    <string name="paper_coated_desc">If your paper is laminated or has a plastic coating like a juice box, do not recycle, properly dispose of the product in the waste bin.</string>
     <string name="source_for_paper">https://pw.lacounty.gov/general/faq/index.cfm</string>
     <string name="battery_lead">Lead Battery</string>
     <string name="battery_lead_desc">Lead, or lead acid, batteries have the distinction of having a recycling rate of close to 100% in North America and Europe. Relatively simple, the process for lead battery recycling is also cost-effective, since reclaimed lead can be used in new batteries. Battery manufacturers lead the charge in lead battery recycling, partly because recovered materials are often for cheaper than new materials. Many lead battery retailers will base their sale price for new batteries on the return of the spent battery core at the time of sale, or provide a discount on the purchase of new batteries with the return of old batteries.
@@ -99,8 +99,15 @@ The most important priority to support the safe disposal of scrap or spent batte
     <string name="source_for_battery">https://www.crownbattery.com/news/which-batteries-are-recyclable</string>
     <string name="electronic_all">Electronics</string>
     <string name="electronic_all_desc">As you may have guessed, electronics are not commonly recyclable in the same manner!
-        One of the important things to realize is that many electronics will be useful to others, even if you have replaced it.  You can sell it at a garage sale, leave it at a swap shop, or give it to a friend.
+        One of the important things to realize is that many electronics will be useful to others, even if you have replaced it. You can sell it at a garage sale, leave it at a swap shop, or give it to a friend.
         If the item is beyond use, your best bet is to lookup the nearest electronic recycling near you.  Some towns will offer processing services for free, and in other cases private companies may dispose of your goods for a small fee.
     </string>
     <string name="source_for_electronics">Common Sense</string>
+
+    <string name="food_small_desc">Do your bit to reduce the amount of waste sent to landfill. Did you know, composting at home for just one year can save global warming gases equivalent to all the CO2 your kettle produces annually, or your washing machine produces in three months?</string>
+    <string name="battery_small_desc">The most important priority to support the safe disposal of scrap or spent batteries is to sort them by type. Each battery chemistry has a different process for recycling and disposal, and mixing them can be extremely dangerous. With systems in place to recycle or otherwise safely dispose of batteries, it’s easy to stay sustainable.</string>
+    <string name="electronics_small_desc">Electronics are not commonly recyclable in the same manner! If the item is beyond use, your best bet is to lookup the nearest electronic recycling near you.  Some towns will offer processing services for free.</string>
+    <string name="glass_small_desc">The ability for glass to be recycled depends on the melting point. For this reason, they ask that you do your part by recycling all glass bottles and jars.</string>
+    <string name="paper_small_desc">Any paper material that doesn\'t come with a plastic coating or finish can be recycled. If your paper is laminated or has a plastic coating like a juice box, do not recycle, properly dispose of the product in the waste bin.</string>
+    <string name="plastic_small_desc">By being mindful and making sure to recycle plastics, you\’re helping to ensure a cleaner environment and less landfill pollution!</string>
 </resources>

@@ -102,50 +102,50 @@
         <TextView
             android:id="@+id/paperTextView"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:text="@string/paper_small_desc" />
 
         <TextView
             android:id="@+id/foodTextView"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:text="@string/food_small_desc" />
 
         <TextView
             android:id="@+id/plasticTextView"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:text="@string/plastic_small_desc" />
 
         <TextView
             android:id="@+id/glassTextView"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:text="@string/glass_small_desc" />
 
         <TextView
             android:id="@+id/batteryTextView"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:text="@string/battery_small_desc" />
 
         <TextView
             android:id="@+id/electronicTextView"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:text="@string/electronics_small_desc" />
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>

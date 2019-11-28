@@ -3,6 +3,7 @@ package com.group18.sustainucd.database;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import java.util.List;
@@ -17,6 +18,8 @@ public interface BinDao {
     List<Bin> getAll();
     @Insert
     void insertBin(Bin bin);
+    @Insert
+    void insertAll(List<Bin> bins);
     @Delete
     void delete(Bin bin);
 }

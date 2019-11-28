@@ -8,7 +8,7 @@
     <dimen name="flag_btn_spaces">16dp</dimen>
     <dimen name="flag_btn_label_distance">8dp</dimen>
     <dimen name="flag_buttons_vertical_distance">24dp</dimen>
-    <dimen name="label_width">64dp</dimen>
+    <dimen name="label_width">72dp</dimen>
     <dimen name="mini_flag_btn_width">24dp</dimen>
     <dimen name="main_info_card_height">96dp</dimen>
 </resources>

@@ -16,10 +16,9 @@ public class Utils {
      * Returns an intent to show show on google maps the bin passed by parameter with the
      * String label passed by parameter
      */
-    public static Intent GetMapIntent(Bin binToShow, String mapsLabel) {
+    public static Intent GetMapIntent(Bin binToShow) {
         Uri gmmIntentUri = Uri.parse("geo:"+binToShow.latitude+","+binToShow.longitude
-                +"?z=18&q="+binToShow.latitude+","+binToShow.longitude+"("+mapsLabel+")");
-
+                +"?z=18&q="+binToShow.latitude+","+binToShow.longitude+"(Bin)");
         // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         // Make the Intent explicit by setting the Google Maps package
@@ -45,8 +44,8 @@ public class Utils {
         // and long
         double a = Math.sin((lat2 - lat1)/2)*Math.sin((lat2 - lat1)/2) + Math.cos(lat1)*Math.cos(lat2)*Math.sin((long2-long1)/2)*Math.sin((long2-long1));
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-        double distance = R * c; // distance between two bins in meters
+        double distance = R * c; // distance between two bins in km
 
-        return distance;
+        return distance*1000; //return in meters
     }
 }

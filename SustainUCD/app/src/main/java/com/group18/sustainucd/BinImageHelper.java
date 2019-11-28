@@ -1,10 +1,18 @@
 package com.group18.sustainucd;
 
 import android.content.Context;
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Environment;
+import android.widget.ImageView;
+
+import com.group18.sustainucd.database.Bin;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * This class will provide the logic and the decisions about:
@@ -25,7 +33,7 @@ public class BinImageHelper {
     }
 
     /** Returns the whole path of a picture starting from the file name */
-    public static String GetBinImagePath(Context context, String binFileName) {
+    public static String GetUserBinImagePath(Context context, String binFileName) {
         String storagePath = GetPicturesStorageDir(context).getAbsolutePath();
         return storagePath+"/"+binFileName+fileSuffix;
     }
@@ -40,4 +48,47 @@ public class BinImageHelper {
         return file.getName().substring(0, file.getName().lastIndexOf("."));
     }
 
+    /**
+     * ASyncTask that will load a picture in background from a file.
+     * It receive an ImageView, the path of the file and a Bin.
+     * After loading the picture will set the bin bitmap and the imageview.
+     * It take care to load from assets folder if the bin is a premade bin.
+     */
+    public static class LoadPictureTask extends AsyncTask<Void, Void, Bitmap> {
+        private ImageView imageView;
+        private Context context;
+        private Bin bin;
+
+        public LoadPictureTask(Bin bin, ImageView imageView, Context context) {
+            this.imageView = imageView;
+            this.bin = bin;
+            this.context = context;
+        }
+
+        @Override
+        protected Bitmap doInBackground(Void... voids) {
+            if (bin.addedByUser) {
+                String path = BinImageHelper.GetUserBinImagePath(context, bin.pictureFileName);
+                return BitmapFactory.decodeFile(path);
+            }
+
+            AssetManager assetManager = context.getAssets();
+            InputStream istr;
+            Bitmap bitmap = null;
+            try {
+                istr = assetManager.open(bin.pictureFileName+fileSuffix);
+                bitmap = BitmapFactory.decodeStream(istr);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return bitmap;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            super.onPostExecute(bitmap);
+            imageView.setImageBitmap(bitmap);
+            bin.bitmap = bitmap;
+        }
+    }
 }

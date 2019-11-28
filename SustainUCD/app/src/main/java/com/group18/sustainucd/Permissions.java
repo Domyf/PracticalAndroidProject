@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 
 /**
  * This class will provide the logic for asking and checking for permission to the whole app.
@@ -28,6 +29,12 @@ public class Permissions {
         //Request the permission
         ActivityCompat.requestPermissions(activity,
                 new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, permission_request);
+    }
+
+    public static void AskAccessFineLocationPermission(Fragment fragment, int permission_request)
+    {
+        //Request the permission
+        fragment.requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, permission_request);
     }
 
     public static boolean HasExternalStoragePermission(Context context)

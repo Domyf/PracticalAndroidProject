@@ -15,12 +15,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
-import android.util.Log;
-import android.view.FocusFinder;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 /**
  * Activity that shows all the information about a bin. Who starts this activity will pass all this
@@ -43,7 +42,6 @@ public class ShowBinActivity extends AppCompatActivity {
 
     public static Bitmap bitmapToShow;
 
-    private final String mapsLabel = "Bin";
     private Bin binToShow;
 
     @Override
@@ -57,11 +55,12 @@ public class ShowBinActivity extends AppCompatActivity {
         InitBin();
         ((ImageView) findViewById(R.id.headerImageView)).setImageBitmap(bitmapToShow);
         SetRecycleIcons();
+        SetRecycleText();
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.done_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent mapIntent = Utils.GetMapIntent(binToShow, mapsLabel);
+                Intent mapIntent = Utils.GetMapIntent(binToShow);
                 if (mapIntent.resolveActivity(getPackageManager()) != null) {
                     startActivity(mapIntent);
                 }
@@ -70,6 +69,22 @@ public class ShowBinActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+    }
+
+    /** Show only the text description of paper if bin.paper is true and so on.. */
+    private void SetRecycleText() {
+        if (!binToShow.paper)
+            findViewById(R.id.paperTextView).setVisibility(View.GONE);
+        if (!binToShow.food)
+            findViewById(R.id.foodTextView).setVisibility(View.GONE);
+        if (!binToShow.plastic)
+            findViewById(R.id.plasticTextView).setVisibility(View.GONE);
+        if (!binToShow.glass)
+            findViewById(R.id.glassTextView).setVisibility(View.GONE);
+        if (!binToShow.battery)
+            findViewById(R.id.batteryTextView).setVisibility(View.GONE);
+        if (!binToShow.electronic)
+            findViewById(R.id.electronicTextView).setVisibility(View.GONE);
     }
 
     /** Setup the "selected" drawable to the icons that correspond to the things

@@ -21,8 +21,6 @@ public class Bin {
     //@ColumnInfo(name = "picture_file_name")
     @PrimaryKey
     @NonNull public String pictureFileName;
-    @ColumnInfo(name = "description")
-    public String description;
     @ColumnInfo(name = "latitude")
     public double latitude;
     @ColumnInfo(name = "longitude")
@@ -47,4 +45,19 @@ public class Bin {
     @Ignore
     public Bitmap bitmap = null;
 
+    public Bin() {}
+
+    @Ignore
+    public Bin(@NonNull String pictureFileName, double latitude, double longitude, boolean addedByUser, boolean paper, boolean food, boolean plastic, boolean glass, boolean battery, boolean electronic) {
+        this.pictureFileName = pictureFileName;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.addedByUser = addedByUser;
+        this.paper = paper;
+        this.battery = battery;
+        this.food = food;
+        this.glass = glass;
+        this.plastic = plastic;
+        this.electronic = electronic;
+    }
 }

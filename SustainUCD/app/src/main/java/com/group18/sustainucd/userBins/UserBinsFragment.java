@@ -101,7 +101,7 @@ public class UserBinsFragment extends Fragment implements UserBinsAdapter.OnClic
 
     private void Delete() {
         BinsManager.Delete(getContext(), adapter.getBinAtPosition(binToDelete));
-        String path = BinImageHelper.GetBinImagePath(getContext(), adapter.getBinAtPosition(binToDelete).pictureFileName);
+        String path = BinImageHelper.GetUserBinImagePath(getContext(), adapter.getBinAtPosition(binToDelete).pictureFileName);
         new File(path).delete();
         adapter.deleteBinAt(binToDelete);
         adapter.notifyItemRemoved(binToDelete);

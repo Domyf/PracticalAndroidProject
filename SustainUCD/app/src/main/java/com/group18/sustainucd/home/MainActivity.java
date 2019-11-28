@@ -42,8 +42,8 @@ import java.io.IOException;
 public class MainActivity extends AppCompatActivity {
 
     public static final int BIN_ADDED_SUCCESSFULLY = 2;
+    public static final int REQUEST_ACCESS_FINE_LOCATION = 0;
 
-    private static final int REQUEST_ACCESS_FINE_LOCATION = 0;
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int REQUEST_EXTERNAL_STORAGE = 3;
     private static final String TAG = "MainActivity";
@@ -61,9 +61,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //Ask for access fine location permission, if not already granted
-        if (!Permissions.HasAccessFineLocationPermission(getApplicationContext()))
-            Permissions.AskAccessFineLocationPermission(this, REQUEST_ACCESS_FINE_LOCATION);
 
         FloatingActionButton fab = findViewById(R.id.done_fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -133,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_EXTERNAL_STORAGE
                 && grantResults.length > 0
                 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {

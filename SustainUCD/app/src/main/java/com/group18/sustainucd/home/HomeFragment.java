@@ -1,6 +1,7 @@
 package com.group18.sustainucd.home;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +20,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.group18.sustainucd.Permissions;
 import com.group18.sustainucd.database.Bin;
 import com.group18.sustainucd.database.BinsManager;
 import com.group18.sustainucd.R;
@@ -35,6 +37,8 @@ import java.util.List;
 public class HomeFragment extends Fragment implements BinsListAdapter.OnClickListener,
         BinsManager.BinsDatabaseListener, OnSuccessListener<Location> {
 
+    private static final int REQUEST_ACCESS_FINE_LOCATION = 0;
+
     private static final String TAG = "HomeFragment";
     private RecyclerView recyclerView;
     private BinsListAdapter adapter;
@@ -50,8 +54,11 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
         //Location initialization
         client = LocationServices.getFusedLocationProviderClient(getContext());
         adapter = new BinsListAdapter(this, getContext());
-        if (!BinsManager.HasBeenInitialized())
-            BinsManager.Initialize(getActivity(), HomeFragment.this);
+        //Ask for access fine location permission, if not already granted
+        if (!Permissions.HasAccessFineLocationPermission(getContext()))
+            Permissions.AskAccessFineLocationPermission(this, REQUEST_ACCESS_FINE_LOCATION);
+        /*if (!BinsManager.HasBeenInitialized())
+            BinsManager.Initialize(getActivity(), HomeFragment.this);*/
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -63,7 +70,8 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         //Get location and then look for nearest bins
-        GetLocation();
+        if (Permissions.HasAccessFineLocationPermission(getContext()))
+            GetLocation();
         swipeRefreshLayout = root.findViewById(R.id.refresh);
         swipeRefreshLayout.setOnRefreshListener(
                 new SwipeRefreshLayout.OnRefreshListener() {
@@ -105,12 +113,14 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
 
     @Override
     public void OnBinsDatabaseLoaded() {
-        Log.d(TAG, "Database loaded");
+        Log.i(TAG, "Database loaded");
         SetBinsToShow();
         // Attach the adapter to the recyclerview to populate items
         recyclerView.setAdapter(adapter);
-        Toast.makeText(getContext(), "Refreshed", Toast.LENGTH_SHORT).show();
-        swipeRefreshLayout.setRefreshing(false);
+        if (swipeRefreshLayout.isRefreshing()) {
+            swipeRefreshLayout.setRefreshing(false);
+            Toast.makeText(getContext(), "Refreshed", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void GetLocation()
@@ -124,7 +134,7 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
                 adapter.getCurrentLatitude(), adapter.getCurrentLongitude());
 
         adapter.SetList(binsToShow);
-        Log.d(TAG, adapter.getItemCount()+" bins");
+        Log.i(TAG, adapter.getItemCount()+" bins");
     }
 
     //Success on location request
@@ -132,13 +142,16 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
     public void onSuccess(Location location) {
         if (location != null) {
             adapter.SetLocation(location.getLatitude(), location.getLongitude());
+            Log.i(TAG, "Location OnSuccess");
             if (!BinsManager.HasBeenInitialized())
                 BinsManager.Initialize(getActivity(), HomeFragment.this);
             else
                 OnBinsDatabaseLoaded();
         } else {
-            swipeRefreshLayout.setRefreshing(false);
-            Toast.makeText(getContext(), "Not Refreshed", Toast.LENGTH_SHORT).show();
+            if (swipeRefreshLayout.isRefreshing()) {
+                swipeRefreshLayout.setRefreshing(false);
+                Toast.makeText(getContext(), "Not Refreshed", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -150,5 +163,16 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
             Update();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_ACCESS_FINE_LOCATION
+                && grantResults.length > 0
+                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            GetLocation();
+        }
     }
 }

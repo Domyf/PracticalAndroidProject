@@ -1,6 +1,7 @@
 package com.group18.sustainucd.home;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -17,8 +18,11 @@ import com.group18.sustainucd.BinImageHelper;
 import com.group18.sustainucd.database.Bin;
 import com.group18.sustainucd.R;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Adapter used for the list of bins showed in the home screen. It has also an interface that should
@@ -78,14 +82,13 @@ public class BinsListAdapter extends RecyclerView.Adapter<BinsListAdapter.BinVie
     @Override
     public void onBindViewHolder(BinViewHolder holder, int position) {
         Bin bin = bins.get(position);
-        Log.d("BinsListAdapter", currentLatitude+" current longitude: "+currentLongitude);
         //If the bitmap is still in RAM then it shouldn't be loaded again
         if (bin.bitmap == null)
-            new LoadPictureTask(bin, holder.binImageView, BinImageHelper.GetBinImagePath(context, bin.pictureFileName)).execute();
+            new BinImageHelper.LoadPictureTask(bin, holder.binImageView, context).execute();
         else
             holder.binImageView.setImageBitmap(bin.bitmap);
         //Set distance text view
-        holder.distanceTextView.setText(String.format("%.2f m", bin.distance));
+        holder.distanceTextView.setText(String.format(Locale.ENGLISH, "%d m", (int)bin.distance));
         //Shows only the right images. View.GONE because the remaining images should
         //be near each other without spaces
         if (!bin.paper)
@@ -149,35 +152,5 @@ public class BinsListAdapter extends RecyclerView.Adapter<BinsListAdapter.BinVie
 
     public interface OnClickListener {
         void OnBinClick(int position);
-    }
-
-    /**
-     * ASyncTask that will load a picture in background from a file.
-     * It recive an ImageView, the path of the file and a Bin.
-     * After loading the picture will set the bin bitmap and the imageview.
-     */
-    private class LoadPictureTask extends AsyncTask<Void, Void, Bitmap> {
-        private ImageView imageView;
-        private String path;
-        private Bin bin;
-
-        public LoadPictureTask(Bin bin, ImageView imageView, String path) {
-            this.imageView = imageView;
-            this.path = path;
-            this.bin = bin;
-        }
-
-        @Override
-        protected Bitmap doInBackground(Void... voids) {
-            Bitmap bitmap = BitmapFactory.decodeFile(path);
-            return bitmap;
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            super.onPostExecute(bitmap);
-            imageView.setImageBitmap(bitmap);
-            bin.bitmap = bitmap;
-        }
     }
 }

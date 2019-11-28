@@ -69,7 +69,7 @@ public class UserBinsAdapter extends RecyclerView.Adapter<UserBinsAdapter.BinVie
         // Set item views based on views and data model
         ImageView im = holder.binImageView;
         if (bin.bitmap == null)
-            new LoadPictureTask(bin, im, BinImageHelper.GetBinImagePath(context, bin.pictureFileName)).execute();
+            new BinImageHelper.LoadPictureTask(bin, holder.binImageView, context).execute();
         else
             im.setImageBitmap(bin.bitmap);
     }
@@ -120,29 +120,5 @@ public class UserBinsAdapter extends RecyclerView.Adapter<UserBinsAdapter.BinVie
     public interface OnClickListener {
         void OnBinClick(int position);
         void OnDeleteBtnClick(int position);
-    }
-
-    private class LoadPictureTask extends AsyncTask<Void, Void, Bitmap> {
-        private ImageView imageView;
-        private String path;
-        private Bin bin;
-        public LoadPictureTask(Bin bin, ImageView imageView, String path) {
-            this.imageView = imageView;
-            this.path = path;
-            this.bin = bin;
-        }
-
-        @Override
-        protected Bitmap doInBackground(Void... voids) {
-            Bitmap bitmap = BitmapFactory.decodeFile(path);
-            return bitmap;
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            super.onPostExecute(bitmap);
-            imageView.setImageBitmap(bitmap);
-            bin.bitmap = bitmap;
-        }
     }
 }
