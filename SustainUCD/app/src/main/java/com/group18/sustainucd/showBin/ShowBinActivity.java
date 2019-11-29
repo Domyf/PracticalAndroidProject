@@ -52,8 +52,9 @@ public class ShowBinActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        InitBin();
+        //Set the bitmap
         ((ImageView) findViewById(R.id.headerImageView)).setImageBitmap(bitmapToShow);
+        InitBin();
         SetRecycleIcons();
         SetRecycleText();
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.done_fab);
@@ -117,6 +118,7 @@ public class ShowBinActivity extends AppCompatActivity {
                             R.drawable.round_phone_android_24_selected));
     }
 
+    /** Initialize the bin based on what received by the calling activity */
     private void InitBin() {
         binToShow = new Bin();
         Bundle extras = getIntent().getExtras();

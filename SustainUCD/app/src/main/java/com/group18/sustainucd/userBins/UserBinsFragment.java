@@ -45,7 +45,7 @@ public class UserBinsFragment extends Fragment implements UserBinsAdapter.OnClic
         return root;
     }
 
-    //Get all the user bins and then update the adapter and set the recycler view adapter
+    /** Get all the user bins and then update the adapter and set the recycler view adapter */
     private void SetBinsToShow() {
         List<Bin> binsToShow = BinsManager.GetUserBins();
         adapter.setList(binsToShow);// Attach the adapter to the recyclerview to populate items
@@ -54,7 +54,7 @@ public class UserBinsFragment extends Fragment implements UserBinsAdapter.OnClic
         Log.d(TAG, adapter.getItemCount()+" bins");
     }
 
-    //Event called when the user clicks on a bin. This will transition from here to ShowBinActivity
+    //Event triggered when the user clicks on a bin. This will transition from here to ShowBinActivity
     @Override
     public void OnBinClick(int position) {
         Log.d(TAG, "Bin clicked: "+position);
@@ -74,7 +74,7 @@ public class UserBinsFragment extends Fragment implements UserBinsAdapter.OnClic
         startActivity(showBinIntent);
     }
 
-    //Dialog building
+    /** Dialog building */
     private void SetupDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         //Pressing on cancel button does nothing. Pressing on ok button will delete the bin
@@ -95,7 +95,7 @@ public class UserBinsFragment extends Fragment implements UserBinsAdapter.OnClic
         //source https://developer.android.com/guide/topics/ui/dialogs
     }
 
-    //Event called when the user presses on a delete button. This shows the dialog
+    //Event triggered when the user presses on a delete button. This shows the dialog
     @Override
     public void OnDeleteBtnClick(int position) {
         //Set the position of the bin that should be deleted
@@ -104,7 +104,7 @@ public class UserBinsFragment extends Fragment implements UserBinsAdapter.OnClic
         dialog.show();
     }
 
-    //Call BinsManager.Delete and then deletes the file related to the bin and updates the adapter
+    /** Call BinsManager.Delete and then deletes the file related to the bin and updates the adapter */
     private void Delete() {
         BinsManager.Delete(getContext(), adapter.getBinAtPosition(binToDelete));
         String path = BinImageHelper.GetUserBinImagePath(getContext(), adapter.getBinAtPosition(binToDelete).pictureFileName);

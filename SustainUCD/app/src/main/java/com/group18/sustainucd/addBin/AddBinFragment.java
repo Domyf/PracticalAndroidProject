@@ -85,7 +85,7 @@ public class AddBinFragment extends Fragment {
         }
     }
 
-    /**  The onCreateView method is called when the Fragment should
+    /** The onCreateView method is called when the Fragment should
         create its view, via XML layout inflation in this case.
      */
     public View onCreateView(@NonNull LayoutInflater inflater,

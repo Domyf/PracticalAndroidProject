@@ -86,13 +86,13 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
         return root;
     }
 
-    //Function that ask again for location in order to update the list of bins
+    /** Function that ask again for location in order to update the list of bins */
     private void Update() {
         //Get location and then look for nearest bins
         GetLocation();
     }
 
-    //Event called when the user clicks on a bin. This will transition from here to ShowBinActivity
+    //Event triggered when the user clicks on a bin. This will transition from here to ShowBinActivity
     @Override
     public void OnBinClick(int position) {
         Log.d(TAG, "Bin clicked: "+position);
@@ -113,7 +113,7 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
         startActivity(showBinIntent);
     }
 
-    //Event called when the database is loaded
+    //Event triggered when the database is loaded
     @Override
     public void OnBinsDatabaseLoaded() {
         Log.i(TAG, "Database loaded");

@@ -52,6 +52,7 @@ public class SubInfoActivity extends AppCompatActivity implements RecycleInfoAda
         SetTitleByCategory(category);
     }
 
+    /** Set the title of the activity based on the category */
     private void SetTitleByCategory(int category) {
         switch (category) {
             case PAPER:
@@ -87,6 +88,7 @@ public class SubInfoActivity extends AppCompatActivity implements RecycleInfoAda
         return super.onOptionsItemSelected(item);
     }
 
+    //Event triggered when the user clicks on a card
     @Override
     public void OnElementClick(int position) {
         RecycleData data = adapter.getDataAtPosition(position);

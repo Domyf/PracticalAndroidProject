@@ -14,7 +14,6 @@ import androidx.fragment.app.Fragment;
  * It can only ask and check the permissions that are needed for the app. Other permissions are not
  * implemented. Every class will refer to this class when asking and checking permissions.
  */
-
 public class Permissions {
 
     public static void AskExternalStoragePermission(Activity activity, int permission_request)

@@ -78,6 +78,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /** Create the temp file if it's not already created and call the camera app.
+     *  The picture will be stored in the file
+     * */
     private void TakePhoto() {
         //Intent for phone camera app
         Intent takePhotoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -92,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
                 ex.printStackTrace();
             }
 
-            //source: https://developer.android.com/training/camera/photobasics
             if (nextBinPictureFile != null) {
                 Uri imageURI = FileProvider.getUriForFile(this,
                         "com.group18.sustainucd.fileprovider", nextBinPictureFile);
@@ -103,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(takePhotoIntent, REQUEST_IMAGE_CAPTURE);
             }
         }
+        //source: https://developer.android.com/training/camera/photobasics
     }
 
     @Override

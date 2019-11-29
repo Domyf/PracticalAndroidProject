@@ -13,6 +13,8 @@ import android.view.View;
 
 import java.util.ArrayList;
 
+/** Activity with 6 cards. Clicking on each card will make a transition to SubInfoActivity or
+ *  MaterialInfoActivity in some cases. */
 public class MainInfoActivity extends AppCompatActivity {
 
     public static final String WHAT_TO_SHOW = "What";
@@ -28,9 +30,9 @@ public class MainInfoActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         SetCards();
-
     }
 
+    /** Set all the cards on click listeners */
     private void SetCards() {
         CardView plasticCardView = findViewById(R.id.pasticCardView);
         plasticCardView.setOnClickListener(new View.OnClickListener() {
