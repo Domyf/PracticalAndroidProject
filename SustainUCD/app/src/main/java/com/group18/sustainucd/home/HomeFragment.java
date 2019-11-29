@@ -78,7 +78,10 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
                     @Override
                     public void onRefresh() {
                         //Refresh operation
-                        Update();
+                        if (Permissions.HasAccessFineLocationPermission(getContext()))
+                            Update();
+                        else
+                            Permissions.AskAccessFineLocationPermission(HomeFragment.this, REQUEST_ACCESS_FINE_LOCATION);
                     }
                 }
         );
@@ -167,20 +170,26 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
         // Refresh operations
         if (item.getItemId() == R.id.action_refresh) {
             swipeRefreshLayout.setRefreshing(true);
-            Update();
+            //Refresh operation
+            if (Permissions.HasAccessFineLocationPermission(getContext()))
+                Update();
+            else
+                Permissions.AskAccessFineLocationPermission(HomeFragment.this, REQUEST_ACCESS_FINE_LOCATION);
         }
         return super.onOptionsItemSelected(item);
     }
 
     //If the location permission has been granted then look for the last known location
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_ACCESS_FINE_LOCATION
-                && grantResults.length > 0
-                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            GetLocation();
+        if (requestCode == REQUEST_ACCESS_FINE_LOCATION && grantResults.length > 0) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                GetLocation();
+            } else if (grantResults[0] == PackageManager.PERMISSION_DENIED &&
+                    swipeRefreshLayout.isRefreshing()) {
+                swipeRefreshLayout.setRefreshing(false);
+            }
         }
     }
 }
