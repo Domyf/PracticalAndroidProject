@@ -2,6 +2,9 @@ package com.group18.sustainucd;
 
 import java.io.Serializable;
 
+/** This class represents the data used by MainInfoActivity, SubInfoActivity and MaterialInfoActivity.
+ *  It has the ID of the material name written in strings.xml and the ID of the material description
+ *  written in strings.xml */
 public class RecycleData implements Serializable {
     private int nameID;
     private int descriptionID;

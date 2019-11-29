@@ -17,6 +17,8 @@ import com.group18.sustainucd.home.BinsListAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+/** This activity shows a list of cards with a textview. The content showed in the list depends on
+ *  the data passed by the calling activity */
 public class SubInfoActivity extends AppCompatActivity implements RecycleInfoAdapter.OnClickListener {
 
     public static final int PAPER = 1;

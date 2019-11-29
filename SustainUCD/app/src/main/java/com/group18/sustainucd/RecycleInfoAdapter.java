@@ -1,6 +1,5 @@
 package com.group18.sustainucd;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +23,7 @@ public class RecycleInfoAdapter extends RecyclerView.Adapter<RecycleInfoAdapter.
     private OnClickListener mainListener;
 
     public RecycleInfoAdapter(OnClickListener listener, List list) {
-        this.recycleData = new ArrayList<>(list);
+        this.recycleData = new ArrayList<RecycleData>(list);
         this.mainListener = listener;
     }
 
