@@ -3,12 +3,14 @@ package com.group18.sustainucd;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.util.Log;
 
 import com.group18.sustainucd.database.Bin;
 
 /**
  * This class will provide some general utilities to all the classes in the app.
  * - Get the intent to show a bin on Google Maps
+ * - Get is the user has or not an app to show a bin on a map
  * - Calculate distance from two locations
  */
 public class Utils {
@@ -25,7 +27,9 @@ public class Utils {
         // Make the Intent explicit by setting the Google Maps package
         mapIntent.setPackage("com.google.android.apps.maps");
         return mapIntent;
+        //source: https://developers.google.com/maps/documentation/urls/android-intents
     }
+
     /** Returns true is the user has an installed app that can show a bin on a map, false otherwise */
     public static boolean HasLocationApp(PackageManager pm) {
         //Simple example location, just for test
@@ -35,6 +39,7 @@ public class Utils {
         // Make the Intent explicit by setting the Google Maps package
         mapIntent.setPackage("com.google.android.apps.maps");
         return mapIntent.resolveActivity(pm) != null;
+        //source: https://developers.google.com/maps/documentation/urls/android-intents
     }
 
     /**
