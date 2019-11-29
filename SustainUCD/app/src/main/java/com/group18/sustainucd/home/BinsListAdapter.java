@@ -42,6 +42,7 @@ public class BinsListAdapter extends RecyclerView.Adapter<BinsListAdapter.BinVie
     private double currentLatitude;
     private double currentLongitude;
 
+    //This class has been made thanks to this source: https://developer.android.com/guide/topics/ui/layout/recyclerview
     public BinsListAdapter(OnClickListener listener, Context context) {
         this.bins = new ArrayList<>();
         this.mainListener = listener;
@@ -105,7 +106,6 @@ public class BinsListAdapter extends RecyclerView.Adapter<BinsListAdapter.BinVie
             holder.electronicImageView.setVisibility(View.GONE);
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return bins.size();
