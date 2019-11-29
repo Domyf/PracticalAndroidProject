@@ -20,6 +20,8 @@ public class BinsManager {
     private static BinDao binDao;
     private static boolean initialized;
 
+    /** Method that initalize the bins in RAM and the entire database. It also provide a way
+     *  to prepopulate the database */
     public synchronized static void Initialize(final Context context, final BinsDatabaseListener listener) {
         new AsyncTask<Void, Void, Void>() {
             @Override
@@ -61,11 +63,8 @@ public class BinsManager {
         return initialized;
     }
 
-    /** Insert the new bin in the list of bins before starting
-     *  a new AsyncTask to insert the bin into the database.
-     *
-     * @param context
-     * @param newBin Bin that should be added
+    /** Insert the new bin in the list of bins before starting a
+     *  new AsyncTask to insert the bin into the database.
      */
     public synchronized static void Insert(final Context context, final Bin newBin) {
         databaseBins.add(newBin);
@@ -81,6 +80,9 @@ public class BinsManager {
         }.execute();
     }
 
+    /** Delete the bin in the list of bins before starting a
+     *  new AsyncTask to delete the bin from the database.
+     **/
     public synchronized static void Delete(final Context context, final Bin bin) {
         databaseBins.remove(bin);
         new AsyncTask<Void, Void, Void>() {
