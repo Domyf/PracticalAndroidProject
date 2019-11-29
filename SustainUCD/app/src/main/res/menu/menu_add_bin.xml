@@ -6,6 +6,6 @@
         android:id="@+id/action_location"
         android:icon="@drawable/baseline_room_24"
         android:orderInCategory="100"
-        android:title="location"
+        android:title="@string/action_location"
         app:showAsAction="always" />
 </menu>

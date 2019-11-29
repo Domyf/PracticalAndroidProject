@@ -110,4 +110,8 @@ The most important priority to support the safe disposal of scrap or spent batte
     <string name="glass_small_desc">The ability for glass to be recycled depends on the melting point. For this reason, they ask that you do your part by recycling all glass bottles and jars.</string>
     <string name="paper_small_desc">Any paper material that doesn\'t come with a plastic coating or finish can be recycled. If your paper is laminated or has a plastic coating like a juice box, do not recycle, properly dispose of the product in the waste bin.</string>
     <string name="plastic_small_desc">By being mindful and making sure to recycle plastics, you\’re helping to ensure a cleaner environment and less landfill pollution!</string>
+    <string name="action_location">Location</string>
+    <string name="action_info">Recycling Info</string>
+    <string name="action_user">Your Bins</string>
+    <string name="action_refresh">Refresh</string>
 </resources>

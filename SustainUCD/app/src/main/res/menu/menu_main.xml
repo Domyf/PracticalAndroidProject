@@ -5,19 +5,19 @@
     <item
         android:id="@+id/action_refresh"
         android:icon="@drawable/round_refresh_24"
-        app:showAsAction="always"
-        android:title="Refresh"/>
+        android:title="@string/action_refresh"
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/action_user"
         android:icon="@drawable/baseline_face_24"
         android:orderInCategory="100"
-        android:title="User"
+        android:title="@string/action_user"
         app:showAsAction="always" />
     <item
         android:id="@+id/action_info"
         android:icon="@drawable/baseline_info_24"
         android:orderInCategory="100"
-        android:title="Recycle Info"
+        android:title="@string/action_info"
         app:showAsAction="always" />
 </menu>
