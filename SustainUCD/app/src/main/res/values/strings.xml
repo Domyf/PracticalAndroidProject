@@ -24,32 +24,37 @@
     <string name="plastic_ps">PS</string>
     <string name="plastic_pete_desc"> Introduced by J. Rex Whinfield and James T. Dickson in 1940, this plastic is one of the most commonly used on the planet. Interestingly enough, it took another 30 years before it was used for crystal-clear beverage bottles, such as the ones produced by Coca-Cola and Pepsi.
 
-PETE plastics make up 96% of all plastic bottles and containers in the United States, yet only 25% of these products are recycled. By being mindful and making sure to recycle code 1 plastics, you\’re helping to ensure a cleaner environment and less landfill pollution!</string>
+PETE plastics make up 96% of all plastic bottles and containers in the United States, yet only 25% of these products are recycled. By being mindful and making sure to recycle code 1 plastics, you\’re helping to ensure a cleaner environment and less landfill pollution! Source: https://www.qualitylogoproducts.com/promo-university/different-types-of-plastic.htm</string>
     <string name="plastic_hdpe_desc">
         In 1953, Karl Ziegler and Erhard Holzkamp used catalysts and low pressure to create high-density polyethylene. It was first used for pipes in storm sewers, drains, and culverts. Today, this plastic is used for a widevariety of products.
 
 HDPE is the most commonly recycled plastic because it will not break under exposure to extreme heat or cold. According to the EPA, 12% of all HDPE products created are recycled in a year. This is a very small dent in the planet’s carbon footprint.
+    Source: https://www.qualitylogoproducts.com/promo-university/different-types-of-plastic.htm
     </string>
     <string name="plastic_pvc_desc">May not recycle! Call your recycler. If recycling is not possible, re-purpose or dispose
     PVC is one of the oldest synthetic materials in industrial production. It was actually discovered on accident twice; once in 1838 by French physicist Henri Victor Regnault and again in 1872 by German chemist Eugen Baumann. On both occasions, these men found it inside vinyl chloride flasks left exposed to sunlight.
 
 PVC is one of the least recycled materials; generally less than 1% of PVC plastic is recycled each year. It has been called the “poison plastic” because it contains numerous toxins and is harmful to our health and the environment.
+    Source: https://www.qualitylogoproducts.com/promo-university/different-types-of-plastic.htm
     </string>
     <string name="plastic_ldpe_desc">May not recycle! Call your recycler. If recycling is not possible, re-purpose or dispose
         LDPE was the first polyethylene to be produced, making it the grandfather of the material. It has less mass than HDPE, which is why it’s considered a separate material for recycling.
 
 Packaging and containers made from LDPE make up about 56% of allplastic waste, 75% of which comes from residential households. Fortunately, many recycling programs are evolving to handle these products. This means less LDPE will end up in landfills and negatively affect the environment!
+    Source: https://www.qualitylogoproducts.com/promo-university/different-types-of-plastic.htm
     </string>
     <string name="plastic_pp_desc">Do not recycle!
     Paul Hogan and Robert L. Banks of Phillips Petroleum Company discovered polypropylene in 1951. At the time, they were simply trying to convert propylene into gasoline, but instead discovered a new catalytic process for making plastic.
 
-Only about 3% of polypropylene products are recycled in the US, but interestingly enough, 325 million pounds of non-bottle plastics were collected for recycling over a year. In other words, a lot of this plastic is created, but only a small fraction is actually recycled.</string>
+Only about 3% of polypropylene products are recycled in the US, but interestingly enough, 325 million pounds of non-bottle plastics were collected for recycling over a year. In other words, a lot of this plastic is created, but only a small fraction is actually recycled.
+    Source: https://www.qualitylogoproducts.com/promo-university/different-types-of-plastic.htm
+    </string>
     <string name="plastic_ps_desc">Do not recycle!
         In 1839, German apothecary Eduard Simon accidentally came across polystyrene while preparing medication. He isolated a substance from natural resin and didn’t realize what he had discovered. It took German chemist Hermann Staudinger to research this polymer and expand on its uses.
 
 Since polystyrene is lightweight and easy to form into plastic materials, it also breaks effortlessly, making it more harmful to the environment. Beaches all over the world are littered with pieces of polystyrene, endangering the health of marine animals. Polystyrene accounts for about 35% of US landfill materials.
+    Source: https://www.qualitylogoproducts.com/promo-university/different-types-of-plastic.htm
     </string>
-    <string name="source_for_plastic">https://www.qualitylogoproducts.com/promo-university/different-types-of-plastic.htm</string>
     <string name="food_all">Edible material</string>
     <string name="food_all_desc">Environmental reasons
 
@@ -62,48 +67,47 @@ We\'re often asked "Why do I need to compost when my waste will break down in la
 When waste is sent to landfill, air cannot get to the organic waste. Therefore as the waste breaks down it creates a harmful greenhouse gas, methane, which damages the Earth\'s atmosphere. However, when this same waste is composted above ground at home, oxygen helps the waste to decompose aerobically which means hardly any methane is produced, which is good news for the planet. And what\'s more, after nine to twelve months, you get a free fertiliser for your garden and plant pots to keep them looking beautiful.
 
 Benefits for your garden
-Your compost is a nutrient-rich food product for your garden and will help improve soil structure, maintain moisture levels, and keep your soil\'s pH balance in check while helping to suppress plant disease. It will have everything your plants need including nitrogen, phosphorus and potassium and it will help buffer soils that are very acidic or alkaline. Compost improves your soil\'s condition and your plants and flowers will love it!</string>
-    <string name="source_for_food">https://www.recyclenow.com/reduce-waste/composting/why-compost</string>
+Your compost is a nutrient-rich food product for your garden and will help improve soil structure, maintain moisture levels, and keep your soil\'s pH balance in check while helping to suppress plant disease. It will have everything your plants need including nitrogen, phosphorus and potassium and it will help buffer soils that are very acidic or alkaline. Compost improves your soil\'s condition and your plants and flowers will love it!
+    Source: https://www.recyclenow.com/reduce-waste/composting/why-compost</string>
     <string name="glass_bottles">Food Bottles and Jars</string>
-    <string name="glass_bottles_desc">The ability for glass to be recycled depends on the melting point. For this reason, they ask that you do your part by recycling all glass bottles and jars.</string>
+    <string name="glass_bottles_desc">The ability for glass to be recycled depends on the melting point. For this reason, they ask that you do your part by recycling all glass bottles and jars. Source: https://lbre.stanford.edu/pssistanford-recycling/frequently-asked-questions/frequently-asked-questions-glass-recycling.</string>
     <string name="glass_other">Vases, Cups, Pyrex, etc...</string>
-    <string name="glass_other_desc">Because these materials are thicker than bottles and jars, they have a higher melting point, and will not break down properly in the recycling center. Do you best to reuse, and in worst case, properly dispose of in the waste bin.</string>
-    <string name="source_for_glass">https://lbre.stanford.edu/pssistanford-recycling/frequently-asked-questions/frequently-asked-questions-glass-recycling.</string>
+    <string name="glass_other_desc">Because these materials are thicker than bottles and jars, they have a higher melting point, and will not break down properly in the recycling center. Do you best to reuse, and in worst case, properly dispose of in the waste bin.
+    Source: https://lbre.stanford.edu/pssistanford-recycling/frequently-asked-questions/frequently-asked-questions-glass-recycling.</string>
     <string name="paper_normal">Non-treated/coated paper</string>
-    <string name="paper_normal_desc">Any paper material that doesn\'t come with a plastic coating or finish can be recycled in commingled or \'paper\'.</string>
+    <string name="paper_normal_desc">Any paper material that doesn\'t come with a plastic coating or finish can be recycled in commingled or \'paper\'. Source: https://pw.lacounty.gov/general/faq/index.cfm</string>
     <string name="paper_coated">Treated or Coated Paper</string>
-    <string name="paper_coated_desc">If your paper is laminated or has a plastic coating like a juice box, do not recycle, properly dispose of the product in the waste bin.</string>
-    <string name="source_for_paper">https://pw.lacounty.gov/general/faq/index.cfm</string>
+    <string name="paper_coated_desc">If your paper is laminated or has a plastic coating like a juice box, do not recycle, properly dispose of the product in the waste bin. Source: https://pw.lacounty.gov/general/faq/index.cfm</string>
     <string name="battery_lead">Lead Battery</string>
     <string name="battery_lead_desc">Lead, or lead acid, batteries have the distinction of having a recycling rate of close to 100% in North America and Europe. Relatively simple, the process for lead battery recycling is also cost-effective, since reclaimed lead can be used in new batteries. Battery manufacturers lead the charge in lead battery recycling, partly because recovered materials are often for cheaper than new materials. Many lead battery retailers will base their sale price for new batteries on the return of the spent battery core at the time of sale, or provide a discount on the purchase of new batteries with the return of old batteries.
 
-Recently, however, the increased use of lithium-ion batteries has become a hazard in lead battery recycling. Li-ion battery assemblers often package these batteries using battery containers that appear very similar to lead-acid battery containers - something that can result in consumers and wholesalers alike confusing the material content of scrap batteries they collect. Li-ion batteries are extremely volatile and raise a major risk of explosions when they are inadvertently placed in the lead battery recycling process. This can cause devastating fires and injuries at lead battery recycling operations. Sorting and pre-shipment inspection of scrap batteries to verify material content before disposal can help prevent such incidents.</string>
+Recently, however, the increased use of lithium-ion batteries has become a hazard in lead battery recycling. Li-ion battery assemblers often package these batteries using battery containers that appear very similar to lead-acid battery containers - something that can result in consumers and wholesalers alike confusing the material content of scrap batteries they collect. Li-ion batteries are extremely volatile and raise a major risk of explosions when they are inadvertently placed in the lead battery recycling process. This can cause devastating fires and injuries at lead battery recycling operations. Sorting and pre-shipment inspection of scrap batteries to verify material content before disposal can help prevent such incidents.
+    Source: https://www.crownbattery.com/news/which-batteries-are-recyclable
+    </string>
     <string name="battery_nickel">Nickel-Cadmium Battery</string>
-    <string name="battery_nickel_desc">Nickel-cadmium batteries pose a serious environmental risk if not disposed of properly, so much so that the European Union banned the production and use of nickel-cadmium in 2009. In order to dispose of these batteries, they must first be isolated from other batteries and battery systems. We encourage the utilization of programs like Call2Recycle if necessary. If there are no disposal services or recycling drop-off points in your area, a secure hazardous waste landfill is your best option.</string>
+    <string name="battery_nickel_desc">Nickel-cadmium batteries pose a serious environmental risk if not disposed of properly, so much so that the European Union banned the production and use of nickel-cadmium in 2009. In order to dispose of these batteries, they must first be isolated from other batteries and battery systems. We encourage the utilization of programs like Call2Recycle if necessary. If there are no disposal services or recycling drop-off points in your area, a secure hazardous waste landfill is your best option.
+    Source: https://www.crownbattery.com/news/which-batteries-are-recyclable</string>
     <string name="battery_nickelMetal">Nickel Metal Hydride Battery</string>
     <string name="battery_nickelMetal_desc">
         Less toxic than nickel-cadmium, but still dangerous in large quantities, spent NiMH batteries have several options for disposal. According to Battery University by Cadex Electronics, individual NiMH batteries can be disposed of with household waste, but 10 or more batteries should go to a disposal service, recycling program, or secure waste landfill.
+    Source: https://www.crownbattery.com/news/which-batteries-are-recyclable
     </string>
     <string name="battery_lithium">Primary Lithium Battery</string>
     <string name="battery_lithium_desc">
         The metallic lithium in these batteries is highly reactive when placed in contact with moisture or subjected to a container wall breach. These batteries present a high risk potential when crushed or broken open in landfills - something that can ignite fires that can burn underground for years. Primary lithium batteries should be disposed of in strict compliance with the battery supplier\'s recommendations. Due to the fire hazards these batteries present to consumers, they should not be disposed of in any quantity with household waste, and should instead be disposed of according to the suppliers\' instructions or those of your local waste management provider.
+    Source: https://www.crownbattery.com/news/which-batteries-are-recyclable
     </string>
     <string name="battery_lion">Lithium-Ion Battery</string>
-    <string name="battery_lion_desc">Lithium-ion batteries have become increasingly prevalent in the market, and the proportion of these batteries being sent to landfilles for disposal has increased greatly over the past few years. Though intact Li-ion batteries are relatively non-toxic, the sheer number being produced and used make them a concern. Recycling Li-ion batteries is done more for environmental reasons than profitability, as the product is highly toxic when broken apart. Since the process is often subsidized by Lithium-ion battery producers, there is no reason for them to go to landfills, which could cause unforeseen problems in the future.</string>
+    <string name="battery_lion_desc">Lithium-ion batteries have become increasingly prevalent in the market, and the proportion of these batteries being sent to landfilles for disposal has increased greatly over the past few years. Though intact Li-ion batteries are relatively non-toxic, the sheer number being produced and used make them a concern. Recycling Li-ion batteries is done more for environmental reasons than profitability, as the product is highly toxic when broken apart. Since the process is often subsidized by Lithium-ion battery producers, there is no reason for them to go to landfills, which could cause unforeseen problems in the future. Source: https://www.crownbattery.com/news/which-batteries-are-recyclable</string>
     <string name="battery_alkaline">Alkaline Batteries</string>
     <string name="battery_alkaline_desc">Alkaline battery systems are safe to dispose of as regular waste due to a regulated decrease in mercury content in 1996. These batteries do contain the reusable materials zinc and manganese, but the recovery process is difficult and dangerous. Alkaline batteries are approved for disposal via household waste streams, but best-practice efforts to recycle them for environmental reasons are increasing. Check with local disposal services or recycling programs as to whether they will accept them.
-
-
-
-The most important priority to support the safe disposal of scrap or spent batteries is to sort them by type. Each battery chemistry has a different process for recycling and disposal, and mixing them can be extremely dangerous. With systems in place to recycle or otherwise safely dispose of batteries, it’s easy to stay sustainable.</string>
-    <string name="source_for_battery">https://www.crownbattery.com/news/which-batteries-are-recyclable</string>
+The most important priority to support the safe disposal of scrap or spent batteries is to sort them by type. Each battery chemistry has a different process for recycling and disposal, and mixing them can be extremely dangerous. With systems in place to recycle or otherwise safely dispose of batteries, it’s easy to stay sustainable.
+    Source: https://www.crownbattery.com/news/which-batteries-are-recyclable</string>
     <string name="electronic_all">Electronics</string>
     <string name="electronic_all_desc">As you may have guessed, electronics are not commonly recyclable in the same manner!
         One of the important things to realize is that many electronics will be useful to others, even if you have replaced it. You can sell it at a garage sale, leave it at a swap shop, or give it to a friend.
         If the item is beyond use, your best bet is to lookup the nearest electronic recycling near you.  Some towns will offer processing services for free, and in other cases private companies may dispose of your goods for a small fee.
     </string>
-    <string name="source_for_electronics">Common Sense</string>
-
     <string name="food_small_desc">Do your bit to reduce the amount of waste sent to landfill. Did you know, composting at home for just one year can save global warming gases equivalent to all the CO2 your kettle produces annually, or your washing machine produces in three months?</string>
     <string name="battery_small_desc">The most important priority to support the safe disposal of scrap or spent batteries is to sort them by type. Each battery chemistry has a different process for recycling and disposal, and mixing them can be extremely dangerous. With systems in place to recycle or otherwise safely dispose of batteries, it’s easy to stay sustainable.</string>
     <string name="electronics_small_desc">Electronics are not commonly recyclable in the same manner! If the item is beyond use, your best bet is to lookup the nearest electronic recycling near you.  Some towns will offer processing services for free.</string>
