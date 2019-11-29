@@ -1,6 +1,7 @@
 package com.group18.sustainucd;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 
 import com.group18.sustainucd.database.Bin;
@@ -24,6 +25,16 @@ public class Utils {
         // Make the Intent explicit by setting the Google Maps package
         mapIntent.setPackage("com.google.android.apps.maps");
         return mapIntent;
+    }
+    /** Returns true is the user has an installed app that can show a bin on a map, false otherwise */
+    public static boolean HasLocationApp(PackageManager pm) {
+        //Simple example location, just for test
+        Uri gmmIntentUri = Uri.parse("geo:37.7749,-122.4194?q=37.7749,-122.4194(Bin)");
+        // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        // Make the Intent explicit by setting the Google Maps package
+        mapIntent.setPackage("com.google.android.apps.maps");
+        return mapIntent.resolveActivity(pm) != null;
     }
 
     /**

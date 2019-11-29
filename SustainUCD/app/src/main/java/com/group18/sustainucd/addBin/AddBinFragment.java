@@ -27,6 +27,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.group18.sustainucd.BinImageHelper;
+import com.group18.sustainucd.Utils;
 import com.group18.sustainucd.database.Bin;
 import com.group18.sustainucd.database.BinsManager;
 import com.group18.sustainucd.R;
@@ -290,7 +291,7 @@ public class AddBinFragment extends Fragment {
                     locationAcquired = true;
                     // Has options menu if the user has Google Maps or other location app
                     // and there are no problems with the location client
-                    if (HasLocationApp()) {
+                    if (Utils.HasLocationApp(getActivity().getPackageManager())) {
                         setHasOptionsMenu(true);
                     }
                 }
@@ -311,7 +312,7 @@ public class AddBinFragment extends Fragment {
     //Event triggered after clicking on the menu item. This will open google maps
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        Intent mapIntent = GetMapIntent();
+        Intent mapIntent = Utils.GetMapIntent(newBin);
         // Attempt to start an activity that can handle the Intent
         if (mapIntent.resolveActivity(getActivity().getPackageManager()) != null) {
             startActivity(mapIntent);
@@ -319,26 +320,6 @@ public class AddBinFragment extends Fragment {
 
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private Intent GetMapIntent() {
-        Uri gmmIntentUri = Uri.parse("geo:"+newBin.latitude+","+newBin.longitude
-                +"?z=18&q="+newBin.latitude+","+newBin.longitude+"("+mapsLabel+")");
-        // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
-        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-        // Make the Intent explicit by setting the Google Maps package
-        mapIntent.setPackage("com.google.android.apps.maps");
-        return mapIntent;
-    }
-
-    private boolean HasLocationApp() {
-        //Simple example location, just for test
-        Uri gmmIntentUri = Uri.parse("geo:37.7749,-122.4194?q=37.7749,-122.4194(Bin)");
-        // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
-        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-        // Make the Intent explicit by setting the Google Maps package
-        mapIntent.setPackage("com.google.android.apps.maps");
-        return mapIntent.resolveActivity(getActivity().getPackageManager()) != null;
     }
 
     private class ScalePictureTask extends AsyncTask<Void, Void, Bitmap> {
