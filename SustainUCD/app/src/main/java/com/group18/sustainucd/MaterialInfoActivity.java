@@ -13,6 +13,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+/** Activity that shows the name of the material as Title and the description as a textview that can
+ *  be scrolled. The title and the description resource IDs should be passed via Intent by the
+ *  calling activity. */
 public class MaterialInfoActivity extends AppCompatActivity {
 
     public static final String DATA = "Data";
