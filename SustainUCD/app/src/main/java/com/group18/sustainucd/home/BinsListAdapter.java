@@ -82,7 +82,8 @@ public class BinsListAdapter extends RecyclerView.Adapter<BinsListAdapter.BinVie
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(BinViewHolder holder, int position) {
-        Bin bin = bins.get(position);
+        Bin bin = getBinAtPosition(position);
+        Log.i("TAG", position+" "+bin.paper);
         //If the bitmap is still in RAM then it shouldn't be loaded again
         if (bin.bitmap == null)
             new BinImageHelper.LoadPictureTask(bin, holder.binImageView, context).execute();
@@ -92,17 +93,34 @@ public class BinsListAdapter extends RecyclerView.Adapter<BinsListAdapter.BinVie
         holder.distanceTextView.setText(String.format(Locale.ENGLISH, "%d m", (int)bin.distance));
         //Shows only the right images. View.GONE because the remaining images should
         //be near each other without spaces
-        if (!bin.paper)
+        if (bin.paper)
+            holder.paperImageView.setVisibility(View.VISIBLE);
+        else
             holder.paperImageView.setVisibility(View.GONE);
-        if (!bin.plastic)
+
+        if (bin.plastic)
+            holder.plasticImageView.setVisibility(View.VISIBLE);
+        else
             holder.plasticImageView.setVisibility(View.GONE);
-        if (!bin.food)
+
+        if (bin.food)
+            holder.foodImageView.setVisibility(View.VISIBLE);
+        else
             holder.foodImageView.setVisibility(View.GONE);
-        if (!bin.glass)
+
+        if (bin.glass)
+            holder.glassImageView.setVisibility(View.VISIBLE);
+        else
             holder.glassImageView.setVisibility(View.GONE);
-        if (!bin.battery)
+
+        if (bin.battery)
+            holder.batteryImageView.setVisibility(View.VISIBLE);
+        else
             holder.batteryImageView.setVisibility(View.GONE);
-        if (!bin.electronic)
+
+        if (bin.electronic)
+            holder.electronicImageView.setVisibility(View.VISIBLE);
+        else
             holder.electronicImageView.setVisibility(View.GONE);
     }
 
