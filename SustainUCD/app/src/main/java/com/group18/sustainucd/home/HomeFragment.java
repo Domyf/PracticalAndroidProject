@@ -57,14 +57,13 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
         //Ask for access fine location permission, if not already granted
         if (!Permissions.HasAccessFineLocationPermission(getContext()))
             Permissions.AskAccessFineLocationPermission(this, REQUEST_ACCESS_FINE_LOCATION);
-        /*if (!BinsManager.HasBeenInitialized())
-            BinsManager.Initialize(getActivity(), HomeFragment.this);*/
+
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        // Lookup the recyclerview in activity layout
+        //Lookup the recyclerview in activity layout
         recyclerView = (RecyclerView) root.findViewById(R.id.bins_recycler_view);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -72,12 +71,13 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
         //Get location and then look for nearest bins
         if (Permissions.HasAccessFineLocationPermission(getContext()))
             GetLocation();
+        //source: https://developer.android.com/training/swipe/add-swipe-interface
         swipeRefreshLayout = root.findViewById(R.id.refresh);
         swipeRefreshLayout.setOnRefreshListener(
                 new SwipeRefreshLayout.OnRefreshListener() {
                     @Override
                     public void onRefresh() {
-                        // Refresh operations
+                        //Refresh operation
                         Update();
                     }
                 }
@@ -86,11 +86,13 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
         return root;
     }
 
+    //Function that ask again for location in order to update the list of bins
     private void Update() {
         //Get location and then look for nearest bins
         GetLocation();
     }
 
+    //Event called when the user clicks on a bin. This will transition from here to ShowBinActivity
     @Override
     public void OnBinClick(int position) {
         Log.d(TAG, "Bin clicked: "+position);
@@ -111,6 +113,7 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
         startActivity(showBinIntent);
     }
 
+    //Event called when the database is loaded
     @Override
     public void OnBinsDatabaseLoaded() {
         Log.i(TAG, "Database loaded");
@@ -123,11 +126,14 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
         }
     }
 
+    // Ask for last location and attach this fragment to the OnSuccess Listener
     private void GetLocation()
     {
         client.getLastLocation().addOnSuccessListener(this);
     }
 
+    //Calculate the distance of all the bins and then create a subset of howManyBinsToShow bins
+    //sorted by distance. Show this on screen.
     private void SetBinsToShow() {
         BinsManager.CalculateDistances(adapter.getCurrentLatitude(), adapter.getCurrentLongitude());
         List<Bin> binsToShow = BinsManager.GetNearestKBins(howManyBinsToShow,
@@ -155,6 +161,7 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
         }
     }
 
+    //Pressing on the refresh button will update the list
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         // Refresh operations
@@ -165,6 +172,7 @@ public class HomeFragment extends Fragment implements BinsListAdapter.OnClickLis
         return super.onOptionsItemSelected(item);
     }
 
+    //If the location permission has been granted then look for the last known location
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String[] permissions, int[] grantResults) {
