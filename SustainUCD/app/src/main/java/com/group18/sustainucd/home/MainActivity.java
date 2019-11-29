@@ -92,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
                 ex.printStackTrace();
             }
 
+            //source: https://developer.android.com/training/camera/photobasics
             if (nextBinPictureFile != null) {
                 Uri imageURI = FileProvider.getUriForFile(this,
                         "com.group18.sustainucd.fileprovider", nextBinPictureFile);
@@ -155,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    //Event triggered on click on one of the top-right menu icon
+    //Event triggered on click on one of the top-right menu icons
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
