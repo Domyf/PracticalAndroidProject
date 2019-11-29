@@ -29,6 +29,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentBottom="true"
+                android:contentDescription="@string/bin_image_descr"
                 android:scaleType="centerCrop"
                 androidx.cardview:srcCompat="@tools:sample/backgrounds/scenic" />
 
@@ -40,7 +41,11 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
-                android:text="Delete" />
+                android:layout_marginStart="127dp"
+                android:layout_marginLeft="127dp"
+                android:layout_toEndOf="@+id/binImageView"
+                android:layout_toRightOf="@+id/binImageView"
+                android:text="@string/delete_btn" />
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
