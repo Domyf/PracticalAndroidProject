@@ -67,17 +67,18 @@ public class BinImageHelper {
 
         @Override
         protected Bitmap doInBackground(Void... voids) {
+            //Get from Picture folder
             if (bin.addedByUser) {
                 String path = BinImageHelper.GetUserBinImagePath(context, bin.pictureFileName);
                 return BitmapFactory.decodeFile(path);
             }
-
+            //Get from assets
             AssetManager assetManager = context.getAssets();
-            InputStream istr;
+            InputStream is;
             Bitmap bitmap = null;
             try {
-                istr = assetManager.open(bin.pictureFileName+fileSuffix);
-                bitmap = BitmapFactory.decodeStream(istr);
+                is = assetManager.open(bin.pictureFileName+fileSuffix);
+                bitmap = BitmapFactory.decodeStream(is);
             } catch (IOException e) {
                 e.printStackTrace();
             }
